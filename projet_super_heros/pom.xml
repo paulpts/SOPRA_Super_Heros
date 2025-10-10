@@ -3,4 +3,35 @@
   <groupId>formation-sopra</groupId>
   <artifactId>projet_super_heros</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  
+  	<dependencies>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.26</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.5.7.Final</version>
+		</dependency>
+
+	</dependencies>
+
+
+	<properties>
+	<maven.compiler.target>21</maven.compiler.target>
+	<maven.compiler.source>21</maven.compiler.source>
+	</properties>
+
+  
+  
+  
+  
+  
+  
 </project>
