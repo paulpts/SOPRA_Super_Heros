@@ -45,7 +45,7 @@ public abstract class Heros {
 	protected Agence agence;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false,columnDefinition = "enum('', '', '')")
-	protected List <Genre> pouvoirs= new ArrayList();
+	protected List<Pouvoirs> pouvoirs= new ArrayList();
 	
 	
 	public Heros() {
