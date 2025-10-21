@@ -5,6 +5,10 @@ public class ChefAgence extends Compte{
 	public ChefAgence(String login, String password) {
 		super(login,password);
 	}
+
+	public ChefAgence() {
+	}
+	
 	
 	
 	
