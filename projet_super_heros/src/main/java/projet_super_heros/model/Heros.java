@@ -16,10 +16,12 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type_heros",columnDefinition = "ENUM('alpha','beta','omega')")
+@Table(name="heros")
 public abstract class Heros {
 	
 	@Id
@@ -52,9 +54,8 @@ public abstract class Heros {
 	public Heros() {
 	}
 
-	public Heros(Integer id, String nom, String prenom, String alias, int popularite, int sante, double salaire,
+	public Heros(String nom, String prenom, String alias, int popularite, int sante, double salaire,
 			double coutCreation, int experience, double degats, int motivation, Agence agence) {
-		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.alias = alias;
@@ -156,6 +157,23 @@ public abstract class Heros {
 		this.motivation = motivation;
 	}
 
+	public Agence getAgence() {
+		return agence;
+	}
+
+	public void setAgence(Agence agence) {
+		this.agence = agence;
+	}
+
+	public List<Pouvoirs> getPouvoirs() {
+		return pouvoirs;
+	}
+
+	public void setPouvoirs(List<Pouvoirs> pouvoirs) {
+		this.pouvoirs = pouvoirs;
+	}
+
+	
 	protected void affecterHeros()
 	{
 		
@@ -165,12 +183,16 @@ public abstract class Heros {
 	{
 		
 	}
-	
+
+	@Override
 	public String toString() {
 		return "Heros [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", alias=" + alias + ", popularite="
 				+ popularite + ", sante=" + sante + ", salaire=" + salaire + ", coutCreation=" + coutCreation
-				+ ", experience=" + experience + ", degats=" + degats + ", motivation=" + motivation + "]";
+				+ ", experience=" + experience + ", degats=" + degats + ", motivation=" + motivation + ", agence="
+				+ agence + "]";
 	}
+	
+	
 	
 	
 	

@@ -1,20 +1,40 @@
 package projet_super_heros.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name="mission")
 public class Mission {
 	
-	private Integer id;					// id en integer car ne peut pas être null
-	private int difficulte;				// Représente le niveau de difficulté d'une mission (entre 1 et 4 par exemple)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;		
+	
+	@Column(nullable = false)									// id en integer car ne peut pas être null
+	private int difficulte;	
+	@Column(nullable = false, length = 100)										// Représente le niveau de difficulté d'une mission (entre 1 et 4 par exemple)
 	private String description;			// Description de ce que veut dire la mission
+	@Column(nullable = false)	
 	private int niveauDanger;			// Marche un peu comme la difficulté mais permet d'assimiler les héros plus ou moins puissants aux niveaux des missions
+	@Column(nullable = false, length = 30)	
 	private String ville;				// Peut etre un enum à faire ?
+	@Column(nullable = false, length = 30)	
 	private String statut;				// Statut : en cours, terminé, pas encore commencé 
-	private double creditMission;		// Correspond à combien la mission rapporte suivant son niveau de difficulté
+	@Column(nullable = false)	
+	private double creditMission;
+	@Column(nullable = false)
+	@ManyToOne
+	private Agence agence;				// Correspond à combien la mission rapporte suivant son niveau de difficulté
 	
 	
 	public Mission(int difficulte, String description, int niveauDanger, String ville, String statut,             // Pas d'ID car il sera généré en autoincrément
-			double creditMission) {
+			double creditMission, Agence agence) {
 		super();
 		this.difficulte = difficulte;
 		this.description = description;
@@ -22,6 +42,7 @@ public class Mission {
 		this.ville = ville;
 		this.statut = statut;
 		this.creditMission = creditMission;
+		this.agence = agence;
 	}
 	
 	
@@ -68,8 +89,22 @@ public class Mission {
 		this.creditMission = creditMission;
 	}
 	
+	
+	
+	
+	
 	// Pour chaque fonction je me demande s'il faut mettre static, à voir après avec l'utilisation
 	
+	public Agence getAgence() {
+		return agence;
+	}
+
+
+	public void setAgence(Agence agence) {
+		this.agence = agence;
+	}
+
+
 	public boolean validerMission() { // je vois pas encore l'intérêt de son utilisation		
 		
 		return true;

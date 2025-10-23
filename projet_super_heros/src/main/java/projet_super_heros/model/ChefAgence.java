@@ -3,9 +3,11 @@ package projet_super_heros.model;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("chefAgence")
+@Table(name="chef_agence")
 public class ChefAgence extends Compte{
 	
 	@Column(length=25)

@@ -8,7 +8,7 @@ public class Admin extends Compte {
 
 	public Admin() {}
 
-	public Admin(Integer id, String login, String password) {
+	public Admin(String login, String password) {
 		super(login, password);
 	}
 
