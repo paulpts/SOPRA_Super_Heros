@@ -1,8 +1,10 @@
 package projet_super_heros.model;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("alpha")
 public class Alpha extends Heros{
 
 

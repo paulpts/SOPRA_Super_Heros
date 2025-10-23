@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,12 +18,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@SequenceGenerator(name = "sequence_heros",sequenceName = "heros_id_bdd")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type_heros",columnDefinition = "ENUM('alpha','beta','omega')")
 public abstract class Heros {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "sequence_heros")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="identifiant")
 	protected Integer id;
 	@Column (length=25, nullable=false)

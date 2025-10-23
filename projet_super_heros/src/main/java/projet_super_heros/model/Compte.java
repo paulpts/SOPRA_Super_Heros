@@ -8,10 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@DiscriminatorColumn(name="type_compte",columnDefinition = "ENUM('Medecin','Secretaire')")
+@Table(name="compte")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type_compte",columnDefinition = "ENUM('admin','chefAgence')")
 public abstract class Compte {
 
 	@Id
