@@ -15,7 +15,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -36,11 +35,12 @@ public abstract class Heros {
 	protected String alias;
 	protected int popularite;
 	protected int sante;
-	@Column(nullable=false)
+	@Column(nullable=false, columnDefinition = "DECIMAL(7,2)")
 	protected double salaire;
-	@Column(nullable=false)
+	@Column(nullable=false, columnDefinition = "DECIMAL(8,2)")
 	protected double coutCreation;
 	protected int experience;
+	@Column(columnDefinition = "DECIMAL(7,2)")
 	protected double degats;
 	protected int motivation;
 	@ManyToOne
