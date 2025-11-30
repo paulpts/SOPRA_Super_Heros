@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import heros.enumerator.Pouvoirs;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -18,14 +20,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type_heros",columnDefinition = "ENUM('alpha','beta','omega')")
+@Entity // Table à part entière
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Strategie pour stocker les entités dans la table, on veut tout dans une table
+@DiscriminatorColumn(name="type_heros") // La colonne avec le type de héros s'appellera "type_heros", annotation associée aux DiscriminatorValue des classes filles.
 @Table(name="heros")
 public abstract class Heros {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //AUTO INCREMENT
 	@Column(name="identifiant")
 	protected Integer id;
 	@Column (length=25, nullable=false)
@@ -47,9 +49,14 @@ public abstract class Heros {
 	@ManyToOne
 	@JoinColumn(nullable=false)
 	protected Agence agence;
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false,columnDefinition = "enum('', '', '')")
-	protected List<Pouvoirs> pouvoirs= new ArrayList();
+	@ElementCollection //Une table SQL ne peut pas stocker une LIST dans une seule colonne. Donc elles sont stockées dans une table séparée mais cette annotation sert à dire que ce n'est pas une entité mais une collection d'enum. 
+	@CollectionTable(
+    name = "heros_pouvoirs",
+    joinColumns = @JoinColumn(name = "heros_id") // Fait une jointure sur l'ID donc on aura une table avec 2 colonnes (ID Heros et Nom du pouvoir)
+	)
+	@Column(name = "pouvoir")
+	@Enumerated(EnumType.STRING) // Permet de stocker la valeur de l'enum dans la base de données
+	protected List<Pouvoirs> pouvoirs = new ArrayList<>();
 	
 	
 	public Heros() {

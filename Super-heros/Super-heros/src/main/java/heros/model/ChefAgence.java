@@ -3,11 +3,10 @@ package heros.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
 @Entity
 @DiscriminatorValue("chefAgence")
-@Table(name="chef_agence")
+// @Table(name="chef_agence") On doit pas mettre de Table pour une classe enfant
 public class ChefAgence extends Compte{
 	
 	@Column(length=25)
