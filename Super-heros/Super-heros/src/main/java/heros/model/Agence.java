@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -27,17 +28,16 @@ public class Agence {
 	    @Column(nullable = false)
 	    private int popularite;
 	    
-	    @Column(nullable = false)
 	    @OneToOne
+		@JoinColumn(name="chef_id", nullable=false)
 	    private ChefAgence chefAgence;
 	    
-	    @Column(nullable = false)
 	    @OneToMany(mappedBy="agence")
-	    private List<Heros> heros = new ArrayList();
+	    private List<Heros> heros = new ArrayList<>();
 	    
 	    
 	    @OneToMany(mappedBy="agence")
-	    private List<Mission> missions = new ArrayList();
+	    private List<Mission> missions = new ArrayList<>();
 
 	   
 	    public Agence() {}
