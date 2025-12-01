@@ -1,28 +1,28 @@
-export class HeroDto {
 
+
+export class HerosDto {
   constructor(
-    private _id: number | null,
-    private _alias: string,       // nom super-héros
-    private _nom: string,         // nom civil
-    private _prenom: string,      // prénom civil
+    private _id: string,
+    private _nom: string,
+    private _prenom: string,
+    private _alias: string,
     private _popularite: number,
     private _sante: number,
-    private _experience: number
-    //  j'ai retiré pour l'instant  motivation et dégâts côté front
-  ) {}
+    private _salaire: number,
+    private _coutCreation: number,
+    private _experience: number,
+    private _degats: number,
+    private _motivation: number,
+    private _agenceId?: string,
+   // private _pouvoirs: PouvoirDto[] = [],
+   // private _missions: MissionDto[] = [],
+  ) { }
 
-  public get id(): number | null {
+  public get id(): string {
     return this._id;
   }
-  public set id(value: number | null) {
+  public set id(value: string) {
     this._id = value;
-  }
-
-  public get alias(): string {
-    return this._alias;
-  }
-  public set alias(value: string) {
-    this._alias = value;
   }
 
   public get nom(): string {
@@ -39,6 +39,13 @@ export class HeroDto {
     this._prenom = value;
   }
 
+  public get alias(): string {
+    return this._alias;
+  }
+  public set alias(value: string) {
+    this._alias = value;
+  }
+
   public get popularite(): number {
     return this._popularite;
   }
@@ -53,6 +60,20 @@ export class HeroDto {
     this._sante = value;
   }
 
+  public get salaire(): number {
+    return this._salaire;
+  }
+  public set salaire(value: number) {
+    this._salaire = value;
+  }
+
+  public get coutCreation(): number {
+    return this._coutCreation;
+  }
+  public set coutCreation(value: number) {
+    this._coutCreation = value;
+  }
+
   public get experience(): number {
     return this._experience;
   }
@@ -60,16 +81,55 @@ export class HeroDto {
     this._experience = value;
   }
 
- 
+  public get degats(): number {
+    return this._degats;
+  }
+  public set degats(value: number) {
+    this._degats = value;
+  }
+
+  public get motivation(): number {
+    return this._motivation;
+  }
+  public set motivation(value: number) {
+    this._motivation = value;
+  }
+
+  public get agenceId(): string | undefined {
+    return this._agenceId;
+  }
+  public set agenceId(value: string | undefined) {
+    this._agenceId = value;
+  }
+
+  public get pouvoirs(): PouvoirDto[] {
+    return this._pouvoirs;
+  }
+  public set pouvoirs(value: PouvoirDto[]) {
+    this._pouvoirs = value;
+  }
+
+  public get missions(): MissionDto[] {
+    return this._missions;
+  }
+  public set missions(value: MissionDto[]) {
+    this._missions = value;
+  }
+
   public toJson(): any {
+    
     return {
-      alias: this.alias,
       nom: this.nom,
       prenom: this.prenom,
+      alias: this.alias,
       popularite: this.popularite,
       sante: this.sante,
-      experience: this.experience
-      // Retrait de  degats, et  motivation
+      salaire: this.salaire,
+      coutCreation: this.coutCreation,
+      experience: this.experience,
+      degats: this.degats,
+      motivation: this.motivation,
+      agence: this.agenceId ?
     };
   }
 }
