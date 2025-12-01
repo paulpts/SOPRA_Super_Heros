@@ -23,7 +23,7 @@ import jakarta.persistence.Table;
 
 @Entity // Table à part entière
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Strategie pour stocker les entités dans la table, on veut tout dans une table
-@DiscriminatorColumn(name="type_heros") // La colonne avec le type de héros s'appellera "type_heros", annotation associée aux DiscriminatorValue des classes filles.
+@DiscriminatorColumn(name="type_heros",columnDefinition = "ENUM('alpha','beta','omega')") // La colonne avec le type de héros s'appellera "type_heros", annotation associée aux DiscriminatorValue des classes filles.
 @Table(name="heros")
 public abstract class Heros {
 	
