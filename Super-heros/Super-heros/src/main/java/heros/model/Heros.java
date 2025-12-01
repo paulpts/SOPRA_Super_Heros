@@ -18,11 +18,12 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity // Table à part entière
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Strategie pour stocker les entités dans la table, on veut tout dans une table
-@DiscriminatorColumn(name="type_heros") // La colonne avec le type de héros s'appellera "type_heros", annotation associée aux DiscriminatorValue des classes filles.
+@DiscriminatorColumn(name="type_heros",columnDefinition = "ENUM('alpha','beta','omega')") // La colonne avec le type de héros s'appellera "type_heros", annotation associée aux DiscriminatorValue des classes filles.
 @Table(name="heros")
 public abstract class Heros {
 	
@@ -59,7 +60,7 @@ public abstract class Heros {
 	protected List<Pouvoirs> pouvoirs = new ArrayList<>();
 	
 	@Column(name = "mission")
-	@Enumerated(EnumType.STRING)
+	@OneToMany(mappedBy="hero")
 	protected List <Mission> mission = new ArrayList<>();
 
 	public Heros() {
@@ -197,9 +198,9 @@ public abstract class Heros {
 		this.mission = mission;
 	}
 
-	protected void affecterHeros()
-	{
-		
+	public void affecterMission(Mission mission) {
+	    this.mission.add(mission);
+	    mission.setHero(this);
 	}
 	
 	protected abstract double payerSalaire();
@@ -211,11 +212,6 @@ public abstract class Heros {
 				+ ", experience=" + experience + ", degats=" + degats + ", motivation=" + motivation + ", agence="
 				+ agence + "]";
 	}
-	
-	
-	
-	
-	
 	
 
 }

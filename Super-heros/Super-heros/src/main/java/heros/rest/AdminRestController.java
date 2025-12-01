@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import heros.model.Admin;
 import heros.service.AdminService;
 
+@RestController
+@RequestMapping("/api/admin")
 public class AdminRestController {
 
     @Autowired
@@ -48,8 +51,7 @@ public class AdminRestController {
     @DeleteMapping("/{id}")
     public void supprimerAdmin(@PathVariable Integer id) {
         adminService.deleteById(id);
-    } 
-    
+    }   
 }
     
 

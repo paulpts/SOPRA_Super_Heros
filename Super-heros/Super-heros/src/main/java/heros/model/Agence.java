@@ -18,99 +18,118 @@ import jakarta.persistence.Table;
 @Table(name = "agence")
 public class Agence {
 
-	    @Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-	    @Column(nullable = false)
-	    private double budget;
+	@Column(nullable = false)
+	private double budget;
 
-	    @Column(nullable = false)
-	    private int popularite;
-	    
-	    @OneToOne
-		@JoinColumn(name="chef_id", nullable=false)
-	    private ChefAgence chefAgence;
-	    
-	    @OneToMany(mappedBy="agence")
-	    private List<Heros> heros = new ArrayList<>();
-	    
-	    
-	    @OneToMany(mappedBy="agence")
-	    private List<Mission> missions = new ArrayList<>();
-
-	   
-	    public Agence() {}
-
-	    public Agence(double budget, int popularite) {
-	        this.budget = budget;
-	        this.popularite = popularite;
-	    }
-
-	    
-	    public Integer getId() {
-	        return id;
-	    }
-
-	    public void setId(Integer id) {
-	        this.id = id;
-	    }
-
-	    public double getBudget() {
-	        return budget;
-	    }
-
-	    public void setBudget(double budget) {
-	        this.budget = budget;
-	    }
-
-	    public int getPopularite() {
-	        return popularite;
-	    }
-
-	    public void setPopularite(int popularite) {
-	        this.popularite = popularite;
-	    }
-
-	    
-		public ChefAgence getChefAgence() {
-			return chefAgence;
-		}
-
-		public void setChefAgence(ChefAgence chefAgence) {
-			this.chefAgence = chefAgence;
-		}
-		
-
-		public List<Heros> getHeros() {
-			return heros;
-		}
-
-		public void setHeros(List<Heros> heros) {
-			this.heros = heros;
-		}
-
-		public List<Mission> getMissions() {
-			return missions;
-		}
-
-		public void setMissions(List<Mission> missions) {
-			this.missions = missions;
-		}
-
-		@Override
-		public String toString() {
-			return "Agence [id=" + id + ", budget=" + budget + ", popularite=" + popularite + "]";
-		}
-
+	@Column(nullable = false)
+	private int popularite;
 	
+	@Column(nullable = false)
+	private String ville;
+
+	@OneToOne
+	@JoinColumn(name="chef_id", nullable=false)
+	private ChefAgence chefAgence;
+
+	@OneToMany(mappedBy="agence")
+	private List<Heros> heros = new ArrayList<>();
+
+
+	@OneToMany(mappedBy="agence")
+	private List<Mission> missions = new ArrayList<>();
+
+
+	public Agence() {}
+
+	public Agence(double budget, int popularite) {
+		this.budget = budget;
+		this.popularite = popularite;
 	}
 
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public double getBudget() {
+		return budget;
+	}
+
+	public void setBudget(double budget) {
+		this.budget = budget;
+	}
+
+	public int getPopularite() {
+		return popularite;
+	}
+
+	public void setPopularite(int popularite) {
+		this.popularite = popularite;
+	}
+
+
+	public ChefAgence getChefAgence() {
+		return chefAgence;
+	}
+
+	public void setChefAgence(ChefAgence chefAgence) {
+		this.chefAgence = chefAgence;
+	}
+
+
+	public List<Heros> getHeros() {
+		return heros;
+	}
+
+	public void setHeros(List<Heros> heros) {
+		this.heros = heros;
+	}
+
+	public List<Mission> getMissions() {
+		return missions;
+	}
+
+	public void setMissions(List<Mission> missions) {
+		this.missions = missions;
+	}
+
+
+	public double payerSalaires() {
+		double total = 0;
+		for (Heros h : heros) {
+			total += h.getSalaire();
+		}
+		return total;
+	}
+
+	public void recruterHeros(Heros heros) {
+	    if (!this.heros.contains(heros)) {
+	        this.heros.add(heros);
+	        heros.setAgence(this);
+	    }
+	}
 	
-	
-	
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Agence [id=" + id + ", budget=" + budget + ", popularite=" + popularite + "]";
+	}
+
+
+}
+
+
+
+
+
+
+
+
 
