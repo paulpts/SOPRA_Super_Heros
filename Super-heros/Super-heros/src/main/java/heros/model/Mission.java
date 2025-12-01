@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -28,8 +29,8 @@ public class Mission {
 	private String statut;				// Statut : en cours, terminé, pas encore commencé 
 	@Column(nullable = false)	
 	private double creditMission;
-	@Column(nullable = false)
 	@ManyToOne
+	@JoinColumn(name = "agence_id", nullable = false)
 	private Agence agence;				// Correspond à combien la mission rapporte suivant son niveau de difficulté
 	
 	
