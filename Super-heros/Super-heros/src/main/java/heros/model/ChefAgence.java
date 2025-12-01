@@ -10,11 +10,14 @@ import jakarta.persistence.Entity;
 public class ChefAgence extends Compte{
 	
 	@Column(length=25)
-	String nom; //A demander � la premiere co
+	String nom;
+	
+	String prenom;//A demander � la premiere co
 
-	public ChefAgence(String login, String password, String nom) {
+	public ChefAgence(String login, String password, String nom, String prenom) {
 		super(login,password);
 		this.nom = nom;
+		this.prenom = prenom;
 	}
 
 	public ChefAgence() {
