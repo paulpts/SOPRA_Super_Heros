@@ -18,6 +18,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity // Table à part entière
@@ -58,12 +59,16 @@ public abstract class Heros {
 	@Enumerated(EnumType.STRING) // Permet de stocker la valeur de l'enum dans la base de données
 	protected List<Pouvoirs> pouvoirs = new ArrayList<>();
 	
-	
+	@Column(name = "mission")
+	@OneToMany(mappedBy="hero")
+	protected List <Mission> mission = new ArrayList<>();
+
 	public Heros() {
 	}
 
 	public Heros(String nom, String prenom, String alias, int popularite, int sante, double salaire,
-			double coutCreation, int experience, double degats, int motivation, Agence agence) {
+			double coutCreation, int experience, double degats, int motivation, Agence agence, List<Pouvoirs> pouvoirs,
+			List<Mission> mission) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.alias = alias;
@@ -74,8 +79,12 @@ public abstract class Heros {
 		this.experience = experience;
 		this.degats = degats;
 		this.motivation = motivation;
-		this.agence=agence;
+		this.agence = agence;
+		this.pouvoirs = pouvoirs;
+		this.mission = mission;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -181,16 +190,20 @@ public abstract class Heros {
 		this.pouvoirs = pouvoirs;
 	}
 
-	
-	protected void affecterHeros()
-	{
-		
+	public List<Mission> getMission() {
+		return mission;
+	}
+
+	public void setMission(List<Mission> mission) {
+		this.mission = mission;
+	}
+
+	public void affecterMission(Mission mission) {
+	    this.mission.add(mission);
+	    mission.setHero(this);
 	}
 	
-	protected void payerSalaier()
-	{
-		
-	}
+	protected abstract double payerSalaire();
 
 	@Override
 	public String toString() {
@@ -199,11 +212,6 @@ public abstract class Heros {
 				+ ", experience=" + experience + ", degats=" + degats + ", motivation=" + motivation + ", agence="
 				+ agence + "]";
 	}
-	
-	
-	
-	
-	
 	
 
 }
