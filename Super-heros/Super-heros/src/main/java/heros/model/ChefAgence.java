@@ -12,6 +12,7 @@ public class ChefAgence extends Compte{
 	@Column(length=25)
 	String nom;
 	
+	@Column(length=25)
 	String prenom;//A demander � la premiere co
 
 	public ChefAgence(String login, String password, String nom, String prenom) {
