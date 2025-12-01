@@ -58,12 +58,16 @@ public abstract class Heros {
 	@Enumerated(EnumType.STRING) // Permet de stocker la valeur de l'enum dans la base de données
 	protected List<Pouvoirs> pouvoirs = new ArrayList<>();
 	
-	
+	@Column(name = "mission")
+	@Enumerated(EnumType.STRING)
+	protected List <Mission> mission = new ArrayList<>();
+
 	public Heros() {
 	}
 
 	public Heros(String nom, String prenom, String alias, int popularite, int sante, double salaire,
-			double coutCreation, int experience, double degats, int motivation, Agence agence) {
+			double coutCreation, int experience, double degats, int motivation, Agence agence, List<Pouvoirs> pouvoirs,
+			List<Mission> mission) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.alias = alias;
@@ -74,8 +78,12 @@ public abstract class Heros {
 		this.experience = experience;
 		this.degats = degats;
 		this.motivation = motivation;
-		this.agence=agence;
+		this.agence = agence;
+		this.pouvoirs = pouvoirs;
+		this.mission = mission;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -181,16 +189,20 @@ public abstract class Heros {
 		this.pouvoirs = pouvoirs;
 	}
 
-	
+	public List<Mission> getMission() {
+		return mission;
+	}
+
+	public void setMission(List<Mission> mission) {
+		this.mission = mission;
+	}
+
 	protected void affecterHeros()
 	{
 		
 	}
 	
-	protected void payerSalaier()
-	{
-		
-	}
+	protected abstract double payerSalaire();
 
 	@Override
 	public String toString() {

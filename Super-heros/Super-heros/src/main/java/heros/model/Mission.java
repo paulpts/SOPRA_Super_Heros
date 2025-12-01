@@ -31,11 +31,16 @@ public class Mission {
 	private double creditMission;
 	@ManyToOne
 	@JoinColumn(name = "agence_id", nullable = false)
-	private Agence agence;				// Correspond à combien la mission rapporte suivant son niveau de difficulté
+	private Agence agence;		
+	
+	@ManyToOne
+	@JoinColumn(name = "hero_id", nullable = false)
+	private Heros hero;
 	
 	
-	public Mission(int difficulte, String description, int niveauDanger, String ville, String statut,             // Pas d'ID car il sera généré en autoincrément
-			double creditMission, Agence agence) {
+	
+	public Mission(int difficulte, String description, int niveauDanger, String ville, String statut,
+			double creditMission, Agence agence, Heros hero) {
 		super();
 		this.difficulte = difficulte;
 		this.description = description;
@@ -44,9 +49,8 @@ public class Mission {
 		this.statut = statut;
 		this.creditMission = creditMission;
 		this.agence = agence;
+		this.hero = hero;
 	}
-	
-	
 	public Integer getId() {
 		return id;
 	}
@@ -90,12 +94,14 @@ public class Mission {
 		this.creditMission = creditMission;
 	}
 	
-	
-	
-	
-	
 	// Pour chaque fonction je me demande s'il faut mettre static, à voir après avec l'utilisation
 	
+	public Heros getHero() {
+		return hero;
+	}
+	public void setHero(Heros hero) {
+		this.hero = hero;
+	}
 	public Agence getAgence() {
 		return agence;
 	}
