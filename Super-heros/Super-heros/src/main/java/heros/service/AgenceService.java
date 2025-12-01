@@ -11,7 +11,7 @@ import heros.repo.AgenceRepository;
 
 //Globalement la même chose que HerosService, plus d'explication en commentaire la bas
 @Service
-public class AgenceService {
+public class AgenceService { //test
     
     @Autowired
     private AgenceRepository agenceRepository;
