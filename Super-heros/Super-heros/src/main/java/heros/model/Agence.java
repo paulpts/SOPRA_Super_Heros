@@ -27,6 +27,9 @@ public class Agence {
 
 	@Column(nullable = false)
 	private int popularite;
+	
+	@Column(nullable = false)
+	private String ville;
 
 	@OneToOne
 	@JoinColumn(name="chef_id", nullable=false)
