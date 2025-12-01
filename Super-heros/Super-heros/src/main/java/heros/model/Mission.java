@@ -94,8 +94,6 @@ public class Mission {
 		this.creditMission = creditMission;
 	}
 	
-	// Pour chaque fonction je me demande s'il faut mettre static, à voir après avec l'utilisation
-	
 	public Heros getHero() {
 		return hero;
 	}
@@ -112,23 +110,66 @@ public class Mission {
 	}
 
 
-	public boolean validerMission() { // je vois pas encore l'intérêt de son utilisation		
+	public boolean validerMission() {
+		
+		if (hero == null) return false;
+
+		if(niveauDanger == 1) {
+
+		} else if (niveauDanger == 2) {
+			if(!(hero instanceof Alpha) && !(hero instanceof Beta)) {
+				return false;
+			}
+		} else if (niveauDanger == 3) {
+			if (!(hero instanceof Alpha)) {
+				return false;
+			}
+		} else {
+			return false;
+		}
 		
 		return true;
-		
 	}
 	
-/*	public double coutDegat() {		// En fonction de l'attribut degat de la classe héros ? 
-		 
+	
+	public double popAgence() {					// Diminue si une mission échoue et augmente si une mission est un succès
+									
+		if(agence.getId() == null) {
+			return 0;
+		}
+		if (validerMission())	{
+			agence.setPopularite(agence.getPopularite() + 5);
+		} else {
+			agence.setPopularite(agence.getPopularite() - 5);
+		}
+		
+		return agence.getPopularite();
+	}
+
+	public double popHeros() {
+		if(hero.getId() == null) {
+			return 0;
+		}
+		if(validerMission()) {
+			hero.setPopularite(hero.getPopularite() + 5);
+		}
+		else {
+			hero.setPopularite(hero.getPopularite() - 5);
+		}
+		return hero.getPopularite();
+	}
+
+	public double coutDegats() {
+
+		if(hero.getId() == null) {
+			return 0;
+		}
+		
+		return hero.getDegats()*difficulte*10;
+
 	}
 	
-	public double popAgence() {		// Diminue si une mission échoue et augmente si une mission est un succès
-		
-	}
-	
-	public double popHeros() {		// Diminue si une mission échoue et augmente si une mission est un succès + rapport avec les médias
-		
-	} */
+
 	
 	@Override
 	public String toString() {
