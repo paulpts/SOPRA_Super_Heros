@@ -1,43 +1,58 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, startWith, Subject, switchMap } from 'rxjs';
-import { HeroDto } from '../dto/heros-dto';
+import { Observable, Subject, startWith, switchMap } from 'rxjs';
+import { HerosDto } from '../dto/heros-dto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root',    
+  providedIn: 'root',
 })
-export class HeroService {
-  private apiUrl: string = '/heros'; // adapter au backend
+export class HerosService {
+  private apiUrl: string = environment.apiUrl + '/heros';
   private refresh$: Subject<void> = new Subject<void>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  public findAll(): Observable<HeroDto[]> {
+  /** Liste de tous les héros (vue admin) */
+  public findAll(): Observable<HerosDto[]> {
     return this.refresh$.pipe(
       startWith(null),
-      switchMap(() => this.http.get<HeroDto[]>(this.apiUrl))
+      switchMap(() => this.http.get<HerosDto[]>(this.apiUrl))
     );
+  }
+
+  /** Liste des héros de l' agence (vue chef d'agence) */
+  public findByAgence(agenceId: number | string): Observable<HerosDto[]> {
+    return this.refresh$.pipe(
+      startWith(null),
+      switchMap(() =>
+        this.http.get<HerosDto[]>(`${this.apiUrl}/agence/${agenceId}`)
+      )
+    );
+  }
+
+  
+  public findById(id: number | string): Observable<HerosDto> {
+    return this.http.get<HerosDto>(`${this.apiUrl}/${id}`);
   }
 
   public refresh(): void {
     this.refresh$.next();
   }
 
-  public findById(id: number): Observable<HeroDto> {
-    return this.http.get<HeroDto>(`${this.apiUrl}/${id}`);
-  }
+  public save(herosDto: HerosDto): void {
+    const payload = herosDto.toJson();
 
-  public save(heroDto: HeroDto): void {
-    const payload = heroDto.toJson();
-
-    if (heroDto.id == null) {
-      this.http.post<HeroDto>(this.apiUrl, payload).subscribe(() => this.refresh());
-    } else {
-      this.http.put<HeroDto>(`${this.apiUrl}/${heroDto.id}`, payload).subscribe(() => this.refresh());
+    if (!herosDto.id) {
+      this.http.post<HerosDto>(this.apiUrl, payload).subscribe(() => this.refresh());
+      return;
     }
+
+    this.http.put<HerosDto>(`${this.apiUrl}/${herosDto.id}`, payload)
+      .subscribe(() => this.refresh());
   }
 
-  public deleteById(id: number): void {
+  public deleteById(id: string): void {
     this.http.delete<void>(`${this.apiUrl}/${id}`).subscribe(() => this.refresh());
   }
 }
