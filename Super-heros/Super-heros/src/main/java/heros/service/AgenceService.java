@@ -29,7 +29,7 @@ public class AgenceService { // test
         return agenceRepository.findById(id).orElse(null);
     }
 
-    public List<Agence> getAll() {
+    public List<Agence> getAllAgence() {
         return agenceRepository.findAll();
     }
 
