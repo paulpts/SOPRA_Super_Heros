@@ -1,20 +1,56 @@
-.bar { (pour personnaliser une balise que tu appelle 'bar')
-    background-color: #333;
+
+.top-nav {
+  display: flex;              
+  align-items: center;        /* Centre verticalement le contenu */
+  background-color: #e0e0e0;  
+  border-bottom: 1px solid #c4c4c4; 
+  padding: 0 40px;            
+  height: 60px;               
+  font-family: Arial, sans-serif;
 }
 
-button {
-    background-color: #4CAF50; /* Vert */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+/* Bloc qui contient le mot LOGO */
+.top-nav-logo {
+  font-weight: bold;
+  margin-right: 40px;         /* Espace entre le logo et les liens */
 }
 
-button:hover { (quand tu passe la souris dessus)
-    background-color: #252e25; /* Vert plus foncé au survol */
+
+.top-nav-menu {
+  list-style: none;           
+  display: flex;              
+  margin: 0;
+  padding: 0;
+  flex: 1;                    
+  gap: 10px;                  
+}
+
+
+.top-nav-menu li {
+  display: flex;
+}
+
+
+.top-nav-menu a {
+  display: block;             /* Permet de cliquer sur tout le rectangle */
+  padding: 10px 16px;
+  text-decoration: none;      
+  color: #333;
+  font-size: 14px;
+}
+
+
+.top-nav-menu a:hover {
+  background-color: #ffffff;
+}
+
+
+.top-nav-menu a.active {
+  background-color: #ffffff;
+  border-bottom: 3px solid #000000;
+}
+
+
+.top-nav-menu .nav-right {
+  margin-left: auto;
 }
