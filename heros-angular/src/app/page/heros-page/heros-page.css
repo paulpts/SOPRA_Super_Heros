@@ -1,0 +1,21 @@
+.main-container {
+  display: flex;       /* Magie ! Ça aligne les enfants horizontalement */
+  height: 100vh;       /* Prend 100% de la hauteur de l'écran */
+  width: 100%;
+}
+
+.MARWAH {
+      width: 250px;        /* Largeur fixe (ou met 20% si tu préfères) */
+  background-color: #f4f4f4; /* Gris clair pour distinguer */
+  border-right: 1px solid #ddd; /* Une petite ligne de séparation */
+  padding: 20px;       /* Espace à l'intérieur */
+  overflow-y: auto;    /* Si le menu est trop long, ça scrollera juste ici */
+}
+
+.MOUNIR{
+      width: 250px;        /* Largeur fixe (ou met 20% si tu préfères) */
+  background-color: #D4f4f6; /* Gris clair pour distinguer */
+  border-right: 1px solid #ddd; /* Une petite ligne de séparation */
+  padding: 20px;       /* Espace à l'intérieur */
+  overflow-y: auto;    /* Si le menu est trop long, ça scrollera juste ici */
+}

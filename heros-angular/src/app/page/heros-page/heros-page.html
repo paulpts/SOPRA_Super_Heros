@@ -1,128 +1,70 @@
-<!-- ===========================
-     VUE CHEF D'AGENCE
-     =========================== -->
-<ng-template #chefTemplate>
-  <div class="container-fluid">
+<header class="navbar">
+  <div class="logo">LOGO</div>
+  
+  <nav class="nav-links">
+    <a routerLink="/dashboard">Tableau de bord</a>
+    <a routerLink="/agences">Agences</a>
+    <a routerLink="/heros">Héros</a>
+    <a routerLink="/missions">Missions</a>
+  </nav>
+</header>
 
-    <div class="row">
-      <!-- GRAPHIQUES -->
-      <aside class="col-12 col-lg-2 mb-3">
-        <div class="mb-3 text-center border rounded py-4">
-          graph statut
-        </div>
-        <div class="mb-3 text-center border rounded py-4">
-          graph motivation
-        </div>
-        <div class="mb-3 text-center border rounded py-4">
-          graph popularité
-        </div>
-      </aside>
+<section class="welcome-banner">
+  <h2>Welcome</h2>
+</section>
 
-      <!-- LISTE DES HÉROS DE L'AGENCE AVEC BOUTONS ALPHA/BETA/OMEGA -->
-      <section class="col-12 col-lg-6 mb-3">
-        <h1 class="text-center mb-4">
-          Listes des héros de l'agence
-        </h1>
+<main class="main-container">
 
-        <!-- Boutons : agence (tous), alpha, beta, omega -->
-        <div class="d-flex justify-content-center mb-3">
-          <div class="btn-group" role="group">
-            <button type="button"
-                    class="btn btn-sm"
-                    [class.btn-primary]="chefFilter === 'AGENCE'"
-                    [class.btn-outline-secondary]="chefFilter !== 'AGENCE'"
-                    (click)="changerFiltreChef('AGENCE')">
-              Agence
-            </button>
-            <button type="button"
-                    class="btn btn-sm"
-                    [class.btn-primary]="chefFilter === 'ALPHA'"
-                    [class.btn-outline-secondary]="chefFilter !== 'ALPHA'"
-                    (click)="changerFiltreChef('ALPHA')">
-              Alpha
-            </button>
-            <button type="button"
-                    class="btn btn-sm"
-                    [class.btn-primary]="chefFilter === 'BETA'"
-                    [class.btn-outline-secondary]="chefFilter !== 'BETA'"
-                    (click)="changerFiltreChef('BETA')">
-              Beta
-            </button>
-            <button type="button"
-                    class="btn btn-sm"
-                    [class.btn-primary]="chefFilter === 'OMEGA'"
-                    [class.btn-outline-secondary]="chefFilter !== 'OMEGA'"
-                    (click)="changerFiltreChef('OMEGA')">
-              Omega
-            </button>
-          </div>
-        </div>
-
-        <!-- Liste des héros (observable herosChef$) -->
-        <div *ngFor="let heros of (herosChef$ | async)"
-             class="d-flex align-items-center mb-3 border rounded p-3">
-          <div class="me-3 d-flex align-items-center justify-content-center border rounded"
-               style="width: 80px; height: 80px;">
-            PHOTO
-          </div>
-
-          <div>
-            <div>
-              <strong>{{ heros.alias }}</strong>
-              <span class="text-muted">#{{ heros.id }}</span>
-            </div>
-            <div>
-              {{ heros.prenom }} {{ heros.nom }}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FORMULAIRE CHEF D'AGENCE (recruter un héros) -->
-      <aside class="col-12 col-lg-4 mb-3">
-        <button class="btn btn-primary w-100 mb-3"
-                (click)="afficherFormulaireCreation()">
-          Recruter un super-héros
-        </button>
-
-        <form *ngIf="showForm"
-              [formGroup]="herosForm"
-              (ngSubmit)="creerOuModifier()"
-              class="border rounded p-3">
-
-          <h2 class="h5 mb-3">
-            {{ editingHeros ? 'Modifier un héros' : 'Recruter un héros' }}
-          </h2>
-
-          <div class="mb-2">
-            <label for="nom_chef" class="form-label">Nom</label>
-            <input id="nom_chef" type="text" class="form-control" [formControl]="nomCtrl">
-          </div>
-
-          <div class="mb-2">
-            <label for="prenom_chef" class="form-label">Prénom</label>
-            <input id="prenom_chef" type="text" class="form-control" [formControl]="prenomCtrl">
-          </div>
-
-          <div class="mb-3">
-            <label for="alias_chef" class="form-label">Alias</label>
-            <input id="alias_chef" type="text" class="form-control" [formControl]="aliasCtrl">
-          </div>
-
-          <div class="btn-group w-100">
-            <button type="submit"
-                    class="btn btn-success"
-                    [disabled]="herosForm.invalid">
-              {{ editingHeros ? 'Enregistrer' : 'Créer' }}
-            </button>
-            <button type="button"
-                    class="btn btn-outline-secondary"
-                    (click)="annulerEditer()">
-              Annuler
-            </button>
-          </div>
-        </form>
-      </aside>
+  <section class="MARWAH">
+    
+    <div class="card agency-list-card">
+      <h3 class="card-title">Liste des agences</h3>
+      <ul class="simple-list">
+        <li class="list-item">Agence Alpha <hr></li>
+        <li class="list-item">Agence Beta <hr></li>
+        <li class="list-item">Agence Gamma <hr></li>
+      </ul>
     </div>
-  </div>
-</ng-template>
+
+    <div class="action-buttons-container">
+
+    </div>
+
+  </section>
+
+  <section class="MOUNIR">
+    <div class="card stats-card">
+      <h3 class="card-title">Infos diverses</h3>
+      
+      <ul class="bullet-list">
+        <li>Popularité moyenne agence : <strong>85%</strong></li>
+        <li>Popularité moyenne héros : <strong>92%</strong></li>
+        <li>Coûts moyens mission : <strong>15k €</strong></li>
+        <li>&nbsp;</li> 
+      </ul>
+    </div>
+  </section>
+
+  <aside class="column right-panel grey-sidebar">
+    
+    <div class="mission-block">
+      <h3>Missions en cours</h3>
+      <ul class="clean-list">
+        <li>Mission 1</li>
+        <li>Mission 2</li>
+        <li>Mission 3</li>
+        <li>Mission 4</li>
+        <li>Mission 5</li>
+        <li>Mission 6</li>
+      </ul>
+    </div>
+
+    <div class="mission-block">
+      <h3>Dernières missions</h3>
+      <ul class="clean-list">
+        </ul>
+    </div>
+
+  </aside>
+
+</main>
