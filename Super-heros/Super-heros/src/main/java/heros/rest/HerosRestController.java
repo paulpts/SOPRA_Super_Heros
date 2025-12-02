@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.model.Agence;
 import heros.model.Heros;
+import heros.service.AgenceService;
 import heros.service.HerosService;
 
 
@@ -23,6 +25,8 @@ public class HerosRestController {
 
     @Autowired
     private HerosService herosService;
+    @Autowired
+    private AgenceService agenceService;
 
     @GetMapping
     public List<Heros> allHeros() {
@@ -39,10 +43,15 @@ public class HerosRestController {
         return ResponseEntity.ok(h);
     }
     
-    @PostMapping
-    public Heros ajouterHeros(@RequestBody Heros heros) {
-        return herosService.create(heros);
-    }
+   @PostMapping
+public Heros ajouterHeros(@RequestBody Heros heros) {
+    // Récupérer l'agence complète depuis la base
+    Agence agence = agenceService.getById(heros.getAgence().getId());
+    heros.setAgence(agence); // Remplacer l'objet partiel par l'objet complet
+
+    return herosService.create(heros);
+}
+
 
     @PutMapping("/{id}")
     public Heros modifierHeros(@PathVariable Integer id, @RequestBody Heros heros) {
