@@ -1,33 +1,25 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Biblio</a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="home" routerLinkActive="active">Accueil</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="livre" routerLinkActive="active">Livres</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="auteur" routerLinkActive="active">Auteurs</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="editeur" routerLinkActive="active">Editeurs</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="collection" routerLinkActive="active">Collections</a>
-        </li>
-      </ul>
-    </div>
+<nav class="top-nav">
+  <!-- Zone de gauche : logo du site -->
+  <div class="top-nav-logo">
+    LOGO
   </div>
+
+  <!-- Liste horizontale des liens de navigation -->
+  <ul class="top-nav-menu">
+    <li>
+      <a routerLink="/dashboard" routerLinkActive="active">Tableau de bord</a>
+    </li>
+    <li>
+      <a routerLink="/agences" routerLinkActive="active">Agences</a>
+    </li>
+    <li>
+      <a routerLink="/heros" routerLinkActive="active">Héros</a>
+    </li>
+    <li>
+      <a routerLink="/missions" routerLinkActive="active">Missions</a>
+    </li>
+    <li class="nav-right">
+      <a routerLink="/logout" routerLinkActive="active">Déconnexion</a>
+    </li>
+  </ul>
 </nav>
