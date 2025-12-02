@@ -44,6 +44,14 @@ public class CompteService {
         }
         return compteRepository.save(chefAgence);
     }
+    
+    public Compte create(Admin admin) {
+        if (admin.getId() != null) {
+            throw new IllegalArgumentException("Le compte ne doit pas avoir d'id !");
+        }
+        return compteRepository.save(admin);
+    }
+
 
     // public Compte update(Compte compte) {
     // return compteRepository.save(compte); //Ca permet de renvoyer l'objet qui est
