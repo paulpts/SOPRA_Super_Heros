@@ -100,7 +100,14 @@ public class Agence {
 	public void setMissions(List<Mission> missions) {
 		this.missions = missions;
 	}
+	
+	public String getVille() {
+		return ville;
+	}
 
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
 
 	public double payerSalaires() {
 		double total = 0;
