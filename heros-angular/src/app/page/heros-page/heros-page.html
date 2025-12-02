@@ -1,111 +1,76 @@
-<!-- 
-  =========================================
-  CONTENEUR PRINCIPAL
-  Class CSS : .main-container (Flexbox)
-  =========================================
--->
 <div class="main-container">
 
-  <!-- 
-    =========================================
-    COLONNE GAUCHE : LES GRAPHIQUES
-    Class CSS : .colonne_gauche (Largeur fixe 250px)
-    =========================================
-  -->
+  <!-- COLONNE GAUCHE -->
   <div class="colonne_gauche">
     
-    <!-- Graphique 1 -->
     <div class="graph-circle">
       Graph Statut
     </div>
 
-    <!-- Graphique 2 -->
     <div class="graph-circle">
       Graph Motivation
     </div>
 
-    <!-- Graphique 3 -->
     <div class="graph-circle">
       Graph Popularité
     </div>
 
   </div>
 
+  <!-- COLONNE CENTRE -->
+  <div class="colonne_centre">
 
-  <!-- 
-    =========================================
-    COLONNE DROITE : CONTENU PRINCIPAL
-    Class CSS : .colonne_droite (Prend tout le reste)
-    =========================================
-  -->
-  <div class="colonne_droite">
-
-    <!-- Titre de la section -->
     <h1 class="page-title">
       Liste des héros (toutes agences confondues)
     </h1>
+    
+    <div class="liste-heros">
 
-    <!-- 
-      Zone mixte : Liste à gauche + Bouton à droite 
-      Class CSS : .contenu-mixte (Flexbox ligne)
-    -->
-    <div class="contenu-mixte">
-
-      <!-- BLOC 1 : LA LISTE DES HÉROS -->
-      <div class="liste-heros">
-
-        <!-- Carte Héros 1 (Exemple statique) -->
-        <div class="hero-card">
-          <div class="hero-photo">PHOTO</div>
-          <div class="hero-infos">
-            <strong>#1 - Batman</strong><br>
-            <span>Statut: En mission</span>
-          </div>
+      <div class="hero-card">
+        <div class="hero-photo">PHOTO</div>
+        <div class="hero-infos">
+          <strong>#1 - Batman</strong><br>
+          <span>Statut: En mission</span>
         </div>
-
-        <!-- Carte Héros 2 -->
-        <div class="hero-card">
-          <div class="hero-photo">PHOTO</div>
-          <div class="hero-infos">
-            <strong>#2 - Superman</strong><br>
-            <span>Statut: Disponible</span>
-          </div>
-        </div>
-
-        <!-- Carte Héros 3 -->
-        <div class="hero-card">
-          <div class="hero-photo">PHOTO</div>
-          <div class="hero-infos">
-            <strong>#3 - Wonder Woman</strong><br>
-            <span>Statut: Blessé</span>
-          </div>
-        </div>
-
-        <!-- Carte Héros 4 -->
-        <div class="hero-card">
-          <div class="hero-photo">PHOTO</div>
-          <div class="hero-infos">
-            <strong>#4 - Flash</strong><br>
-            <span>Statut: En repos</span>
-          </div>
-        </div>
-
       </div>
 
-
-      <!-- BLOC 2 : LE BOUTON D'ACTION (À Droite) -->
-      <div class="zone-action">
-        <!-- 
-          Bouton pour ouvrir le formulaire de création 
-          Plus tard tu ajouteras (click)="ouvrirFormulaire()"
-        -->
-        <button class="btn-creer">
-          Créer un super-héros
-        </button>
+      <div class="hero-card">
+        <div class="hero-photo">PHOTO</div>
+        <div class="hero-infos">
+          <strong>#2 - Superman</strong><br>
+          <span>Statut: Disponible</span>
+        </div>
       </div>
 
-    </div> <!-- Fin contenu-mixte -->
+      <div class="hero-card">
+        <div class="hero-photo">PHOTO</div>
+        <div class="hero-infos">
+          <strong>#3 - Wonder Woman</strong><br>
+          <span>Statut: Blessé</span>
+        </div>
+      </div>
 
-  </div> <!-- Fin colonne_droite -->
+      <div class="hero-card">
+        <div class="hero-photo">PHOTO</div>
+        <div class="hero-infos">
+          <strong>#4 - Flash</strong><br>
+          <span>Statut: En repos</span>
+        </div>
+      </div>
 
-</div> <!-- Fin main-container -->
+    </div>
+
+  </div>
+
+  <!-- COLONNE DROITE -->
+  <div class="colonne_droite">
+
+    <div class="zone-action">
+      <button class="btn-creer" routerLink="/recruter-hero">
+        Recruter un super-héros
+      </button>
+    </div>
+
+  </div>
+
+</div>
