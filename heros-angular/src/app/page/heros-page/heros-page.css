@@ -1,38 +1,38 @@
 /* =========================================
    CONTENEUR PRINCIPAL
    ========================================= */
-.main-container {   /* Container principal dans lequel il y a les autres balises */
-  display: flex;            /* Active le mode Flexbox : met les enfants côte à côte */
-  width: 100%;              /* Prend toute la largeur */
-  min-height: 90vh;         /* Prend au moins 90% de la hauteur de l'écran */
-  background-color: #ffffff; 
-  padding-top: 20px;        /* Un peu d'espace sous la barre de navigation */
-  gap: 30px;                /* Espace entre la colonne gauche et la droite */
+.main-container {
+  display: flex;            /* Active Flexbox */
+  width: 100%;              /* Prend toute la largeur de l'écran */
+  min-height: 90vh;         
+  background-color: #ffffff;
+  padding: 40px;            /* Un peu de marge autour pour ne pas coller aux bords */
+  gap: 20px;                /* Espace entre les colonnes */
+    
 }
 
 /* =========================================
-   COLONNE GAUCHE (Les Graphiques)
+   COLONNE GAUCHE (Ratio 1/4)
    ========================================= */
 .colonne_gauche {
-  width: 250px;             /* Largeur fixe pour la barre latérale */
-  display: flex;            /* Flexbox vertical pour empiler les ronds */
-  flex-direction: column;   /* On empile les éléments les uns sous les autres */
-  align-items: center;      /* On centre les ronds horizontalement */
-  padding: 20px;
-  gap: 40px;                /* Espace entre chaque rond */
+  flex: 1;                  /* 1 part du gâteau */
+  padding-top: 100px;
+  min-width: 200px;         
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
   
-
-  /* border-right: 1px solid #eee; */    /* => Pour visualiser la zone si on veut */
+  /* Juste pour voir la zone */
+  /* background-color: #f9f9f9; */
+  /* border-radius: 8px; */
 }
 
-/* Le style des ronds gris (Graphiques) */
 .graph-circle {
-  width: 150px;             /* Largeur du rond */
-  height: 150px;            /* Hauteur identique pour faire un rond parfait */
-  background-color: #d9d9d9;/* Gris clair (comme sur l'image) */
-  border-radius: 50%;       /* C'est ça qui transforme le carré en rond ! */
-  
-  /* Pour centrer le texte dans le rond */
+  width: 120px;
+  height: 120px;
+  background-color: #d9d9d9;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,80 +43,86 @@
 }
 
 /* =========================================
-   COLONNE DROITE (Liste + Bouton)
+   COLONNE CENTRE (Ratio 2/4)
    ========================================= */
-.colonne_droite {
-  flex: 1;                  /* Magique : Prend TOUT l'espace qui reste à droite */
+.colonne_centre {
+  flex: 2;                  /* 2 parts du gâteau (Le double des autres) */
+  
   display: flex;
-  flex-direction: column;   /* On met le titre au-dessus, et le contenu dessous */
-  padding-right: 40px;      /* Marge à droite pour ne pas coller au bord de l'écran */
+  flex-direction: column;
 }
 
-/* Le Titre "Liste des héros..." */
 .page-title {
-  text-align: center;       /* Centré horizontalement */
+  text-align: center;
   font-size: 24px;
-  margin-bottom: 40px;      /* Espace sous le titre */
+  margin-bottom: 30px;
   font-weight: 500;
 }
 
-/* Zone qui contient la Liste (à gauche) et le Bouton (à droite) */
-.contenu-mixte {
-  display: flex;            /* On sépare la liste et le bouton création */
-  gap: 40px;                /* Espace entre la liste et le bouton */
-  align-items: flex-start;  /* On aligne tout en haut */
-}
-
-/* --- La Liste des Héros --- */
 .liste-heros {
-  flex: 2;                  /* La liste prend 2/3 de la place disponible */
   display: flex;
-  flex-direction: column;   /* Les héros s'empilent */
-  gap: 20px;                /* Espace entre chaque ligne de héros */
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* Une ligne "Héros" (Photo + Infos) */
 .hero-card {
-  display: flex;            /* Pour mettre la photo à côté des infos */
-  gap: 15px;                /* Espace entre photo et infos */
-  align-items: stretch;     /* Les deux blocs ont la même hauteur */
+  display: flex;
+  gap: 15px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  
+  &:hover {
+    transform: translateX(5px);
+  }
 }
 
 .hero-photo {
-  width: 100px;             /* Carré fixe */
-  height: 100px;
+  width: 80px;      /* Taille fixe pour la photo */
+  height: 80px;
+  flex-shrink: 0;   /* Empêche la photo de s'écraser si l'écran est petit */
   background-color: #d9d9d9;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .hero-infos {
-  flex: 1;                  /* Le bloc info prend tout le reste de la ligne */
-  background-color: #e6e6e6;/* Gris un peu plus clair */
+  flex: 1;          /* Prend le reste de la largeur de la carte */
+  background-color: #e6e6e6;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 20px;
 }
 
-/* --- Le Bouton "Créer" (à droite) --- */
+/* =========================================
+   COLONNE DROITE (Ratio 1/4)
+   ========================================= */
+.colonne_droite {
+  flex: 1;                  /* 1 part du gâteau */
+  
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-end; Si tu veux coller le bouton à droite */
+}
+
 .zone-action {
-  flex: 1;                  /* Le bouton prend 1/3 de la place */
+  width: 100%;
 }
 
 .btn-creer {
-  width: 100%;              /* Prend toute la largeur de sa colonne */
-  padding: 30px 20px;       /* Gros padding pour faire un rectangle épais */
+  width: 100%;
+  padding: 20px;
   background-color: #d9d9d9;
   border: none;
   font-size: 16px;
-  cursor: pointer;          /* Change la souris en main au survol */
+  font-weight: bold;
+  cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s; /* Petit effet smooth */
+  transition: background-color 0.3s;
   
   &:hover {
-    background-color: #c0c0c0; /* Un peu plus foncé au survol */
+    background-color: #c0c0c0;
   }
 }
