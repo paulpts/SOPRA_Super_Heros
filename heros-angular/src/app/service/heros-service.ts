@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, startWith, switchMap } from 'rxjs';
 import { HerosDto } from '../dto/heros-dto';
-import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class HerosService {
-  private apiUrl: string = environment.apiUrl + '/heros';
+  private apiUrl: string = '/api/heros'; //  car  au niveau du back on a : @RequestMapping("/api/heros")
   private refresh$: Subject<void> = new Subject<void>();
 
   constructor(private http: HttpClient) { }
@@ -55,4 +55,17 @@ export class HerosService {
   public deleteById(id: string): void {
     this.http.delete<void>(`${this.apiUrl}/${id}`).subscribe(() => this.refresh());
   }
+
+ public findAllOmega(): Observable<HerosDto[]> {
+    return this.http.get<HerosDto[]>('/api/omega');
+  }
+
+  public findAllBeta(): Observable<HerosDto[]> {
+    return this.http.get<HerosDto[]>('/api/beta');
+  }
+
+  public findAllAlpha(): Observable<HerosDto[]> {
+    return this.http.get<HerosDto[]>('/api/alpha');
+  }
 }
+
