@@ -8,6 +8,9 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("chefAgence")
 // @Table(name="chef_agence") On doit pas mettre de Table pour une classe enfant
 public class ChefAgence extends Compte{
+
+	@Column(nullable = true)
+	Agence agence;
 	
 	@Column(length=25)
 	String nom;
