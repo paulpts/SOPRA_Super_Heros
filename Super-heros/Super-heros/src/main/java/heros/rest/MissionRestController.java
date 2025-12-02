@@ -3,7 +3,6 @@ package heros.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.response.MissionResponse;
 import heros.model.Mission;
 import heros.service.MissionService;
 
@@ -25,23 +25,19 @@ public class MissionRestController {
     private MissionService missionService;
 
     @GetMapping
-    public List<Mission> allMissions() {
-        return missionService.getAll();
+    public List<MissionResponse> allMissions() {
+    	return missionService.getAllMission().stream().map(MissionResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Mission> ficheMission(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
-        Mission m = missionService.getById(id);
-
-        if (m == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(m);
+    public MissionResponse ficheMission(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
+        Mission m = (Mission) missionService.getById(id);
+        return MissionResponse.convert(m);
     }
 
     @PostMapping
     public Mission ajouterMission(@RequestBody Mission mission) {
-        return missionService.create(mission);
+        return  missionService.create(mission);
     }
 
     @PutMapping("/{id}")

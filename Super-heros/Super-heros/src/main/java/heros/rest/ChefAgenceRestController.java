@@ -3,7 +3,6 @@ package heros.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,13 +29,9 @@ public class ChefAgenceRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ChefAgenceResponse> ficheChefAgence(@PathVariable Integer id) {
+    public ChefAgenceResponse ficheChefAgence(@PathVariable Integer id) {
         ChefAgence ca = (ChefAgence) compteService.getById(id);
-
-        if (ca == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(ChefAgenceResponse.convert(ca));
+        return ChefAgenceResponse.convert(ca);
     }
 
     @PostMapping
@@ -47,7 +42,7 @@ public class ChefAgenceRestController {
     @PutMapping("/{id}")
     public ChefAgence modifierChefAgence(@PathVariable Integer id, @RequestBody ChefAgence chefAgence) {
         chefAgence.setId(id);
-        return (ChefAgence) compteService.update(chefAgence);
+        return (ChefAgence) compteService.update(id,chefAgence);
     }
 
     @DeleteMapping("/{id}")
