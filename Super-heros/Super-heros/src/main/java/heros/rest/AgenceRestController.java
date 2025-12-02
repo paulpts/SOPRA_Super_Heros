@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.request.CreateAgenceRequest;
 import heros.dto.response.AgenceResponse;
 import heros.model.Agence;
 import heros.service.AgenceService;
@@ -36,8 +37,8 @@ public class AgenceRestController {
     }
     
     @PostMapping
-    public AgenceResponse ajouterAgence(@RequestBody Agence agence) {
-        return agenceService.create(agence);
+    public Agence ajouterAgence(@RequestBody CreateAgenceRequest request) {
+        return agenceService.create(new Agence(),request);
     }
 
     @PutMapping("/{id}")
