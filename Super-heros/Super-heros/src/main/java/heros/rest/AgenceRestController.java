@@ -42,7 +42,7 @@ public class AgenceRestController {
 
     @PutMapping("/{id}")
     public Agence modifierAgence(@PathVariable Integer id, @RequestBody Agence agence) {
-        return agenceService.update(agence);
+        return agenceService.update(id, agence);
     }
     
 

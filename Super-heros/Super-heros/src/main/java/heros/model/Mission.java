@@ -39,6 +39,11 @@ public class Mission {
 	
 	
 	
+	public Mission() {
+
+	}
+	
+	
 	public Mission(int difficulte, String description, int niveauDanger, String ville, String statut,
 			double creditMission, Agence agence, Heros hero) {
 		super();
