@@ -36,7 +36,7 @@ public class AgenceRestController {
     }
     
     @PostMapping
-    public Agence ajouterAgence(@RequestBody Agence agence) {
+    public AgenceResponse ajouterAgence(@RequestBody Agence agence) {
         return agenceService.create(agence);
     }
 
