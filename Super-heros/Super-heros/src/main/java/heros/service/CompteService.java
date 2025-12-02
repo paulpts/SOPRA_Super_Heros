@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import heros.model.Admin;
-import heros.model.Agence;
 import heros.model.ChefAgence;
 import heros.model.Compte;
-import heros.repo.AgenceRepository;
 import heros.repo.CompteRepository;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -20,8 +18,6 @@ public class CompteService {
     @Autowired
     private CompteRepository compteRepository;
 
-    @Autowired
-    private AgenceRepository agenceRepository;
 
     public Compte getById(Integer id) {
         if (id == null) {

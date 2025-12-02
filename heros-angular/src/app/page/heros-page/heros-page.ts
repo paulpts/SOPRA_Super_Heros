@@ -40,7 +40,7 @@ export class HerosPage implements OnInit {
       return 'En repos';
     }
 
-    /
+    
    
     return 'Disponible';
   }

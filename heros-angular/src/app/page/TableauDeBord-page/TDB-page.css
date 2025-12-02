@@ -1,0 +1,134 @@
+/* =========================================
+   GLOBAL
+   ========================================= */
+.dashboard-container {
+  display: flex;            /* Les 3 colonnes côte à côte */
+  width: 100%;
+  min-height: 80vh;
+  padding: 20px;
+  gap: 20px;                /* Espace entre les colonnes */
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+ul { padding: 0; list-style: none; } /* Reset des listes */
+
+/* =========================================
+   BANNIÈRE WELCOME
+   ========================================= */
+.welcome-banner {
+  background-color: #d9d9d9;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between; /* Ecarte le texte à gauche et le bouton à droite */
+  align-items: center;
+  margin-bottom: 20px;      /* Espace avant les colonnes */
+}
+
+.welcome-text h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.budget {
+  padding: 10px 30px;
+  background-color: #cccccc; /* Un peu plus foncé */
+  border: none;
+  font-weight: bold;
+}
+
+/* =========================================
+   COLONNE GAUCHE (Missions Dispo + Top Héros)
+   ========================================= */
+.col-left {
+  flex: 1;                  /* Largeur standard */
+  display: flex;
+  flex-direction: column;
+}
+
+.mb-20 { margin-bottom: 20px; }
+
+.grey-card {
+  background-color: #d9d9d9;
+  padding: 20px;
+  text-align: center;       /* Textes centrés */
+}
+
+.card-title {
+  margin-top: 0;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.recrutement-header {
+  background-color: #ffffff; /* Fond blanc pour le titre "Recruter" */
+  padding: 10px;
+  border: 1px solid #333;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.sub-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.numbered-list li {
+  margin-bottom: 10px;
+}
+
+/* =========================================
+   COLONNE CENTRE (Infos Diverses)
+   ========================================= */
+.col-center {
+  flex: 1;
+}
+
+.white-card {
+  background-color: #ffffff;
+  padding: 20px;
+  height: 100%;             /* Prend toute la hauteur disponible */
+}
+
+.border-card {
+  border: 1px solid #333;   /* Le cadre noir autour */
+}
+
+.bullet-list {
+  text-align: left;         /* Liste alignée à gauche */
+  padding-left: 20px;       /* Marge pour les puces */
+  list-style-type: disc;    /* Force les puces rondes */
+}
+
+.bullet-list li {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+/* =========================================
+   COLONNE DROITE (Sidebar Missions)
+   ========================================= */
+.col-right {
+  flex: 1;
+}
+
+.grey-sidebar {
+  background-color: #d9d9d9;
+  padding: 20px;
+  height: 100%;             /* Descend jusqu'en bas */
+  text-align: center;
+}
+
+.sidebar-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.clean-list li {
+  margin-bottom: 15px;      /* Espace les missions */
+}
+
+.mb-40 { margin-bottom: 40px; } /* Espace entre les deux listes */

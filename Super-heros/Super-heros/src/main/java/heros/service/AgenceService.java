@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import heros.dto.request.CreateAgenceRequest;
 import heros.model.Agence;
 import heros.model.ChefAgence;
-import heros.model.Compte;
 import heros.repo.AgenceRepository;
 import heros.repo.CompteRepository;
 import jakarta.persistence.EntityNotFoundException;
