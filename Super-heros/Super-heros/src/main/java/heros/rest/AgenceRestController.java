@@ -3,7 +3,6 @@ package heros.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,21 +27,17 @@ public class AgenceRestController {
 
     @GetMapping
     public List<AgenceResponse> allAgences() {
-    	 return agenceService.getAll().stream().map(AgenceResponse::convert).toList()
+    	return agenceService.getAllAgence().stream().map(AgenceResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AgenceResponse> ficheAgence(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
-        Agence a = agenceService.getById(id);
-
-        if (a == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(a);
+    public AgenceResponse ficheAgence(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
+        Agence a = (Agence) agenceService.getById(id);
+        return AgenceResponse.convert(a);
     }
     
     @PostMapping
-    public AgenceRespone ajouterAgence(@RequestBody AgenceResponse response) {
+    public Agence ajouterAgence(@RequestBody Agence agence) {
         return agenceService.create(agence);
     }
 
