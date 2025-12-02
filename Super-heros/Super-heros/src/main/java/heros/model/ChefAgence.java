@@ -19,13 +19,22 @@ public class ChefAgence extends Compte{
 	@Column(length=25)
 	private String prenom;//A demander � la premiere co
 
-	public ChefAgence(String login, String password, String nom, String prenom) {
-		super(login,password);
-		this.nom = nom;
-		this.prenom = prenom;
+	public ChefAgence(String login, String password, Agence agence, String nom, String prenom) {
+		super(login, password);
+		this.nom=nom;
+		this.prenom=prenom;
+	}
+	
+	public ChefAgence() {
+
+	}
+	
+	public Agence getAgence() {
+		return agence;
 	}
 
-	public ChefAgence() {
+	public void setAgence(Agence agence) {
+		this.agence = agence;
 	}
 
 	public String getNom() {
@@ -35,9 +44,12 @@ public class ChefAgence extends Compte{
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
-	
-	
-	
 
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
 }

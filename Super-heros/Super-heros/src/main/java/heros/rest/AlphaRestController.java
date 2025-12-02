@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import heros.model.Alpha;
-import heros.model.Heros;
 import heros.service.HerosService;
 
 
@@ -36,13 +35,13 @@ public class AlphaRestController {
     }
     
     @PostMapping
-    public Alpha ajouterAlpha(@RequestBody Heros heros) {
-        return (Alpha) herosService.create(heros);
+    public Alpha ajouterAlpha(@RequestBody Alpha alpha) {
+        return (Alpha) herosService.create(alpha);
     }
 
     @PutMapping("/{id}")
-    public Alpha modifierAlpha(@PathVariable Integer id, @RequestBody Heros heros) {
-        return (Alpha) herosService.update(heros);
+    public Alpha modifierAlpha(@PathVariable Integer id, @RequestBody Alpha alpha) {
+        return (Alpha) herosService.update(alpha);
     }
 
     @DeleteMapping("/{id}")

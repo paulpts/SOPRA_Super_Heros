@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import heros.model.Beta;
-import heros.model.Heros;
 import heros.service.HerosService;
 
 
@@ -36,13 +35,13 @@ public class BetaRestController {
     }
     
     @PostMapping
-    public Beta ajouterBeta(@RequestBody Heros heros) {
-        return (Beta) herosService.create(heros);
+    public Beta ajouterBeta(@RequestBody Beta beta) {
+        return (Beta) herosService.create(beta);
     }
 
     @PutMapping("/{id}")
-    public Beta modifierBeta(@PathVariable Integer id, @RequestBody Heros heros) {
-        return (Beta) herosService.update(heros);
+    public Beta modifierBeta(@PathVariable Integer id, @RequestBody Beta beta) {
+        return (Beta) herosService.update(beta);
     }
 
     @DeleteMapping("/{id}")
