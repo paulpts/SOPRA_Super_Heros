@@ -6,17 +6,16 @@
     <a routerLink="/agences">Agences</a>
     <a routerLink="/heros">Héros</a>
     <a routerLink="/missions">Missions</a>
-    <button class="btn-logout" (click)="logout()">Déconnexion</button>
   </nav>
 </header>
 
 <section class="welcome-banner">
-  <h2>Welcome {{ adminName }}</h2>
+  <h2>Welcome</h2>
 </section>
 
-<main class="dashboard-container">
+<main class="main-container">
 
-  <section class="column left-panel">
+  <section class="MARWAH">
     
     <div class="card agency-list-card">
       <h3 class="card-title">Liste des agences</h3>
@@ -28,18 +27,12 @@
     </div>
 
     <div class="action-buttons-container">
-      <button class="btn-primary" (click)="openCreateAgencyForm()">
-        Créer une agence
-      </button>
-      
-      <button class="btn-primary" (click)="openCreateMissionForm()">
-        Créer une mission
-      </button>
+
     </div>
 
   </section>
 
-  <section class="column center-panel">
+  <section class="MOUNIR">
     <div class="card stats-card">
       <h3 class="card-title">Infos diverses</h3>
       

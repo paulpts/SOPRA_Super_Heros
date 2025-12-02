@@ -36,13 +36,13 @@ public class OmegaRestController {
     }
     
     @PostMapping
-    public Omega ajouterOmega(@RequestBody Heros heros) {
-        return (Omega) herosService.create(heros);
+    public Omega ajouterOmega(@RequestBody Omega omega) {
+        return (Omega) herosService.create(omega);
     }
 
     @PutMapping("/{id}")
-    public Omega modifierOmega(@PathVariable Integer id, @RequestBody Heros heros) {
-        return (Omega) herosService.update(heros);
+    public Omega modifierOmega(@PathVariable Integer id, @RequestBody Omega omega) {
+        return (Omega) herosService.update(omega);
     }
 
     @DeleteMapping("/{id}")
@@ -50,4 +50,13 @@ public class OmegaRestController {
         herosService.deleteById(id);
     }
     
+    @GetMapping("/alias/{alias}") //Permet de recuperer heros par son alias
+    public Omega getHerosByAlias(@PathVariable String alias) {
+        return (Omega) herosService.getByAlias(alias);
+    }
+    
+    @GetMapping("/agence/{agenceId}") // Permet de recuperer les heros par agence selon l'ID
+    public List<Omega> getOmegaByAgenceId(@PathVariable Integer agenceId) {
+        return herosService.getOmegaByAgenceId(agenceId);
+    }
 }

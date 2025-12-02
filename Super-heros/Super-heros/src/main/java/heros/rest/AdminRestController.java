@@ -12,24 +12,25 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import heros.model.Admin;
-import heros.service.AdminService;
+import heros.service.CompteService;
 
 @RestController
 @RequestMapping("/api/admin")
 public class AdminRestController {
 
     @Autowired
-    private AdminService adminService;
+    private CompteService compteService;
 
     @GetMapping
     public List<Admin> allChefAgence() {
-        return adminService.getAll();
+        return compteService.getAllAdmin();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Admin> ficheChefAgence(@PathVariable Integer id) {
-        Admin a = adminService.getById(id);
+        Admin a = (Admin) compteService.getById(id);
 
         if(a == null) {
             return ResponseEntity.notFound().build();
@@ -39,18 +40,18 @@ public class AdminRestController {
 
     @PostMapping
     public Admin ajouterAdmin(@RequestBody Admin admin) {
-        return adminService.create(admin);
+        return (Admin)compteService.create(admin);
     }
 
     @PutMapping("/{id}")
     public Admin modifierAdmin(@PathVariable Integer id,@RequestBody Admin admin) {
         admin.setId(id);
-        return adminService.update(admin);
+        return (Admin) compteService.update(admin);
     }
 
     @DeleteMapping("/{id}")
     public void supprimerAdmin(@PathVariable Integer id) {
-        adminService.deleteById(id);
+    	compteService.deleteById(id);
     }   
 }
     
