@@ -36,8 +36,8 @@ public class AlphaRestController {
     }
     
     @PostMapping
-    public Alpha ajouterAlpha(@RequestBody Heros heros) {
-        return (Alpha) herosService.create(heros);
+    public Alpha ajouterAlpha(@RequestBody Alpha alpha) {
+        return (Alpha) herosService.create(alpha);
     }
 
     @PutMapping("/{id}")

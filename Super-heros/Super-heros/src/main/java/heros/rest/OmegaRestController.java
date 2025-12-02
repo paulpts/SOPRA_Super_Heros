@@ -36,13 +36,13 @@ public class OmegaRestController {
     }
     
     @PostMapping
-    public Omega ajouterOmega(@RequestBody Heros heros) {
-        return (Omega) herosService.create(heros);
+    public Omega ajouterOmega(@RequestBody Omega omega) {
+        return (Omega) herosService.create(omega);
     }
 
     @PutMapping("/{id}")
-    public Omega modifierOmega(@PathVariable Integer id, @RequestBody Heros heros) {
-        return (Omega) herosService.update(heros);
+    public Omega modifierOmega(@PathVariable Integer id, @RequestBody Omega omega) {
+        return (Omega) herosService.update(omega);
     }
 
     @DeleteMapping("/{id}")
