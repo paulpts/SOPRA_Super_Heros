@@ -1,5 +1,3 @@
-
-
 export class HerosDto {
   constructor(
     private _id: string,
@@ -14,8 +12,8 @@ export class HerosDto {
     private _degats: number,
     private _motivation: number,
     private _agenceId?: string,
-   // private _pouvoirs: PouvoirDto[] = [],
-   // private _missions: MissionDto[] = [],
+   // private _missionIds: number[] = [], (tableau contenant plusieurs id de missions)
+   // private _pouvoirs: string[] = [],
   ) { }
 
   public get id(): string {
@@ -102,19 +100,19 @@ export class HerosDto {
     this._agenceId = value;
   }
 
-  public get pouvoirs(): PouvoirDto[] {
+  /* public get pouvoirs(): string[] {
     return this._pouvoirs;
   }
-  public set pouvoirs(value: PouvoirDto[]) {
+  public set pouvoirs(value: string[]) {
     this._pouvoirs = value;
   }
 
-  public get missions(): MissionDto[] {
-    return this._missions;
+  public get missionsIds(): number[] {
+    return this._missionsIds;
   }
-  public set missions(value: MissionDto[]) {
-    this._missions = value;
-  }
+  public set missionsIds(value: number[]) {
+    this._missionsIds = value;
+  }*/
 
   public toJson(): any {
     
@@ -129,7 +127,7 @@ export class HerosDto {
       experience: this.experience,
       degats: this.degats,
       motivation: this.motivation,
-      agence: this.agenceId ?
-    };
+      agence: this.agenceId ? { id: Number(this.agenceId) } : null// Le back attend un objet "agence" (avec une propriété id)
+    };                                                            // null : valeur envoyee quand aucune agence n'est sélectionnée
   }
 }
