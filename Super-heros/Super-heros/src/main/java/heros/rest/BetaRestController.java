@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import heros.model.Beta;
-import heros.model.Heros;
 import heros.service.HerosService;
 
 
