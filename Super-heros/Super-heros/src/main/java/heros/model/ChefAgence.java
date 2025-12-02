@@ -24,7 +24,11 @@ public class ChefAgence extends Compte{
 		this.nom=nom;
 		this.prenom=prenom;
 	}
+	
+	public ChefAgence() {
 
+	}
+	
 	public Agence getAgence() {
 		return agence;
 	}
