@@ -1,5 +1,8 @@
 package heros.dto.response;
 
+import java.util.List;
+
+import heros.enumerator.Pouvoirs;
 import heros.model.Omega;
 
 public class OmegaResponse {
@@ -13,6 +16,7 @@ public class OmegaResponse {
     private int experience;
     private int motivation;
     private Integer agenceId;
+    private List<Pouvoirs> pouvoirs;
 
     public OmegaResponse() {
     }
@@ -110,6 +114,15 @@ public class OmegaResponse {
     public void setAgenceId(Integer agenceId) {
          this.agenceId = agenceId; 
     }
+    
+    public List<Pouvoirs> getPouvoirs() {
+     return pouvoirs;
+    }
+
+    public void setPouvoirs(List<Pouvoirs> pouvoirs) {
+     this.pouvoirs = pouvoirs;
+    }
+    
 
     public static OmegaResponse convert(Omega omega) {
         OmegaResponse response = new OmegaResponse();
@@ -128,11 +141,14 @@ public class OmegaResponse {
         } else {
         response.setAgenceId(null);
         }
+        response.setPouvoirs(omega.getPouvoirs());
+        
 
     
         return response;
 
     }
+
 
     
 
