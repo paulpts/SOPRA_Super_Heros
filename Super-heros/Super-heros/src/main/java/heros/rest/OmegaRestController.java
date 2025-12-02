@@ -12,17 +12,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.request.CreateUpdateHerosRequest;
 import heros.dto.response.OmegaResponse;
 import heros.model.Omega;
 import heros.service.HerosService;
-
 
 @RestController
 @RequestMapping("/api/omega")
 public class OmegaRestController {
 
+
     @Autowired
     private HerosService herosService;
+
 
     @GetMapping
     public List<OmegaResponse> allOmega() {
@@ -35,13 +37,25 @@ public class OmegaRestController {
     }
 
     @PostMapping
-    public OmegaResponse ajouterOmega(@RequestBody Omega omega) {
-        return OmegaResponse.convert((Omega) herosService.create(omega));
+    public OmegaResponse ajouterOmega(@RequestBody CreateUpdateHerosRequest request) {
+        return OmegaResponse.convert((Omega) herosService.createOmega(request));
     }
 
     @PutMapping("/{id}")
-    public OmegaResponse modifierOmega(@PathVariable Integer id, @RequestBody Omega omega) {
+    public OmegaResponse modifierOmega(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
+        Omega omega = new Omega(
+                request.getNom(),
+                request.getPrenom(),
+                request.getAlias(),
+                request.getPopularite(),
+                request.getSante(),
+                request.getSalaire(),
+                request.getExperience(),
+                request.getDegats(),
+                request.getMotivation(),
+                request.getPouvoirs());
         omega.setId(id);
+        omega.setAgence(herosService.getById(id).getAgence());
         return OmegaResponse.convert((Omega) herosService.update(omega));
     }
 
