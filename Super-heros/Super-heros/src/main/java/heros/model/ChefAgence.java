@@ -3,20 +3,21 @@ package heros.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue("chefAgence")
 // @Table(name="chef_agence") On doit pas mettre de Table pour une classe enfant
 public class ChefAgence extends Compte{
 
-	@Column(nullable = true)
-	Agence agence;
+	@OneToOne(mappedBy= "chefAgence")
+	private Agence agence;
 	
 	@Column(length=25)
-	String nom;
+	private String nom;
 	
 	@Column(length=25)
-	String prenom;//A demander � la premiere co
+	private String prenom;//A demander � la premiere co
 
 	public ChefAgence(String login, String password, String nom, String prenom) {
 		super(login,password);

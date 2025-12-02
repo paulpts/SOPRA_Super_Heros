@@ -21,6 +21,7 @@ type ChefFilter = 'AGENCE' | 'ALPHA' | 'BETA' | 'OMEGA';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './heros-page.html',
+  styleUrls: ['./heros-page.css'],
 })
 export class HerosPage implements OnInit {
 
