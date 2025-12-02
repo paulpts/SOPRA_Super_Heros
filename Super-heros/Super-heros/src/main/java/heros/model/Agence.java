@@ -43,9 +43,13 @@ public class Agence {
 	public Agence() {
 	}
 
-	public Agence(double budget, int popularite) {
+	public Agence(double budget, int popularite, String ville, ChefAgence chefAgence)
+		 {
 		this.budget = budget;
 		this.popularite = popularite;
+		this.ville = ville;
+		this.chefAgence = chefAgence;
+
 	}
 
 	public Integer getId() {

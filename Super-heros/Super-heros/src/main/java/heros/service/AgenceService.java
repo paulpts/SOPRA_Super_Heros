@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import heros.dto.request.CreateAgenceRequest;
 import heros.model.Agence;
 import heros.model.ChefAgence;
-import heros.model.Compte;
 import heros.repo.AgenceRepository;
 import heros.repo.CompteRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -22,6 +22,9 @@ public class AgenceService { // test
     @Autowired
     private CompteRepository compteRepository;
 
+    @Autowired
+    private CompteService compteSrv;
+
     public Agence getById(Integer id) {
         if (id == null) {
             throw new RuntimeException("L'id d'une agence ne peut pas être null");
@@ -33,15 +36,21 @@ public class AgenceService { // test
         return agenceRepository.findAll();
     }
 
-    public Agence create(Agence agence) {
-        if (agence.getId() != null) {
-            throw new IllegalArgumentException("L'agence ne doit pas avoir d'id !");
-        }
-        ChefAgence chefAgence = agence.getChefAgence();
+    public Agence create(Agence agence, CreateAgenceRequest agenceRequest) {
+        // if (agence.getId() != null) {
+        // throw new IllegalArgumentException("L'agence ne doit pas avoir d'id !");
+        // }
+
+        agence.setVille(agenceRequest.getVille());
+        agence.setBudget(agenceRequest.getBudget());
+        agence.setPopularite(agenceRequest.getPopularite());
+        ChefAgence chefAgence = (ChefAgence) compteSrv.getById(agenceRequest.getChefAgenceId());
+        agence.setChefAgence(chefAgence);
+        agenceRepository.save(agence);
         chefAgence.setAgence(agence);
         compteRepository.save(chefAgence);
 
-        return agenceRepository.save(agence);
+        return agence;
     }
 
     // public Compte update(Compte compte) {
