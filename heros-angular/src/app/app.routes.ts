@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HerosPage} from './page/heros-page/heros-page';
 import { ConnexionPage } from './page/connexion-page/connexion-page';
 import { TDB } from './page/TableauDeBord-page/TDB';
+import { MissionPage } from './page/mission-page/mission-page';
 
 export const routes: Routes = [
   // Redirection par défaut vers /home si l'utilisateur écrit / dans l'URL
