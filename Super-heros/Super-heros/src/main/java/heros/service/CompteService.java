@@ -1,11 +1,17 @@
 package heros.service;
 
 import java.util.List;
-import heros.repo.CompteRepository;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import heros.model.Admin;
+import heros.model.Alpha;
+import heros.model.ChefAgence;
 import heros.model.Compte;
+import heros.model.Heros;
+import heros.repo.CompteRepository;
 
 @Service
 public class CompteService {
@@ -20,8 +26,6 @@ public class CompteService {
         }
     return compteRepository.findById(id).orElse(null);
     }
-
-
 
     public List<Compte> getAll() {
         return compteRepository.findAll();    
@@ -39,8 +43,32 @@ public class CompteService {
         compteRepository.deleteById(id);
     }
 
-    public void deleteHeros(Compte compte) { //J'ai mis aussi un DELETE pour l'object Heros mais pas sur que ca nous serve vu qu'on a deja DeleteById
+    public void deleteCompte(Compte compte) { 
         compteRepository.delete(compte);
     }
     
+    
+    public List<Admin> getAllAdmin()
+ 	{
+ 		return compteRepository.findAllAdmin();
+ 	}
+    
+    public List<ChefAgence> getAllChefAgence()
+ 	{
+ 		return compteRepository.findAllChefAgence();
+ 	}
+    
+	public Admin getAdminById(Integer id)
+	{
+		Optional<Compte> opt = compteRepository.findById(id);
+		if(opt.isEmpty()) {return null;}
+	    else {return (Admin)opt.get();}
+	}
+	
+	public ChefAgence getChefAgenceById(Integer id)
+	{
+		Optional<Compte> opt = compteRepository.findById(id);
+		if(opt.isEmpty()) {return null;}
+		else {return (ChefAgence)opt.get();}
+	}
 }

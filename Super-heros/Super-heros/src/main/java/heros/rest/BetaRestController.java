@@ -50,4 +50,13 @@ public class BetaRestController {
         herosService.deleteById(id);
     }
     
+    @GetMapping("/alias/{alias}") //Permet de recuperer heros par son alias
+    public Beta getHerosByAlias(@PathVariable String alias) {
+        return (Beta) herosService.getByAlias(alias);
+    }
+    
+    @GetMapping("/agence/{agenceId}") // Permet de recuperer les heros par agence selon l'ID
+    public List<Beta> getBetaByAgenceId(@PathVariable Integer agenceId) {
+        return herosService.getBetaByAgenceId(agenceId);
+    }
 }
