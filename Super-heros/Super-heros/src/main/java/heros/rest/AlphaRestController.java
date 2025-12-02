@@ -50,4 +50,14 @@ public class AlphaRestController {
         herosService.deleteById(id);
     }
     
+    @GetMapping("/alias/{alias}") //Permet de recuperer heros par son alias
+    public Alpha getHerosByAlias(@PathVariable String alias) {
+        return (Alpha) herosService.getByAlias(alias);
+    }
+    
+    @GetMapping("/agence/{agenceId}") // Permet de recuperer les heros par agence selon l'ID
+    public List<Alpha> getAlphaByAgenceId(@PathVariable Integer agenceId) {
+        return herosService.getAlphaByAgenceId(agenceId);
+    }
+
 }
