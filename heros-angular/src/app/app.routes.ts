@@ -17,7 +17,7 @@ export const routes: Routes = [
   { path: 'heros', component: HerosPage },
 
   // Gestion des missions 
- // { path: 'mission', component: MissionPage },
+  { path: 'mission', component: MissionPage },
 
   // Tableau de bord
   //{ path: 'dashboard', component: TableauDeBordPage },
