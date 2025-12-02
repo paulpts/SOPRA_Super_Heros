@@ -1,99 +1,77 @@
+<header class="navbar">
+  <div class="logo">LOGO</div>
+  
+  <nav class="nav-links">
+    <a routerLink="/dashboard">Tableau de bord</a>
+    <a routerLink="/agences">Agences</a>
+    <a routerLink="/heros">Héros</a>
+    <a routerLink="/missions">Missions</a>
+    <button class="btn-logout" (click)="logout()">Déconnexion</button>
+  </nav>
+</header>
 
-<div *ngIf="isAdmin; else chefTemplate" class="container-fluid">
+<section class="welcome-banner">
+  <h2>Welcome {{ adminName }}</h2>
+</section>
 
-  <div class="row">
-    <!-- COLONNE GAUCHE : GRAPHIQUES -->
-    <aside class="col-12 col-lg-2 mb-3">
-      <div class="mb-3 text-center border rounded py-4">
-        graph statut
-      </div>
-      <div class="mb-3 text-center border rounded py-4">
-        graph motivation
-      </div>
-      <div class="mb-3 text-center border rounded py-4">
-        graph popularité
-      </div>
-    </aside>
+<main class="dashboard-container">
 
-    <!-- COLONNE CENTRALE : LISTE DES HÉROS (toutes agences) -->
-    <section class="col-12 col-lg-6 mb-3">
-      <h1 class="text-center mb-4">
-        Listes des héros (toutes agences confondues)
-      </h1>
+  <section class="column left-panel">
+    
+    <div class="card agency-list-card">
+      <h3 class="card-title">Liste des agences</h3>
+      <ul class="simple-list">
+        <li class="list-item">Agence Alpha <hr></li>
+        <li class="list-item">Agence Beta <hr></li>
+        <li class="list-item">Agence Gamma <hr></li>
+      </ul>
+    </div>
 
-      <div *ngFor="let heros of (heros$ | async); trackBy: trackHeros"
-           class="d-flex align-items-center mb-3 border rounded p-3">
-        <div class="me-3 d-flex align-items-center justify-content-center border rounded"
-             style="width: 80px; height: 80px;">
-          Images A ajouter
-        </div>
-
-        <div>
-          <div>
-            <strong>{{ heros.alias }}</strong>
-            <span class="text-muted">#{{ heros.id }}</span>
-          </div>
-          <div>
-            {{ heros.prenom }} {{ heros.nom }}
-          </div>
-          <div>
-            Popularité : {{ heros.popularite }}
-            | Santé : {{ heros.sante }}
-            | Salaire : {{ heros.salaire }}
-          </div>
-          <div>
-            Agence : {{ heros.agenceId || 'null' }}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- COLONNE DROITE : bouton + formulaire admin -->
-    <aside class="col-12 col-lg-4 mb-3">
-      <button class="btn btn-primary w-100 mb-3"
-              (click)="afficherFormulaireCreation()">
-        Créer un super-héros
+    <div class="action-buttons-container">
+      <button class="btn-primary" (click)="openCreateAgencyForm()">
+        Créer une agence
       </button>
-
-      <form *ngIf="showForm"
-            [formGroup]="herosForm"
-            (ngSubmit)="creerOuModifier()"
-            class="border rounded p-3">
-
-        <h2 class="h5 mb-3">
-          {{ editingHeros ? 'Modifier un héros' : 'Créer un super-héros' }} <!-- Si editingHeros n’est pas null → on est en mode édition, on affiche “Modifier un héros”.
-
-Sinon → on est en mode création, on affiche “Créer un super-héros”.-->
-        </h2>
-
-        <!-- Nom -->
-        <div class="mb-2">
-          <label for="nom" class="form-label">Nom</label>
-          <input id="nom" type="text" class="form-control" [formControl]="nomCtrl">
-        </div>
-
-        <!-- Prénom -->
-        <div class="mb-2">
-          <label for="prenom" class="form-label">Prénom</label>
-          <input id="prenom" type="text" class="form-control" [formControl]="prenomCtrl">
-        </div>
-
-        <!-- Alias -->
-        <div class="mb-2">
-          <label for="alias" class="form-label">Alias</label>
-          <input id="alias" type="text" class="form-control" [formControl]="aliasCtrl">
-        </div>
-
-        <!-- Popularité / Santé -->
-        <div class="row mb-2">
-          <div class="col-6">
-            <label for="popularite" class="form-label">Popularité</label>
-            <input id="popularite" type="number" class="form-control" [formControl]="populariteCtrl">
-          </div>
-          <div class="col-6">
-            <label for="sante" class="form-label">Santé</label>
-            <input id="sante" type="number" class="form-control" [formControl]="santeCtrl">
-          </div>
-        </div>
-
       
+      <button class="btn-primary" (click)="openCreateMissionForm()">
+        Créer une mission
+      </button>
+    </div>
+
+  </section>
+
+  <section class="column center-panel">
+    <div class="card stats-card">
+      <h3 class="card-title">Infos diverses</h3>
+      
+      <ul class="bullet-list">
+        <li>Popularité moyenne agence : <strong>85%</strong></li>
+        <li>Popularité moyenne héros : <strong>92%</strong></li>
+        <li>Coûts moyens mission : <strong>15k €</strong></li>
+        <li>&nbsp;</li> 
+      </ul>
+    </div>
+  </section>
+
+  <aside class="column right-panel grey-sidebar">
+    
+    <div class="mission-block">
+      <h3>Missions en cours</h3>
+      <ul class="clean-list">
+        <li>Mission 1</li>
+        <li>Mission 2</li>
+        <li>Mission 3</li>
+        <li>Mission 4</li>
+        <li>Mission 5</li>
+        <li>Mission 6</li>
+      </ul>
+    </div>
+
+    <div class="mission-block">
+      <h3>Dernières missions</h3>
+      <ul class="clean-list">
+        </ul>
+    </div>
+
+  </aside>
+
+</main>
