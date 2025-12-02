@@ -1,70 +1,111 @@
-<header class="navbar">
-  <div class="logo">LOGO</div>
-  
-  <nav class="nav-links">
-    <a routerLink="/dashboard">Tableau de bord</a>
-    <a routerLink="/agences">Agences</a>
-    <a routerLink="/heros">Héros</a>
-    <a routerLink="/missions">Missions</a>
-  </nav>
-</header>
+<!-- 
+  =========================================
+  CONTENEUR PRINCIPAL
+  Class CSS : .main-container (Flexbox)
+  =========================================
+-->
+<div class="main-container">
 
-<section class="welcome-banner">
-  <h2>Welcome</h2>
-</section>
-
-<main class="main-container">
-
-  <section class="MARWAH">
+  <!-- 
+    =========================================
+    COLONNE GAUCHE : LES GRAPHIQUES
+    Class CSS : .colonne_gauche (Largeur fixe 250px)
+    =========================================
+  -->
+  <div class="colonne_gauche">
     
-    <div class="card agency-list-card">
-      <h3 class="card-title">Liste des agences</h3>
-      <ul class="simple-list">
-        <li class="list-item">Agence Alpha <hr></li>
-        <li class="list-item">Agence Beta <hr></li>
-        <li class="list-item">Agence Gamma <hr></li>
-      </ul>
+    <!-- Graphique 1 -->
+    <div class="graph-circle">
+      Graph Statut
     </div>
 
-    <div class="action-buttons-container">
-
+    <!-- Graphique 2 -->
+    <div class="graph-circle">
+      Graph Motivation
     </div>
 
-  </section>
-
-  <section class="MOUNIR">
-    <div class="card stats-card">
-      <h3 class="card-title">Infos diverses</h3>
-      
-      <ul class="bullet-list">
-        <li>Popularité moyenne agence : <strong>85%</strong></li>
-        <li>Popularité moyenne héros : <strong>92%</strong></li>
-        <li>Coûts moyens mission : <strong>15k €</strong></li>
-        <li>&nbsp;</li> 
-      </ul>
-    </div>
-  </section>
-
-  <aside class="column right-panel grey-sidebar">
-    
-    <div class="mission-block">
-      <h3>Missions en cours</h3>
-      <ul class="clean-list">
-        <li>Mission 1</li>
-        <li>Mission 2</li>
-        <li>Mission 3</li>
-        <li>Mission 4</li>
-        <li>Mission 5</li>
-        <li>Mission 6</li>
-      </ul>
+    <!-- Graphique 3 -->
+    <div class="graph-circle">
+      Graph Popularité
     </div>
 
-    <div class="mission-block">
-      <h3>Dernières missions</h3>
-      <ul class="clean-list">
-        </ul>
-    </div>
+  </div>
 
-  </aside>
 
-</main>
+  <!-- 
+    =========================================
+    COLONNE DROITE : CONTENU PRINCIPAL
+    Class CSS : .colonne_droite (Prend tout le reste)
+    =========================================
+  -->
+  <div class="colonne_droite">
+
+    <!-- Titre de la section -->
+    <h1 class="page-title">
+      Liste des héros (toutes agences confondues)
+    </h1>
+
+    <!-- 
+      Zone mixte : Liste à gauche + Bouton à droite 
+      Class CSS : .contenu-mixte (Flexbox ligne)
+    -->
+    <div class="contenu-mixte">
+
+      <!-- BLOC 1 : LA LISTE DES HÉROS -->
+      <div class="liste-heros">
+
+        <!-- Carte Héros 1 (Exemple statique) -->
+        <div class="hero-card">
+          <div class="hero-photo">PHOTO</div>
+          <div class="hero-infos">
+            <strong>#1 - Batman</strong><br>
+            <span>Statut: En mission</span>
+          </div>
+        </div>
+
+        <!-- Carte Héros 2 -->
+        <div class="hero-card">
+          <div class="hero-photo">PHOTO</div>
+          <div class="hero-infos">
+            <strong>#2 - Superman</strong><br>
+            <span>Statut: Disponible</span>
+          </div>
+        </div>
+
+        <!-- Carte Héros 3 -->
+        <div class="hero-card">
+          <div class="hero-photo">PHOTO</div>
+          <div class="hero-infos">
+            <strong>#3 - Wonder Woman</strong><br>
+            <span>Statut: Blessé</span>
+          </div>
+        </div>
+
+        <!-- Carte Héros 4 -->
+        <div class="hero-card">
+          <div class="hero-photo">PHOTO</div>
+          <div class="hero-infos">
+            <strong>#4 - Flash</strong><br>
+            <span>Statut: En repos</span>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- BLOC 2 : LE BOUTON D'ACTION (À Droite) -->
+      <div class="zone-action">
+        <!-- 
+          Bouton pour ouvrir le formulaire de création 
+          Plus tard tu ajouteras (click)="ouvrirFormulaire()"
+        -->
+        <button class="btn-creer">
+          Créer un super-héros
+        </button>
+      </div>
+
+    </div> <!-- Fin contenu-mixte -->
+
+  </div> <!-- Fin colonne_droite -->
+
+</div> <!-- Fin main-container -->

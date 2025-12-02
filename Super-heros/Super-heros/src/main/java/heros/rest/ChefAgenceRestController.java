@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.response.ChefAgenceResponse;
 import heros.model.ChefAgence;
 import heros.service.CompteService;
 
@@ -24,18 +25,18 @@ public class ChefAgenceRestController {
     private CompteService compteService;
 
     @GetMapping
-    public List<ChefAgence> allChefAgence() {
-        return compteService.getAllChefAgence();
+    public List<ChefAgenceResponse> allChefAgence() {
+        return compteService.getAllChefAgence().stream().map(ChefAgenceResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ChefAgence> ficheChefAgence(@PathVariable Integer id) {
+    public ResponseEntity<ChefAgenceResponse> ficheChefAgence(@PathVariable Integer id) {
         ChefAgence ca = (ChefAgence) compteService.getById(id);
 
-        if(ca == null) {
+        if (ca == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(ca);
+        return ResponseEntity.ok(ChefAgenceResponse.convert(ca));
     }
 
     @PostMapping
@@ -44,14 +45,14 @@ public class ChefAgenceRestController {
     }
 
     @PutMapping("/{id}")
-    public ChefAgence modifierChefAgence(@PathVariable Integer id,@RequestBody ChefAgence chefAgence) {
+    public ChefAgence modifierChefAgence(@PathVariable Integer id, @RequestBody ChefAgence chefAgence) {
         chefAgence.setId(id);
         return (ChefAgence) compteService.update(chefAgence);
     }
 
     @DeleteMapping("/{id}")
     public void supprimerChefAgence(@PathVariable Integer id) {
-    	compteService.deleteById(id);
-    } 
-    
+        compteService.deleteById(id);
+    }
+
 }

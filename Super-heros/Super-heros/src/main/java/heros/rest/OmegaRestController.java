@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import heros.model.Heros;
 import heros.model.Omega;
 import heros.service.HerosService;
 
@@ -36,13 +35,13 @@ public class OmegaRestController {
     }
     
     @PostMapping
-    public Omega ajouterOmega(@RequestBody Heros heros) {
-        return (Omega) herosService.create(heros);
+    public Omega ajouterOmega(@RequestBody Omega omega) {
+        return (Omega) herosService.create(omega);
     }
 
     @PutMapping("/{id}")
-    public Omega modifierOmega(@PathVariable Integer id, @RequestBody Heros heros) {
-        return (Omega) herosService.update(heros);
+    public Omega modifierOmega(@PathVariable Integer id, @RequestBody Omega omega) {
+        return (Omega) herosService.update(omega);
     }
 
     @DeleteMapping("/{id}")
