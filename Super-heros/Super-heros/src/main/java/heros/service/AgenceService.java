@@ -54,10 +54,7 @@ public class AgenceService { // test
                 .orElseThrow(() -> new EntityNotFoundException("Agence inexistante"));
         updateAgence.setBudget(agence.getBudget());
         updateAgence.setPopularite(agence.getPopularite());
-        updateAgence.setVille(agence.getPopularite());
-        updateAgence.setPopularite(agence.getPopularite());
-        updateAgence.setPopularite(agence.getPopularite());
-        updateAgence.setPopularite(agence.getPopularite());
+        updateAgence.setVille(agence.getVille());
         return agenceRepository.save(updateAgence); // Ca permet de renvoyer l'objet qui est mis à jour
     }
 
