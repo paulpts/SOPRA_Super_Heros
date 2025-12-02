@@ -3,6 +3,7 @@ package heros.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.response.BetaResponse;
 import heros.model.Beta;
-import heros.model.Heros;
 import heros.service.HerosService;
 
 
@@ -25,38 +26,44 @@ public class BetaRestController {
     private HerosService herosService;
 
     @GetMapping
-    public List<Beta> allBeta() {
-        return herosService.getAllBeta();
+    public List<BetaResponse> allBeta() {
+        return herosService.getAllBeta().stream().map(BetaResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
-    public Beta ficheBeta(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
-    
-    	return herosService.getBetaById(id);
+    public ResponseEntity<BetaResponse> ficheBeta(@PathVariable Integer id) {
+    Beta beta = (Beta) herosService.getById(id);
+
+    if (beta == null) {
+        return ResponseEntity.notFound().build();
     }
-    
+
+    return ResponseEntity.ok(BetaResponse.convert(beta));
+    }
+
     @PostMapping
-    public Beta ajouterBeta(@RequestBody Heros heros) {
-        return (Beta) herosService.create(heros);
+    public BetaResponse ajouterBeta(@RequestBody Beta beta) {
+        return BetaResponse.convert((Beta) herosService.create(beta));
     }
 
     @PutMapping("/{id}")
-    public Beta modifierBeta(@PathVariable Integer id, @RequestBody Heros heros) {
-        return (Beta) herosService.update(heros);
+    public BetaResponse modifierBeta(@PathVariable Integer id, @RequestBody Beta beta) {
+        beta.setId(id);
+        return BetaResponse.convert((Beta) herosService.update(beta));
     }
 
     @DeleteMapping("/{id}")
     public void supprimerBeta(@PathVariable Integer id) {
         herosService.deleteById(id);
     }
-    
-    @GetMapping("/alias/{alias}") //Permet de recuperer heros par son alias
-    public Beta getHerosByAlias(@PathVariable String alias) {
-        return (Beta) herosService.getByAlias(alias);
+
+    @GetMapping("/alias/{alias}")
+    public BetaResponse getHerosByAlias(@PathVariable String alias) {
+        return BetaResponse.convert((Beta) herosService.getByAlias(alias));
     }
-    
-    @GetMapping("/agence/{agenceId}") // Permet de recuperer les heros par agence selon l'ID
-    public List<Beta> getBetaByAgenceId(@PathVariable Integer agenceId) {
-        return herosService.getBetaByAgenceId(agenceId);
+
+    @GetMapping("/agence/{agenceId}")
+    public List<BetaResponse> getBetaByAgenceId(@PathVariable Integer agenceId) {
+        return herosService.getBetaByAgenceId(agenceId).stream().map(BetaResponse::convert).toList();
     }
 }
