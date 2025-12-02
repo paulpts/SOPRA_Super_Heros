@@ -22,7 +22,7 @@ public class MissionService {
     }
 
 
-    public List<Mission> getAll() {
+    public List<Mission> getAllMission() {
         return missionRepository.findAll();
     }
 

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import heros.model.Admin;
+import heros.model.Agence;
 import heros.model.ChefAgence;
 import heros.model.Compte;
+import heros.repo.AgenceRepository;
 import heros.repo.CompteRepository;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -17,6 +19,9 @@ public class CompteService {
 
     @Autowired
     private CompteRepository compteRepository;
+
+    @Autowired
+    private AgenceRepository agenceRepository;
 
     public Compte getById(Integer id) {
         if (id == null) {
@@ -33,11 +38,11 @@ public class CompteService {
     // return compteRepository.save(compte);
     // }
 
-    public Compte create(Compte compte) {
-        if (compte.getId() != null) {
+    public Compte create(ChefAgence chefAgence) {
+        if (chefAgence.getId() != null) {
             throw new IllegalArgumentException("Le compte ne doit pas avoir d'id !");
         }
-        return compteRepository.save(compte);
+        return compteRepository.save(chefAgence);
     }
 
     // public Compte update(Compte compte) {

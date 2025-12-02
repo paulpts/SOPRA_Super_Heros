@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.response.OmegaResponse;
 import heros.model.Omega;
 import heros.service.HerosService;
 
@@ -24,38 +25,38 @@ public class OmegaRestController {
     private HerosService herosService;
 
     @GetMapping
-    public List<Omega> allOmega() {
-        return herosService.getAllOmega();
+    public List<OmegaResponse> allOmega() {
+        return herosService.getAllOmega().stream().map(OmegaResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
-    public Omega ficheOmega(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
-    
-    	return herosService.getOmegaById(id);
+    public OmegaResponse ficheOmega(@PathVariable Integer id) {
+        return OmegaResponse.convert((Omega) herosService.getById(id));
     }
-    
+
     @PostMapping
-    public Omega ajouterOmega(@RequestBody Omega omega) {
-        return (Omega) herosService.create(omega);
+    public OmegaResponse ajouterOmega(@RequestBody Omega omega) {
+        return OmegaResponse.convert((Omega) herosService.create(omega));
     }
 
     @PutMapping("/{id}")
-    public Omega modifierOmega(@PathVariable Integer id, @RequestBody Omega omega) {
-        return (Omega) herosService.update(omega);
+    public OmegaResponse modifierOmega(@PathVariable Integer id, @RequestBody Omega omega) {
+        omega.setId(id);
+        return OmegaResponse.convert((Omega) herosService.update(omega));
     }
 
     @DeleteMapping("/{id}")
     public void supprimerOmega(@PathVariable Integer id) {
         herosService.deleteById(id);
     }
-    
-    @GetMapping("/alias/{alias}") //Permet de recuperer heros par son alias
-    public Omega getHerosByAlias(@PathVariable String alias) {
-        return (Omega) herosService.getByAlias(alias);
+
+    @GetMapping("/alias/{alias}")
+    public OmegaResponse getHerosByAlias(@PathVariable String alias) {
+        return OmegaResponse.convert((Omega) herosService.getByAlias(alias));
     }
-    
-    @GetMapping("/agence/{agenceId}") // Permet de recuperer les heros par agence selon l'ID
-    public List<Omega> getOmegaByAgenceId(@PathVariable Integer agenceId) {
-        return herosService.getOmegaByAgenceId(agenceId);
+
+    @GetMapping("/agence/{agenceId}")
+    public List<OmegaResponse> getOmegaByAgenceId(@PathVariable Integer agenceId) {
+        return herosService.getOmegaByAgenceId(agenceId).stream().map(OmegaResponse::convert).toList();
     }
 }

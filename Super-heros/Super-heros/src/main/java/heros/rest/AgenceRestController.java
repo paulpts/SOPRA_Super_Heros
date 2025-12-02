@@ -3,7 +3,6 @@ package heros.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.response.AgenceResponse;
 import heros.model.Agence;
 import heros.service.AgenceService;
 
@@ -25,18 +25,14 @@ public class AgenceRestController {
     private AgenceService agenceService;
 
     @GetMapping
-    public List<Agence> allAgences() {
-        return agenceService.getAll();
+    public List<AgenceResponse> allAgences() {
+    	return agenceService.getAllAgence().stream().map(AgenceResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Agence> ficheAgence(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
-        Agence a = agenceService.getById(id);
-
-        if (a == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(a);
+    public AgenceResponse ficheAgence(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
+        Agence a = (Agence) agenceService.getById(id);
+        return AgenceResponse.convert(a);
     }
     
     @PostMapping
