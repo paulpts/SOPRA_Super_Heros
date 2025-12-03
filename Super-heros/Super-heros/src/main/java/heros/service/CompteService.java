@@ -18,7 +18,6 @@ public class CompteService {
     @Autowired
     private CompteRepository compteRepository;
 
-
     public Compte getById(Integer id) {
         if (id == null) {
             throw new RuntimeException("L'id du compte ne peut pas être null");
@@ -40,14 +39,13 @@ public class CompteService {
         }
         return compteRepository.save(chefAgence);
     }
-    
+
     public Compte create(Admin admin) {
         if (admin.getId() != null) {
             throw new IllegalArgumentException("Le compte ne doit pas avoir d'id !");
         }
         return compteRepository.save(admin);
     }
-
 
     // public Compte update(Compte compte) {
     // return compteRepository.save(compte); //Ca permet de renvoyer l'objet qui est
@@ -69,12 +67,14 @@ public class CompteService {
     public void deleteCompte(Compte compte) {
         compteRepository.delete(compte);
     }
-    
-    public Compte getByLoginAndPassword(String login,String password)
-	{
-		return compteRepository.findByLoginAndPassword(login,password);
-	}
 
+    public Compte getByLoginAndPassword(String login, String password) {
+        return compteRepository.findByLoginAndPassword(login, password);
+    }
+
+    public Compte getByLogin(String login) {
+        return compteRepository.findByLogin(login).orElseThrow();
+    }
 
     public List<Admin> getAllAdmin() {
         return compteRepository.findAllAdmin();
