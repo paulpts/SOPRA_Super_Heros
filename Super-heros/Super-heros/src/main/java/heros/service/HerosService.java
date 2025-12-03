@@ -12,6 +12,7 @@ import heros.model.Beta;
 import heros.model.Heros;
 import heros.model.Omega;
 import heros.repo.HerosRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class HerosService {
@@ -44,8 +45,8 @@ public class HerosService {
 			request.getPouvoirs());
 			return herosRepository.save(omega);
 		}
-
-			
+		
+		
 	public Heros createAlpha(CreateUpdateHerosRequest request) {
 		Alpha alpha = new Alpha(
 			request.getNom(),
@@ -60,8 +61,8 @@ public class HerosService {
 			request.getPouvoirs());
 			return herosRepository.save(alpha);
 		}
-
-			
+		
+		
 	public Heros createBeta(CreateUpdateHerosRequest request) {
 		Beta beta = new Beta(
 			request.getNom(),
@@ -76,16 +77,60 @@ public class HerosService {
 			request.getPouvoirs());
 			return herosRepository.save(beta);
 		}
-		
-		public Heros update(Heros heros) {
-			return herosRepository.save(heros); //Ca permet de renvoyer l'objet qui est mis à jour
+			
+	public Heros updateOmega(Integer id,CreateUpdateHerosRequest request) {
+		Omega omega = (Omega) herosRepository.findById(id)
+        		  .orElseThrow(() -> new EntityNotFoundException("Héros Oméga inexistant"));
+		omega.setNom(request.getNom());
+		omega.setPrenom(request.getPrenom());
+		omega.setAlias(request.getAlias());
+		omega.setPopularite(request.getPopularite());
+		omega.setSante(request.getSante());
+		omega.setSalaire(request.getSalaire());
+		omega.setExperience(request.getExperience());
+		omega.setDegats(request.getDegats());
+		omega.setMotivation(request.getMotivation());
+		omega.setPouvoirs(request.getPouvoirs());
+		return herosRepository.save(omega); //Ca permet de renvoyer l'objet qui est mis à jour
+		}
+
+	public Heros updateAlpha(Integer id,CreateUpdateHerosRequest request) {
+		Alpha alpha = (Alpha) herosRepository.findById(id)
+        		  .orElseThrow(() -> new EntityNotFoundException("Héros Oméga inexistant"));
+		alpha.setNom(request.getNom());
+		alpha.setPrenom(request.getPrenom());
+		alpha.setAlias(request.getAlias());
+		alpha.setPopularite(request.getPopularite());
+		alpha.setSante(request.getSante());
+		alpha.setSalaire(request.getSalaire());
+		alpha.setExperience(request.getExperience());
+		alpha.setDegats(request.getDegats());
+		alpha.setMotivation(request.getMotivation());
+		alpha.setPouvoirs(request.getPouvoirs());
+		return herosRepository.save(alpha); //Ca permet de renvoyer l'objet qui est mis à jour
+		}
+
+	public Heros updateBeta(Integer id,CreateUpdateHerosRequest request) {
+		Beta beta = (Beta) herosRepository.findById(id)
+        		  .orElseThrow(() -> new EntityNotFoundException("Héros Oméga inexistant"));
+		beta.setNom(request.getNom());
+		beta.setPrenom(request.getPrenom());
+		beta.setAlias(request.getAlias());
+		beta.setPopularite(request.getPopularite());
+		beta.setSante(request.getSante());
+		beta.setSalaire(request.getSalaire());
+		beta.setExperience(request.getExperience());
+		beta.setDegats(request.getDegats());
+		beta.setMotivation(request.getMotivation());
+		beta.setPouvoirs(request.getPouvoirs());
+		return herosRepository.save(beta); //Ca permet de renvoyer l'objet qui est mis à jour
 		}
 		
-		public void deleteById(Integer id) { // DELETE FROM heros WHERE id=?
+	public void deleteById(Integer id) { // DELETE FROM heros WHERE id=?
 			herosRepository.deleteById(id);
 		}
 		
-		public void deleteHeros(Heros heros) { //J'ai mis aussi un DELETE pour l'object Heros mais pas sur que ca nous serve vu qu'on a deja DeleteById
+	public void deleteHeros(Heros heros) { //J'ai mis aussi un DELETE pour l'object Heros mais pas sur que ca nous serve vu qu'on a deja DeleteById
 		herosRepository.delete(heros);
 	}
 	
@@ -114,23 +159,26 @@ public class HerosService {
 	
 	public Omega getOmegaById(Integer id)
 	{
-		Optional<Heros> opt = herosRepository.findById(id);
-		if(opt.isEmpty()) {return null;}
-		else {return (Omega)opt.get();}
+		if(id==null) {
+			throw new RuntimeException("L'id d'un héros ne peut pas être null");
+		}
+		return (Omega) herosRepository.findById(id).orElse(null);
 	}
 	
 	public Beta getBetaById(Integer id)
 	{
-		Optional<Heros> opt = herosRepository.findById(id);
-		if(opt.isEmpty()) {return null;}
-		else {return (Beta)opt.get();}
+		if(id==null) {
+			throw new RuntimeException("L'id d'un héros ne peut pas être null");
+		}
+		return (Beta) herosRepository.findById(id).orElse(null);
 	}
 	
 	public Alpha getAlphaById(Integer id)
 	{
-		Optional<Heros> opt = herosRepository.findById(id);
-		if(opt.isEmpty()) {return null;}
-		else {return (Alpha)opt.get();}
+		if(id==null) {
+			throw new RuntimeException("L'id d'un héros ne peut pas être null");
+		}
+		return (Alpha) herosRepository.findById(id).orElse(null);
 	}
 	
 	public List<Alpha> getAlphaByAgenceId(Integer agenceId) {

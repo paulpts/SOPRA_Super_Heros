@@ -3,6 +3,7 @@ package heros.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,10 +22,8 @@ import heros.service.HerosService;
 @RequestMapping("/api/omega")
 public class OmegaRestController {
 
-
     @Autowired
     private HerosService herosService;
-
 
     @GetMapping
     public List<OmegaResponse> allOmega() {
@@ -32,8 +31,12 @@ public class OmegaRestController {
     }
 
     @GetMapping("/{id}")
-    public OmegaResponse ficheOmega(@PathVariable Integer id) {
-        return OmegaResponse.convert((Omega) herosService.getById(id));
+    public ResponseEntity<OmegaResponse> ficheOmega(@PathVariable Integer id) {
+        Omega omega = (Omega) herosService.getOmegaById(id);
+        if (omega == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(OmegaResponse.convert(omega));
     }
 
     @PostMapping
@@ -43,20 +46,7 @@ public class OmegaRestController {
 
     @PutMapping("/{id}")
     public OmegaResponse modifierOmega(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
-        Omega omega = new Omega(
-                request.getNom(),
-                request.getPrenom(),
-                request.getAlias(),
-                request.getPopularite(),
-                request.getSante(),
-                request.getSalaire(),
-                request.getExperience(),
-                request.getDegats(),
-                request.getMotivation(),
-                request.getPouvoirs());
-        omega.setId(id);
-        omega.setAgence(herosService.getById(id).getAgence());
-        return OmegaResponse.convert((Omega) herosService.update(omega));
+        return OmegaResponse.convert((Omega) herosService.updateOmega(id, request));
     }
 
     @DeleteMapping("/{id}")
