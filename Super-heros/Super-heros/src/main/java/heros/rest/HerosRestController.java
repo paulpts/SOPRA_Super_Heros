@@ -18,14 +18,9 @@ import heros.service.HerosService;
 @RequestMapping("/api/heros")
 public class HerosRestController {
 
-
     @Autowired
     private HerosService herosService;
 
-    
-	@Autowired
-	HerosService herosService;
-	
     @GetMapping
     public List<HerosResponse> allHeros() {
         return herosService.getAll().stream().map(HerosResponse::convert).toList();
@@ -49,6 +44,5 @@ public class HerosRestController {
     public HerosResponse getHerosByAlias(@PathVariable String alias) {
         return HerosResponse.convert(herosService.getByAlias(alias));
     }
-
 
 }
