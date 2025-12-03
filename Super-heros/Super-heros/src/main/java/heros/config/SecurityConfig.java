@@ -19,52 +19,50 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
-@EnableMethodSecurity(prePostEnabled = true) // Activer les annotations @PreAuthorize / @PostAuthorize
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+	
     private final static Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
-    // Le SecurityFilterChain va nous permettre de configurer les accès, éventuellement le CSRF, politiques CORS générales, etc.
-    @Bean // On bypass la config auto-configuration
+    @Bean
     SecurityFilterChain filterChain(HttpSecurity http, JwtHeaderFilter jwtFilter) throws Exception {
         log.error("Configuration {} du filter chain {}", "var1", "var2");
 
-        // Configurer ici les accès généraux
+
         http.authorizeHttpRequests(auth -> {
-            // On autorise les ressources externes (JSP, CSS, JS, IMG)
+        	
             auth.requestMatchers("/WEB-INF/**", "/*.css", "/assets/**").permitAll();
 
-            // On autorise tout le monde sur connexion
             auth.requestMatchers(HttpMethod.POST, "/api/auth").permitAll();
+            
+           /* auth.requestMatchers(HttpMethod.GET,"/api/x", "api/y").hasRole("ADMIN");
+            auth.requestMatchers(HttpMethod.POST,"/api/x", "api/y").hasRole("ADMIN");
+            auth.requestMatchers(HttpMethod.PUT,"/api/x", "api/y").hasRole("ADMIN");
+            auth.requestMatchers(HttpMethod.DELETE,"/api/x", "api/y").hasRole("ADMIN");*/
 
-            // Sinon, accès restreint aux utilisateurs authentifiés
             auth.requestMatchers("/**").authenticated();
         });
+        
+    /*    http.formLogin(form -> {
+            form.loginPage("/login"); 
+            form.loginProcessingUrl("/process_login");
+            form.defaultSuccessUrl("/home", true);
+            form.permitAll();
+        });*/
 
-        // Activer le formulaire de connexion
-        http.formLogin(form -> {
-            form.loginPage("/login"); // Page de login, GetMapping à gérer nous-même
-            form.loginProcessingUrl("/process_login"); // URL de process du login par Spring Security, PostMapping créé et géré par Spring Security
-            form.defaultSuccessUrl("/home", true); // Redirection vers /home après login OK
-            form.permitAll(); // On autorise la page de login
-        });
-
-        // Activer la page de déconnexion
         http.logout(logout -> {
-            logout.logoutUrl("/logout") // URL de déconnexion, Mapping créé et géré par Spring Security
+            logout.logoutUrl("/logout") 
                 .logoutRequestMatcher(request -> "GET".equals(request.getMethod()) && request.getRequestURI().equals("/logout")); // Cette ligne est pour autoriser le GET sur /logout, car par défaut c'est du POST que Spring Security crée
 
-            logout.logoutSuccessUrl("/login"); // Redirection vers /login après logout OK
+            logout.logoutSuccessUrl("/login");
         });
 
-        // Désactiver la protection CSRF
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"));
 
-        // Configuration de la politique CORS
         http.cors(cors -> {
             CorsConfigurationSource source = request -> {
                 CorsConfiguration config = new CorsConfiguration();
 
-                // On autorise toutes les en-têtes HTTP, toutes les méthodes HTTP de tous les domaines
                 config.setAllowedHeaders(List.of("*"));
                 config.setAllowedMethods(List.of("*"));
                 config.setAllowedOrigins(List.of("*"));
@@ -75,18 +73,18 @@ public class SecurityConfig {
             cors.configurationSource(source);
         });
 
-        // Positionner le filter JwtHeaderFilter AVANT AuthenticationFilter
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    @Bean
+   @Bean
     PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    	System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("chef1") + "\r\n");
+    	return passwordEncoder;
     }
 
-    // Permet d'injecter dans le contexte de Spring l'AuthenticationManager actuellement utilisé par Spring Security
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
