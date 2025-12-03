@@ -69,6 +69,12 @@ public class CompteService {
     public void deleteCompte(Compte compte) {
         compteRepository.delete(compte);
     }
+    
+    public Compte getByLoginAndPassword(String login,String password)
+	{
+		return compteRepository.findByLoginAndPassword(login,password);
+	}
+
 
     public List<Admin> getAllAdmin() {
         return compteRepository.findAllAdmin();

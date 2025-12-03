@@ -2,20 +2,29 @@
 
   <!-- COLONNE GAUCHE-->
   <div class="colonne_gauche">
+    
+    <!-- Graphique 1 : Statut (Ex: camembert des missions) -->
     <div class="graph-circle">
-      graph statut
+      Graph Statut
     </div>
 
+    <!-- Graphique 2 : Taux de réussite (KPI important) -->
     <div class="graph-circle">
-      graph taux de réussite
+      Graph Taux de réussite
     </div>
   </div>
 
   <!-- COLONNE CENTRE :-->
   <div class="colonne_centre">
 
+    <!-- Titre de la page avec DEBUGUEUR -->
     <h1 class="page-title">
       Liste des missions
+      <!-- 
+         DEBUG : Affiche le nombre brut reçu du backend.
+         Si ça affiche 0 ici, c'est que le problème vient de la connexion (Service/Back), pas du filtre.
+      -->
+      <span style="font-size: 14px; color: grey;">(Nombres de missions correspondante(s) aux filtre(s): {{ missions.length }})</span>
     </h1>
 
     <!-- Légende avec les 3 checkbox -->

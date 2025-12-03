@@ -1,21 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Utile pour les futures boucles *ngFor
+import { MissionDto } from '../../dto/mission-dto';
+import { FormsModule } from '@angular/forms';
+import { AgenceDto } from '../../dto/agence-dto';
+import { MissionService } from '../../service/mission-service';
+import { AgenceService } from '../../service/agence-service';
 
 @Component({
   selector: 'app-agency-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './TDB.html',
   styleUrls: ['./TDB-page.css']
 })
 export class TDB {
 
-  // Variable affichée dans la bannière Welcome
-  nomChefAgence: string = 'Nick Fury'; 
+  public missions: MissionDto[] = [];
+  public agences: AgenceDto[] = [];
 
-  constructor() {}
+  constructor(private missionService: MissionService, private agenceService: AgenceService) {}
 
-  // Tu pourras ajouter ici des méthodes plus tard, par exemple :
-  // recruterHero() { ... }
+  ngOnInit(): void { 
+    this.missionService.findAll().subscribe((missions) => { 
+      this.missions = missions;
+    });
+    this.agenceService.findAll().subscribe((agences) => { 
+      this.agences = agences;
+    })
+  }
 
+ 
 }
