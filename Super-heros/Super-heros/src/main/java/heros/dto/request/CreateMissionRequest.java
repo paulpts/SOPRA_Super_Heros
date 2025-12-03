@@ -3,7 +3,7 @@ package heros.dto.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class CreateOrUpdateMissionRequest {
+public class CreateMissionRequest {
 	
 	@NotNull
 	private int difficulte;
@@ -13,9 +13,18 @@ public class CreateOrUpdateMissionRequest {
 	
 	@NotNull
 	private int niveauDanger;
+	
+	@NotNull
+	private double creditMission;
+	
+	@NotBlank
+	private String statut;
 
 	@NotBlank
 	private String ville;
+	
+	private int agenceId;
+
 
 	public int getDifficulte() {
 		return difficulte;
@@ -41,6 +50,22 @@ public class CreateOrUpdateMissionRequest {
 		this.niveauDanger = niveauDanger;
 	}
 
+	public double getCreditMission() {
+		return creditMission;
+	}
+
+	public void setCreditMission(double creditMission) {
+		this.creditMission = creditMission;
+	}
+
+	public String getStatut() {
+		return statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
 	public String getVille() {
 		return ville;
 	}
@@ -48,5 +73,14 @@ public class CreateOrUpdateMissionRequest {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
+
+	public int getAgenceId() {
+		return agenceId;
+	}
+
+	public void setAgenceId(int agenceId) {
+		this.agenceId = agenceId;
+	}
+
 
 }
