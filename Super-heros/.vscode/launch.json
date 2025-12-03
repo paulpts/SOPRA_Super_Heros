@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "SuperHerosApplication",
+            "request": "launch",
+            "mainClass": "heros.SuperHerosApplication",
+            "projectName": "Super-heros"
+        },
+        {
+            "type": "java",
+            "name": "Launch Java Program",
+            "request": "launch",
+            "mainClass": ""
+        }
+    ]
+}

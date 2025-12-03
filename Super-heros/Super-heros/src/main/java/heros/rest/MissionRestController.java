@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import heros.dto.request.CreateMissionRequest;
 import heros.dto.response.MissionResponse;
 import heros.model.Mission;
 import heros.service.MissionService;
@@ -37,13 +38,14 @@ public class MissionRestController {
     }
 
     @PostMapping
-    public Mission ajouterMission(@RequestBody Mission mission) {
-        return  missionService.create(mission);
+    public MissionResponse ajouterMission(@RequestBody CreateMissionRequest request) {
+    	return MissionResponse.convert(missionService.create(new Mission(), request));
     }
 
     @PutMapping("/{id}")
-    public Mission modifierMission(@PathVariable Integer id,@RequestBody Mission mission) {
-        return missionService.update(mission);
+    public MissionResponse modifierMission(@PathVariable Integer id,@RequestBody CreateMissionRequest request) {
+    	System.out.println(">>> MISSION CONTROLLER TRIGGERED");
+        return MissionResponse.convert(missionService.update(id, request));
     }
 
     @DeleteMapping("/{id}")

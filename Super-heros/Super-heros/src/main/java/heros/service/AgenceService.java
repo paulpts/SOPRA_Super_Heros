@@ -1,6 +1,7 @@
 package heros.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,16 +59,19 @@ public class AgenceService { // test
     // mis à jour
     // }
 
-    public Agence update(Integer id, Agence agence) {
+    public Agence update(Integer id, CreateAgenceRequest request) {
         Agence updateAgence = agenceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Agence inexistante"));
-        updateAgence.setBudget(agence.getBudget());
-        updateAgence.setPopularite(agence.getPopularite());
-        updateAgence.setVille(agence.getVille());
+        updateAgence.setBudget(request.getBudget());
+        updateAgence.setPopularite(request.getPopularite());
+        updateAgence.setVille(request.getVille());
         return agenceRepository.save(updateAgence); // Ca permet de renvoyer l'objet qui est mis à jour
     }
 
     public void deleteById(Integer id) {
+    	Agence agence = agenceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Agence inexistante"));
+    	agence.getChefAgence().setAgence(null);
         agenceRepository.deleteById(id);
     }
 
