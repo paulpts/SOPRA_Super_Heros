@@ -61,9 +61,13 @@
         <div class="mission-infos">
           {{ mission.description }} — {{ mission.statut }}
         </div>
+        <body
+        *ngIf="missions.length === 0"
+      >
+        Aucune mission ne correspond aux critères sélectionnés.
+      </body>
       </div>
 
-      
 
     </div>
 
