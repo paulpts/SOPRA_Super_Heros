@@ -4,7 +4,7 @@
     <h2>Welcome  nomChefAgence </h2>
   </div>
   <div class="budget">
-    budget
+    {{ budgetAgence }} Crédits
   </div>
 </div>
 
@@ -28,11 +28,10 @@
         Recruter un héros
       </div>
       <div class="top-heros-list">
-        <h4 class="sub-title">Top héros (selon critère ?)</h4>
-        <ol class="numbered-list">
-          <li>nom_super</li>
-          <li>nom_super</li>
-          <li>nom_super</li>
+        <h4 class="sub-title">Heros disponibles</h4>
+        <ol class="numbered-list" *ngFor="let hero of herosDisponibles" >
+          <li *ngIf="hero.agenceId == null">{{ hero.nom }} - Cout de creation : {{ hero.coutCreation }} <button (click)="recruterHero(hero)">Recruter</button></li>
+          
         </ol>
       </div>
     </div>
