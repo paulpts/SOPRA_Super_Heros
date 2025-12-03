@@ -30,11 +30,11 @@ public class Mission {
 	@Column(nullable = false)	
 	private double creditMission;
 	@ManyToOne
-	@JoinColumn(name = "agence_id", nullable = false)
+	@JoinColumn(name = "agence_id")
 	private Agence agence;		
 	
 	@ManyToOne
-	@JoinColumn(name = "hero_id", nullable = false)
+	@JoinColumn(name = "hero_id")
 	private Heros hero;
 	
 	
