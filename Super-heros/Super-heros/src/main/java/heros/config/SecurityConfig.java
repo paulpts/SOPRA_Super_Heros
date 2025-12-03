@@ -30,15 +30,13 @@ public class SecurityConfig {
 
 
         http.authorizeHttpRequests(auth -> {
-        	
-            auth.requestMatchers("/WEB-INF/**", "/*.css", "/assets/**").permitAll();
 
             auth.requestMatchers(HttpMethod.POST, "/api/auth").permitAll();
             
-           /* auth.requestMatchers(HttpMethod.GET,"/api/x", "api/y").hasRole("ADMIN");
-            auth.requestMatchers(HttpMethod.POST,"/api/x", "api/y").hasRole("ADMIN");
-            auth.requestMatchers(HttpMethod.PUT,"/api/x", "api/y").hasRole("ADMIN");
-            auth.requestMatchers(HttpMethod.DELETE,"/api/x", "api/y").hasRole("ADMIN");*/
+            // auth.requestMatchers(HttpMethod.GET,"/api/x", "api/y").hasRole("ADMIN");
+            // auth.requestMatchers(HttpMethod.POST,"/api/x", "api/y").hasRole("ADMIN");
+            // auth.requestMatchers(HttpMethod.PUT,"/api/x", "api/y").hasRole("ADMIN");
+            // auth.requestMatchers(HttpMethod.DELETE,"/api/x", "api/y").hasRole("ADMIN");
 
             auth.requestMatchers("/**").authenticated();
         });
