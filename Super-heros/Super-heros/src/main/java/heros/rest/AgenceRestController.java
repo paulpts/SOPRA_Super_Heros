@@ -17,7 +17,6 @@ import heros.dto.response.AgenceResponse;
 import heros.model.Agence;
 import heros.service.AgenceService;
 
-
 @RestController
 @RequestMapping("/api/agence")
 public class AgenceRestController {
@@ -27,33 +26,33 @@ public class AgenceRestController {
 
     @GetMapping
     public List<AgenceResponse> allAgences() {
-    	return agenceService.getAllAgence().stream().map(AgenceResponse::convert).toList();
+        return agenceService.getAllAgence().stream().map(AgenceResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
-    public AgenceResponse ficheAgence(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
+    public AgenceResponse ficheAgence(@PathVariable Integer id) { // J'ai du mal à capter le ResponseEntity j'ai repris
+                                                                  // pour exemple celui de MatiereRestController
         Agence a = (Agence) agenceService.getById(id);
         return AgenceResponse.convert(a);
     }
-    
+
     @PostMapping
-    public Agence ajouterAgence(@RequestBody CreateAgenceRequest request) {
-        return agenceService.create(new Agence(),request);
+    public AgenceResponse ajouterAgence(@RequestBody CreateAgenceRequest request) {
+        return AgenceResponse.convert(agenceService.create(new Agence(), request));
     }
 
     @PutMapping("/{id}")
     public Agence modifierAgence(@PathVariable Integer id, @RequestBody Agence agence) {
         return agenceService.update(id, agence);
     }
-    
 
     @DeleteMapping("/{id}")
-    public void supprimerAgence(@PathVariable Integer id){
+    public void supprimerAgence(@PathVariable Integer id) {
         agenceService.deleteById(id);
     }
 
     @GetMapping("/chef/{chefId}")
     public Agence getAgenceByChef(@PathVariable Integer chefId) {
         return agenceService.getChefAgenceById(chefId);
-    }     
+    }
 }

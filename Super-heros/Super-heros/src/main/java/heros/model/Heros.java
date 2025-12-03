@@ -41,14 +41,14 @@ public abstract class Heros {
 	protected int sante;
 	@Column(nullable=false, columnDefinition = "DECIMAL(7,2)")
 	protected double salaire;
-	@Column(nullable=false, columnDefinition = "DECIMAL(8,2)")
+	@Column(nullable=false, columnDefinition = "DECIMAL(9,2)") 
 	protected double coutCreation;
 	protected int experience;
 	@Column(columnDefinition = "DECIMAL(7,2)")
 	protected double degats;
 	protected int motivation;
 	@ManyToOne
-	@JoinColumn(nullable=false)
+	@JoinColumn(nullable=true)
 	protected Agence agence;
 	@ElementCollection //Une table SQL ne peut pas stocker une LIST dans une seule colonne. Donc elles sont stockées dans une table séparée mais cette annotation sert à dire que ce n'est pas une entité mais une collection d'enum. 
 	@CollectionTable(
