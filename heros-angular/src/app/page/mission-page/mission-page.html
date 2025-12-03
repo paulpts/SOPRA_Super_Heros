@@ -1,6 +1,6 @@
 <div class="main-container">
 
-  <!-- COLONNE GAUCHE -->
+  <!-- COLONNE GAUCHE-->
   <div class="colonne_gauche">
     <div class="graph-circle">
       graph statut
@@ -11,69 +11,66 @@
     </div>
   </div>
 
-  <!-- COLONNE CENTRE -->
+  <!-- COLONNE CENTRE :-->
   <div class="colonne_centre">
 
     <h1 class="page-title">
       Liste des missions
     </h1>
 
-    <!-- Légende des statuts -->
-   
-<div class="mission-legende">
-  <label class="legende-item">
-    <input type="checkbox" class="legende-carre" />
-    <span>Disponibles</span>
-  </label>
+    <!-- Légende avec les 3 checkbox -->
+    <div class="mission-legende">
+      <label class="legende-item">
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showDisponibles"
+        />
+        <span>Disponibles</span>
+      </label>
 
-  <label class="legende-item">
-    <input type="checkbox" class="legende-carre" />
-    <span>En cours</span>
-  </label>
+      <label class="legende-item">
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showEnCours"
+        />
+        <span>En cours</span>
+      </label>
 
-  <label class="legende-item">
-    <input type="checkbox" class="legende-carre" />
-    <span>Terminées</span>
-  </label>
-</div>
-    <!-- Liste des missions (pour l'instant pas relier au back) -->
+      <label class="legende-item">
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showTerminees"
+        />
+        <span>Terminées</span>
+      </label>
+    </div>
+
+    <!-- Liste des missions filtrées -->
     <div class="liste-missions">
 
-      <div class="mission-card">
-        <div class="mission-id">Mission (id)</div>
-        <div class="mission-infos">Infos diverses sur la mission</div>
+      <div
+        class="mission-card"
+        *ngFor="let mission of filtrerMissions()"
+      >
+        <div class="mission-id">
+          Mission {{ mission.id }}
+        </div>
+        <div class="mission-infos">
+          {{ mission.description }} — {{ mission.statut }}
+        </div>
       </div>
 
-      <div class="mission-card">
-        <div class="mission-id">Mission (id)</div>
-        <div class="mission-infos">Infos diverses sur la mission</div>
-      </div>
-
-      <div class="mission-card">
-        <div class="mission-id">Mission (id)</div>
-        <div class="mission-infos">Infos diverses sur la mission</div>
-      </div>
-
-      <div class="mission-card">
-        <div class="mission-id">Mission (id)</div>
-        <div class="mission-infos">Infos diverses sur la mission</div>
-      </div>
-
-      <div class="mission-card">
-        <div class="mission-id">Mission (id)</div>
-        <div class="mission-infos">Infos diverses sur la mission</div>
-      </div>
-
-      <div class="mission-card">
-        <div class="mission-id">Mission (id)</div>
-        <div class="mission-infos">Infos diverses sur la mission</div>
-      </div>
+      
 
     </div>
 
   </div>
 
-  <!-- COLONNE DROITE (à compléter si nécessaire) -->
-  <div class="colonne_droite"></div>
+  <!-- COLONNE DROITE : vide pour l'instant -->
+  <div class="colonne_droite">
+  </div>
 
 </div>
