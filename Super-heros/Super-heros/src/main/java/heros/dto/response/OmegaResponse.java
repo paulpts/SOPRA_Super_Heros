@@ -5,7 +5,7 @@ import java.util.List;
 import heros.enumerator.Pouvoirs;
 import heros.model.Omega;
 
-public class OmegaResponse {
+public class OmegaResponse extends HerosResponse{
      private int id;
      private String nom;
      private String prenom;
