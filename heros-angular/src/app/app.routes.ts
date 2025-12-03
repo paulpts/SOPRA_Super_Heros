@@ -9,7 +9,7 @@ export const routes: Routes = [
   //{ path: '', redirectTo: 'home', pathMatch: 'full' },
 
   // Connexion
-  { path: 'login', component: ConnexionPage },
+  { path: 'auth', component: ConnexionPage },
 
   // Tableau de bord
   { path: 'home', component: TDB },

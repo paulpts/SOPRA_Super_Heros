@@ -97,7 +97,7 @@
   text-align: center;
   font-size: 16px;
   font-weight: bold;        /* Texte en gras */
-  color: #ffffff;           /* Couleur du Texte */
+  color: #ffffff;           /* Couleur du Texte blanc */
   text-transform: uppercase; /* en majuscules */
   transition: transform 0.2s, background-color 0.3s;
 }
