@@ -23,6 +23,9 @@ public class HerosRestController {
     private HerosService herosService;
 
     
+	@Autowired
+	HerosService herosService;
+	
     @GetMapping
     public List<HerosResponse> allHeros() {
         return herosService.getAll().stream().map(HerosResponse::convert).toList();

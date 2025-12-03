@@ -33,11 +33,52 @@ public class SecurityConfig {
 
             auth.requestMatchers(HttpMethod.POST, "/api/auth").permitAll();
             
-            // auth.requestMatchers(HttpMethod.GET,"/api/x", "api/y").hasRole("ADMIN");
-            // auth.requestMatchers(HttpMethod.POST,"/api/x", "api/y").hasRole("ADMIN");
-            // auth.requestMatchers(HttpMethod.PUT,"/api/x", "api/y").hasRole("ADMIN");
-            // auth.requestMatchers(HttpMethod.DELETE,"/api/x", "api/y").hasRole("ADMIN");
-
+            auth.requestMatchers(HttpMethod.GET,
+            		"/api/admin",
+            		"/api/chefAgence",
+            		"/api/agence", 
+            		"api/heros", 
+            		"api/alpha", 
+            		"api/beta", 
+            		"api/omega", 
+            		"api/mission").hasRole("ADMIN");
+            auth.requestMatchers(HttpMethod.POST, 
+            		"/api/chefAgence",
+            		"/api/admin",
+            		"/api/agence", 
+            		"api/heros", 
+            		"api/alpha", 
+            		"api/beta", 
+            		"api/omega", 
+            		"api/mission").hasRole("ADMIN");
+            auth.requestMatchers(HttpMethod.PUT, 
+            		"/api/chefAgence",
+            		"/api/admin",
+            		"/api/agence", 
+            		"api/heros", 
+            		"api/alpha", 
+            		"api/beta", 
+            		"api/omega", 
+            		"api/mission").hasRole("ADMIN");
+            auth.requestMatchers(HttpMethod.DELETE,
+            		"/api/chefAgence",
+            		"/api/admin",
+            		"/api/agence", 
+            		"api/heros", 
+            		"api/alpha", 
+            		"api/beta", 
+            		"api/omega", 
+            		"api/mission").hasRole("ADMIN");
+            
+            auth.requestMatchers(HttpMethod.GET,
+            		"/api/chefAgence",
+            		"/api/agence", 
+            		"api/heros", 
+            		"api/alpha", 
+            		"api/beta", 
+            		"api/omega", 
+            		"api/mission").hasRole("CHEFAGENCE");
+          
             auth.requestMatchers("/**").authenticated();
         });
         
