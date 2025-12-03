@@ -43,7 +43,8 @@ public class MissionRestController {
 
     @PutMapping("/{id}")
     public MissionResponse modifierMission(@PathVariable Integer id,@RequestBody CreateMissionRequest request) {
-    	return MissionResponse.convert(missionService.update(id, request));
+    	System.out.println(">>> MISSION CONTROLLER TRIGGERED");
+        return MissionResponse.convert(missionService.update(id, request));
     }
 
     @DeleteMapping("/{id}")
