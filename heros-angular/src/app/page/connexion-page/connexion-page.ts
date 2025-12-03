@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router'; // Pour naviguer vers une autre page
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl ,FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { AuthRequestDto } from '../../dto/auth-request-dto';
 import { AuthService } from '../../service/auth-service';
 import { OnInit } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [], // Pas besoin de module spécifique pour l'instant
+  imports: [CommonModule, ReactiveFormsModule], 
   templateUrl: './connexion-page.html',
   styleUrl: './connexion-page.css'
 })
