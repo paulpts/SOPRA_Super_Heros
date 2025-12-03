@@ -3,6 +3,7 @@ package heros.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import heros.dto.response.MissionResponse;
 import heros.model.Mission;
 import heros.service.MissionService;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/mission")
 public class MissionRestController {
@@ -32,7 +33,7 @@ public class MissionRestController {
     }
 
     @GetMapping("/{id}")
-    public MissionResponse ficheMission(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
+    public MissionResponse ficheMission(@PathVariable Integer id) {
         Mission m = (Mission) missionService.getById(id);
         return MissionResponse.convert(m);
     }

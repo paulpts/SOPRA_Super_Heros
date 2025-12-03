@@ -1,10 +1,6 @@
 <div class="main-container">
 
-  <!-- 
-    =========================================
-    COLONNE GAUCHE : LES GRAPHIQUES (Analyse globale)
-    =========================================
-  -->
+  <!-- COLONNE GAUCHE-->
   <div class="colonne_gauche">
     
     <!-- Graphique 1 : Statut (Ex: camembert des missions) -->
@@ -18,11 +14,7 @@
     </div>
   </div>
 
-  <!-- 
-    =========================================
-    COLONNE CENTRE : LISTE DES MISSIONS ET FILTRES
-    =========================================
-  -->
+  <!-- COLONNE CENTRE :-->
   <div class="colonne_centre">
 
     <!-- Titre de la page avec DEBUGUEUR -->
@@ -35,76 +27,69 @@
       <span style="font-size: 14px; color: grey;">(Reçues: {{ missions.length }})</span>
     </h1>
 
-    <!-- 
-      LÉGENDE / ZONE DE FILTRAGE
-      C'est ici que tu vas lier tes checkbox à tes variables TS (showDisponibles, etc.)
-    -->
+    <!-- Légende avec les 3 checkbox -->
     <div class="mission-legende">
-      
-      <!-- Filtre DISPONIBLES -->
       <label class="legende-item">
-        <!-- [(ngModel)] lie la case à la variable TS et la met à jour dans les deux sens -->
-        <input type="checkbox" class="legende-carre" [(ngModel)]="showDisponibles" />
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showDisponibles"
+        />
         <span>Disponibles</span>
       </label>
 
-      <!-- Filtre EN COURS -->
       <label class="legende-item">
-        <input type="checkbox" class="legende-carre" [(ngModel)]="showEnCours" />
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showEnCours"
+        />
         <span>En cours</span>
       </label>
 
-      <!-- Filtre TERMINÉES -->
       <label class="legende-item">
-        <input type="checkbox" class="legende-carre" [(ngModel)]="showTerminees" />
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showTerminees"
+        />
         <span>Terminées</span>
       </label>
     </div>
-    
-    <!-- 
-      LISTE DES MISSIONS (Boucle dynamique)
-      On appelle ta fonction filtrerMissions() ici.
-    -->
+
+    <!-- Liste des missions filtrées -->
     <div class="liste-missions">
 
-      <!-- 
-        BOUCLE *ngFor : Elle va se répéter pour chaque mission retournée par ta fonction
-        On met la classe CSS 'mission-card' sur la balise qui se répète.
-      -->
-      <div *ngFor="let mission of filtrerMissions()" class="mission-card">
-        
-        <!-- Affichage de l'ID (Tu remplaceras le texte par {{ mission.id }} ) -->
-        <div class="mission-id">Mission #{{ mission.id }}</div> 
-        
-        <!-- Affichage des infos (Tu remplaceras le texte par {{ mission.description }} etc.) -->
-        <div class="mission-infos">
-          Statut: {{ mission.statut }} - Coût: {{ mission.creditMission }}
-          <!-- Tu peux ajouter un (click) ici pour voir le détail de la mission -->
+      <div
+        class="mission-card"
+        *ngFor="let mission of filtrerMissions()"
+      >
+        <div class="mission-id">
+          Mission {{ mission.id }}
         </div>
+        <div class="mission-infos">
+          {{ mission.description }} — {{ mission.statut }}
+        </div>
+        <body
+        *ngIf="missions.length === 0"
+      >
+        Aucune mission ne correspond aux critères sélectionnés.
+      </body>
       </div>
-
-      <!-- 
-        Message d'absence de missions
-        Il s'affiche uniquement si la fonction retourne une liste vide 
-      -->
+      
       <div *ngIf="filtrerMissions().length === 0" class="empty-message">
         Aucune mission ne correspond aux filtres. <br>
         <small *ngIf="missions.length === 0" style="color: red;">
            (Attention : Aucune donnée reçue du serveur !)
         </small>
       </div>
-      
+
     </div>
 
   </div>
 
-  <!-- 
-    =========================================
-    COLONNE DROITE : (Zone d'action/Détail si nécessaire)
-    =========================================
-  -->
+  <!-- COLONNE DROITE : vide pour l'instant -->
   <div class="colonne_droite">
-    <!-- Tu peux mettre ici les boutons Créer Mission ou un formulaire d'édition -->
   </div>
 
 </div>
