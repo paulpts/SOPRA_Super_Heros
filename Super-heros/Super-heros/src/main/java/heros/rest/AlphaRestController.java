@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.request.CreateUpdateHerosRequest;
 import heros.dto.response.AlphaResponse;
 import heros.model.Alpha;
 import heros.service.HerosService;
@@ -42,8 +43,8 @@ public class AlphaRestController {
     }
 
     @PostMapping
-    public AlphaResponse ajouterAlpha(@RequestBody Alpha alpha) {
-        return AlphaResponse.convert((Alpha) herosService.create(alpha));
+    public AlphaResponse ajouterAlpha(@RequestBody CreateUpdateHerosRequest request) {
+        return AlphaResponse.convert((Alpha) herosService.createAlpha(request));
     }
 
     @PutMapping("/{id}")
