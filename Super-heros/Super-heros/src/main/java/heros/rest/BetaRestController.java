@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.request.CreateUpdateHerosRequest;
 import heros.dto.response.BetaResponse;
 import heros.model.Beta;
 import heros.service.HerosService;
@@ -42,8 +43,8 @@ public class BetaRestController {
     }
 
     @PostMapping
-    public BetaResponse ajouterBeta(@RequestBody Beta beta) {
-        return BetaResponse.convert((Beta) herosService.create(beta));
+    public BetaResponse ajouterBeta(@RequestBody CreateUpdateHerosRequest request) {
+        return BetaResponse.convert((Beta) herosService.createBeta(request));
     }
 
     @PutMapping("/{id}")

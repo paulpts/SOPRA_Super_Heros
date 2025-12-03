@@ -1,7 +1,7 @@
 export class MissionDto {
 
   constructor(
-    private _id: number | null,
+    private _id: number | null,  // id peut etre null quand la mission n'a pas encore été crée en BDD 
     private _difficulte: number,
     private _description: string,
     private _niveauDanger: number,
