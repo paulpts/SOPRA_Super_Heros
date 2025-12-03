@@ -11,12 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 import heros.config.JwtUtils;
 import heros.dto.request.AuthUserRequest;
 import heros.dto.response.AuthResponse;
+import heros.model.Compte;
+import heros.service.CompteService;
 
 @RestController
 @RequestMapping("/api")
 public class AuthRestController {
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private CompteService compteSrv;
 
     @PostMapping("/auth")
     public AuthResponse auth(@RequestBody AuthUserRequest request) {
@@ -25,6 +30,10 @@ public class AuthRestController {
         // On demande à Spring Security si le user / password sont OK
         this.authenticationManager.authenticate(auth);
 
-        return new AuthResponse(JwtUtils.generate(auth));
+        Compte compte = compteSrv.getByLoginAndPassword(request.getLogin(), request.getPassword());
+
+
+
+        return new AuthResponse(JwtUtils.generate(auth),compte.getId());
     }
 }
