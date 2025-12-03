@@ -1,6 +1,7 @@
 package heros.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +69,11 @@ public class AgenceService { // test
     }
 
     public void deleteById(Integer id) {
+        Agence agence = agenceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Agence inexistante"));
+        ChefAgence chef = agence.getChefAgence();
+        chef.setAgence(null);
+
         agenceRepository.deleteById(id);
     }
 

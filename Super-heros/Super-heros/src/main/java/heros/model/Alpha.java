@@ -8,8 +8,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("alpha")
-public class Alpha extends Heros{
-
+public class Alpha extends Heros {
 
 	public Alpha() {
 	}
@@ -17,11 +16,12 @@ public class Alpha extends Heros{
 	public Alpha(String nom, String prenom, String alias, int popularite, int sante, double salaire,
 			double coutCreation, int experience, double degats, int motivation, Agence agence, List<Pouvoirs> pouvoirs,
 			List<Mission> mission) {
-		super(nom, prenom, alias, popularite, sante, salaire, coutCreation, experience, degats, motivation, agence, pouvoirs,
+		super(nom, prenom, alias, popularite, sante, salaire, 1_500_000, experience, degats, motivation, agence,
+				pouvoirs,
 				mission);
 	}
 
-		public Alpha(String nom, String prenom, String alias, int popularite, int sante, double salaire, int experience,
+	public Alpha(String nom, String prenom, String alias, int popularite, int sante, double salaire, int experience,
 			double degats, int motivation, List<Pouvoirs> pouvoirs) {
 		this.nom = nom;
 		this.prenom = prenom;
@@ -34,8 +34,6 @@ public class Alpha extends Heros{
 		this.motivation = motivation;
 		this.pouvoirs = pouvoirs;
 	}
-
-
 
 	@Override
 	protected double payerSalaire() {
