@@ -67,7 +67,13 @@
         Aucune mission ne correspond aux critères sélectionnés.
       </body>
       </div>
-
+      
+      <div *ngIf="filtrerMissions().length === 0" class="empty-message">
+        Aucune mission ne correspond aux filtres. <br>
+        <small *ngIf="missions.length === 0" style="color: red;">
+           (Attention : Aucune donnée reçue du serveur !)
+        </small>
+      </div>
 
     </div>
 
