@@ -11,7 +11,7 @@ import org.jose4j.lang.JoseException;
 import org.springframework.security.core.Authentication;
 
 public class JwtUtils {
-    private final static String JWT_KEY = "6E5A7234753778214125442A472D4B6150645367556B58703273357638792F42";
+    private static final String JWT_KEY = "19D6IjLAudjoZMxFHnp/Owq2SKapi7JRqGhUo82TrAMF9JBz7ATG4SnDLulvQqI2";
     private final static long JWT_EXPIRATION = 3_600_000; // 1 heure
 
     private JwtUtils() { }
