@@ -8,8 +8,8 @@ public class AuthUserRequest {
         return login;
     }
 
-    public void setLogin(String username) {
-        this.login = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
