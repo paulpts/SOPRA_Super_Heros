@@ -67,13 +67,13 @@
    ========================================= */
 .custom-input {
   width: 100%;
-  padding: 18px 25px;       /* Padding généreux */
-  background-color: #333333; /* Gris très foncé */
+  padding: 18px 25px;       
+  background-color: #333333; 
   border: none;
   border-radius: 30px;      /* Gros arrondi (pilule) */
-  text-align: center;       /* Texte centré */
+  text-align: center;      
   font-size: 16px;
-  color: #ffffff;           /* Texte blanc */
+  color: #ffffff;           
   outline: none;
   box-sizing: border-box;   /* Important pour que le padding ne casse pas la largeur */
 }
@@ -90,35 +90,21 @@
 .btn-connect {
   width: 100%;
   padding: 18px 25px;
-  background-color: #333333; /* Même gris foncé que les inputs */
+  background-color: #333333; 
   border: none;
   border-radius: 30px;      /* Même arrondi */
   cursor: pointer;
   text-align: center;
   font-size: 16px;
   font-weight: bold;        /* Texte en gras */
-  color: #ffffff;           /* Texte blanc */
-  text-transform: uppercase; /* SE CONNECTER en majuscules */
+  color: #ffffff;           /* Couleur du Texte */
+  text-transform: uppercase; /* en majuscules */
   transition: transform 0.2s, background-color 0.3s;
 }
 
 /* Effet au survol */
 .btn-connect:hover {
-  background-color: #444444; /* Un peu plus clair au survol */
-  transform: translateY(-2px); /* Petit effet de levier sympa */
+  background-color: #444444; 
+  transform: translateY(-2px); /* Petit effet de levier */
 }
 
-/* =========================================
-   STYLE DU LIEN (Mot de passe oublié)
-   ========================================= */
-.forgot-password-link {
-  display: block;           /* Se met sur sa propre ligne */
-  margin-top: 15px;
-  color: #000000;           /* Texte noir */
-  text-decoration: none;    /* Pas de soulignement par défaut */
-  font-size: 14px;
-}
-
-.forgot-password-link:hover {
-  text-decoration: underline; /* Souligne au survol */
-}

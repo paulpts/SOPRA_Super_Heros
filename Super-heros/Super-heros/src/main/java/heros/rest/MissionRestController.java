@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.request.CreateMissionRequest;
 import heros.dto.response.MissionResponse;
 import heros.model.Mission;
 import heros.service.MissionService;
@@ -30,19 +31,20 @@ public class MissionRestController {
     }
 
     @GetMapping("/{id}")
-    public MissionResponse ficheMission(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
+    public MissionResponse ficheMission(@PathVariable Integer id) {
         Mission m = (Mission) missionService.getById(id);
         return MissionResponse.convert(m);
     }
 
     @PostMapping
-    public Mission ajouterMission(@RequestBody Mission mission) {
-        return  missionService.create(mission);
+    public MissionResponse ajouterMission(@RequestBody CreateMissionRequest request) {
+    	return MissionResponse.convert(missionService.create(new Mission(), request));
     }
 
     @PutMapping("/{id}")
-    public Mission modifierMission(@PathVariable Integer id,@RequestBody Mission mission) {
-        return missionService.update(mission);
+    public MissionResponse modifierMission(@PathVariable Integer id,@RequestBody CreateMissionRequest request) {
+    	System.out.println(">>> MISSION CONTROLLER TRIGGERED");
+        return MissionResponse.convert(missionService.update(id, request));
     }
 
     @DeleteMapping("/{id}")

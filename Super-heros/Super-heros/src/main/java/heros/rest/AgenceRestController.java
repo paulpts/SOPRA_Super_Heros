@@ -30,8 +30,7 @@ public class AgenceRestController {
     }
 
     @GetMapping("/{id}")
-    public AgenceResponse ficheAgence(@PathVariable Integer id) { // J'ai du mal à capter le ResponseEntity j'ai repris
-                                                                  // pour exemple celui de MatiereRestController
+    public AgenceResponse ficheAgence(@PathVariable Integer id) { 
         Agence a = (Agence) agenceService.getById(id);
         return AgenceResponse.convert(a);
     }
@@ -42,8 +41,8 @@ public class AgenceRestController {
     }
 
     @PutMapping("/{id}")
-    public Agence modifierAgence(@PathVariable Integer id, @RequestBody Agence agence) {
-        return agenceService.update(id, agence);
+    public AgenceResponse modifierAgence(@PathVariable Integer id, @RequestBody CreateAgenceRequest request) {
+    	return AgenceResponse.convert(agenceService.update(id, request));
     }
 
     @DeleteMapping("/{id}")
