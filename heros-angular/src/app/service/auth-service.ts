@@ -33,6 +33,7 @@ export class AuthService {
           }
 
           this._token = resp.token;
+          this._id = resp.id;
 
           sessionStorage.setItem("token", this._token);
 
