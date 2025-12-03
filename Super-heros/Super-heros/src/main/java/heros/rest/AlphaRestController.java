@@ -50,7 +50,7 @@ public class AlphaRestController {
 
     @PutMapping("/{id}")
     public AlphaResponse modifierAlpha(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
-        return AlphaResponse.convert((Alpha) herosService.updateAlpha(id, request));
+        return AlphaResponse.convert((Alpha) herosService.updateAlpha(id, request));   
     }
 
     @DeleteMapping("/{id}")

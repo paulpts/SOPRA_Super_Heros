@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import heros.dto.request.CreateUpdateHerosRequest;
+import heros.dto.response.HerosResponse;
 import heros.dto.response.OmegaResponse;
 import heros.model.Omega;
 import heros.service.HerosService;
@@ -26,17 +27,17 @@ public class OmegaRestController {
     private HerosService herosService;
 
     @GetMapping
-    public List<OmegaResponse> allOmega() {
-        return herosService.getAllOmega().stream().map(OmegaResponse::convert).toList();
+    public List<HerosResponse> allOmega() {
+        return herosService.getAllOmega().stream().map(HerosResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OmegaResponse> ficheOmega(@PathVariable Integer id) {
+    public ResponseEntity<HerosResponse> ficheOmega(@PathVariable Integer id) {
         Omega omega = (Omega) herosService.getOmegaById(id);
         if (omega == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(OmegaResponse.convert(omega));
+        return ResponseEntity.ok(HerosResponse.convert(omega));
     }
 
     @PostMapping
