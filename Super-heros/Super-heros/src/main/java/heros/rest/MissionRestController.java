@@ -31,7 +31,7 @@ public class MissionRestController {
     }
 
     @GetMapping("/{id}")
-    public MissionResponse ficheMission(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
+    public MissionResponse ficheMission(@PathVariable Integer id) {
         Mission m = (Mission) missionService.getById(id);
         return MissionResponse.convert(m);
     }
