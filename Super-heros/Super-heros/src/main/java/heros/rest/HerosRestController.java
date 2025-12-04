@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,10 +34,17 @@ public class HerosRestController {
         return ResponseEntity.ok(HerosResponse.convert(heros));
     }
 
+
+  /*  @PutMapping("/{id}")
+    public HerosResponse modifierHeros(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
+        return HerosResponse.convert(herosService.updateHeros(id, request));
+    }
+
+  
     @DeleteMapping("/{id}")
     public void supprimerHeros(@PathVariable Integer id) {
         herosService.deleteById(id);
-    }
+    }*/
 
     @GetMapping("/alias/{alias}")
     public HerosResponse getHerosByAlias(@PathVariable String alias) {

@@ -41,13 +41,13 @@ public class OmegaRestController {
     }
 
     @PostMapping
-    public OmegaResponse ajouterOmega(@RequestBody CreateUpdateHerosRequest request) {
-        return OmegaResponse.convert((Omega) herosService.createOmega(request));
+    public HerosResponse ajouterOmega(@RequestBody CreateUpdateHerosRequest request) {
+        return HerosResponse.convert((Omega) herosService.createOmega(request));
     }
 
     @PutMapping("/{id}")
-    public OmegaResponse modifierOmega(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
-        return OmegaResponse.convert((Omega) herosService.updateOmega(id, request));
+    public HerosResponse modifierOmega(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
+        return HerosResponse.convert((Omega) herosService.updateHeros(id, request));
     }
 
     @DeleteMapping("/{id}")
@@ -56,8 +56,8 @@ public class OmegaRestController {
     }
 
     @GetMapping("/alias/{alias}")
-    public OmegaResponse getHerosByAlias(@PathVariable String alias) {
-        return OmegaResponse.convert((Omega) herosService.getByAlias(alias));
+    public HerosResponse getHerosByAlias(@PathVariable String alias) {
+        return HerosResponse.convert((Omega) herosService.getByAlias(alias));
     }
 
     @GetMapping("/agence/{agenceId}")

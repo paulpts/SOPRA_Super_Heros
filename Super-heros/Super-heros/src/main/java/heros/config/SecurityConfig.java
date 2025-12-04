@@ -38,13 +38,14 @@ public class SecurityConfig {
             		"/api/chefAgence",
             		"/api/agence", 
             		"api/heros", 
-            		"api/alpha", 
+            		"api/alpha",
+                   // "/api/alpha/**", 
             		"api/beta", 
             		"api/omega", 
             		"api/mission").hasRole("ADMIN");
             auth.requestMatchers(HttpMethod.POST, 
             		"/api/chefAgence",
-            		"/api/admin",
+            		//"/api/admin",
             		"/api/agence", 
             		"api/heros", 
             		"api/alpha", 
@@ -53,8 +54,8 @@ public class SecurityConfig {
             		"api/mission").hasRole("ADMIN");
             auth.requestMatchers(HttpMethod.PUT, 
             		"/api/chefAgence",
-            		"/api/admin",
-            		"/api/agence", 
+            		//"/api/admin",
+            		//"/api/agence", 
             		"api/heros", 
             		"api/alpha", 
             		"api/beta", 
@@ -62,8 +63,8 @@ public class SecurityConfig {
             		"api/mission").hasRole("ADMIN");
             auth.requestMatchers(HttpMethod.DELETE,
             		"/api/chefAgence",
-            		"/api/admin",
-            		"/api/agence", 
+            		//"/api/admin",
+            		//"/api/agence", 
             		"api/heros", 
             		"api/alpha", 
             		"api/beta", 
@@ -120,7 +121,7 @@ public class SecurityConfig {
    @Bean
     PasswordEncoder passwordEncoder() {
     	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    	System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("chef1") + "\r\n");
+    	//System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("chef2") + "\r\n");
     	return passwordEncoder;
     }
 

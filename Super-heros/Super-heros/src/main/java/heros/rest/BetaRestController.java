@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import heros.dto.request.CreateUpdateHerosRequest;
-import heros.dto.response.BetaResponse;
+import heros.dto.response.HerosResponse;
 import heros.model.Beta;
 import heros.service.HerosService;
 
@@ -27,27 +27,27 @@ public class BetaRestController {
     private HerosService herosService;
 
     @GetMapping
-    public List<BetaResponse> allBeta() {
-        return herosService.getAllBeta().stream().map(BetaResponse::convert).toList();
+    public List<HerosResponse> allBeta() {
+        return herosService.getAllBeta().stream().map(HerosResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BetaResponse> ficheBeta(@PathVariable Integer id) {
+    public ResponseEntity<HerosResponse> ficheBeta(@PathVariable Integer id) {
         Beta beta = (Beta) herosService.getById(id);
         if (beta == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(BetaResponse.convert(beta));
+        return ResponseEntity.ok(HerosResponse.convert(beta));
     }
 
     @PostMapping
-    public BetaResponse ajouterBeta(@RequestBody CreateUpdateHerosRequest request) {
-        return BetaResponse.convert((Beta) herosService.createBeta(request));
+    public HerosResponse ajouterBeta(@RequestBody CreateUpdateHerosRequest request) {
+        return HerosResponse.convert((Beta) herosService.createBeta(request));
     }
 
     @PutMapping("/{id}")
-    public BetaResponse modifierBeta(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
-        return BetaResponse.convert((Beta) herosService.updateBeta(id, request));
+    public HerosResponse modifierBeta(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
+        return HerosResponse.convert((Beta) herosService.updateHeros(id, request));
     }
 
     @DeleteMapping("/{id}")
@@ -56,12 +56,12 @@ public class BetaRestController {
     }
 
     @GetMapping("/alias/{alias}")
-    public BetaResponse getHerosByAlias(@PathVariable String alias) {
-        return BetaResponse.convert((Beta) herosService.getByAlias(alias));
+    public HerosResponse getHerosByAlias(@PathVariable String alias) {
+        return HerosResponse.convert((Beta) herosService.getByAlias(alias));
     }
 
     @GetMapping("/agence/{agenceId}")
-    public List<BetaResponse> getBetaByAgenceId(@PathVariable Integer agenceId) {
-        return herosService.getBetaByAgenceId(agenceId).stream().map(BetaResponse::convert).toList();
+    public List<HerosResponse> getBetaByAgenceId(@PathVariable Integer agenceId) {
+        return herosService.getBetaByAgenceId(agenceId).stream().map(HerosResponse::convert).toList();
     }
 }

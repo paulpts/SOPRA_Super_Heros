@@ -4,12 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,11 +19,13 @@ public class AdminRestController {
     @Autowired
     private CompteService compteService;
 
+    // ok postman as admin
     @GetMapping
     public List<Admin> allChefAgence() {
         return compteService.getAllAdmin();
     }
 
+    // ok postman as admin
     @GetMapping("/{id}")
     public ResponseEntity<Admin> ficheChefAgence(@PathVariable Integer id) {
         Admin a = (Admin) compteService.getById(id);
@@ -38,7 +36,7 @@ public class AdminRestController {
         return ResponseEntity.ok(a);
     }
 
-    @PostMapping
+  /*  @PostMapping
     public Admin ajouterAdmin(@RequestBody Admin admin) {
         return (Admin) compteService.create(admin);
     }
@@ -49,8 +47,9 @@ public class AdminRestController {
         return (Admin) compteService.update(id, admin);
     }
 
+    // ok postman as admin
     @DeleteMapping("/{id}")
     public void supprimerAdmin(@PathVariable Integer id) {
         compteService.deleteById(id);
-    }
+    }*/
 }

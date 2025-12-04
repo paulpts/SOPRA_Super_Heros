@@ -21,7 +21,8 @@ public class ChefAgence extends Compte {
 	@Column(length = 25)
 	private String prenom;// A demander � la premiere co
 
-	public ChefAgence(String login, String password, Agence agence, String nom, String prenom) {
+	
+	public ChefAgence(String login, String password, String nom, String prenom) {
 		super(login, password);
 		this.nom = nom;
 		this.prenom = prenom;

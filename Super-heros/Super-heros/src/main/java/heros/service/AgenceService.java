@@ -38,10 +38,6 @@ public class AgenceService { // test
     }
 
     public Agence create(Agence agence, CreateAgenceRequest agenceRequest) {
-        // if (agence.getId() != null) {
-        // throw new IllegalArgumentException("L'agence ne doit pas avoir d'id !");
-        // }
-
         agence.setVille(agenceRequest.getVille());
         agence.setBudget(agenceRequest.getBudget());
         agence.setPopularite(agenceRequest.getPopularite());
@@ -50,14 +46,9 @@ public class AgenceService { // test
         agenceRepository.save(agence);
         chefAgence.setAgence(agence);
         compteRepository.save(chefAgence);
-
         return agence;
     }
 
-    // public Compte update(Compte compte) {
-    // return compteRepository.save(compte); //Ca permet de renvoyer l'objet qui est
-    // mis à jour
-    // }
 
     public Agence update(Integer id, CreateAgenceRequest request) {
         Agence updateAgence = agenceRepository.findById(id)
@@ -68,7 +59,7 @@ public class AgenceService { // test
         return agenceRepository.save(updateAgence); // Ca permet de renvoyer l'objet qui est mis à jour
     }
 
-    public void deleteById(Integer id) {
+  /*  public void deleteById(Integer id) {
     	Agence agence = agenceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Agence inexistante"));
     	agence.getChefAgence().setAgence(null);
@@ -77,7 +68,7 @@ public class AgenceService { // test
 
     public void deleteAgence(Agence agence) {
         agenceRepository.delete(agence);
-    }
+    }*/
 
     public Agence getChefAgenceById(Integer chefId) { // Methode rajouté pour recuperer un chef d'agence grâce à son ID
         return agenceRepository.findByChefAgence_Id(chefId);

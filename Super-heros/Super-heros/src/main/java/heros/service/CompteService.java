@@ -4,19 +4,25 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import heros.dto.request.CreateUpdateChefAgenceRequest;
 import heros.model.Admin;
 import heros.model.ChefAgence;
 import heros.model.Compte;
+import heros.repo.AgenceRepository;
 import heros.repo.CompteRepository;
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CompteService {
 
     @Autowired
     private CompteRepository compteRepository;
+    @Autowired
+    private PasswordEncoder encoder;
+    @Autowired
+    private AgenceRepository agenceRepository;
 
     public Compte getById(Integer id) {
         if (id == null) {
@@ -29,44 +35,47 @@ public class CompteService {
         return compteRepository.findAll();
     }
 
-    // public Compte create(Compte compte) {
-    // return compteRepository.save(compte);
-    // }
 
-    public Compte create(ChefAgence chefAgence) {
-        if (chefAgence.getId() != null) {
-            throw new IllegalArgumentException("Le compte ne doit pas avoir d'id !");
-        }
+
+    public Compte createChefAgence(CreateUpdateChefAgenceRequest request) {
+        ChefAgence chefAgence = new ChefAgence(
+            request.getLogin(),
+            encoder.encode(request.getPassword()),
+            request.getNom(),
+            request.getPrenom()
+        );
         return compteRepository.save(chefAgence);
     }
 
-    public Compte create(Admin admin) {
+   /* public Compte createAdmin(Admin admin) {
         if (admin.getId() != null) {
             throw new IllegalArgumentException("Le compte ne doit pas avoir d'id !");
         }
         return compteRepository.save(admin);
-    }
+    }*/
 
-    // public Compte update(Compte compte) {
-    // return compteRepository.save(compte); //Ca permet de renvoyer l'objet qui est
-    // mis à jour
-    // }
 
-    public Compte update(Integer id, Compte compte) {
-        Compte updateCompte = compteRepository.findById(id)
+
+   /* public ChefAgence updateChefAgence(Integer id, CreateUpdateChefAgenceRequest request) {
+        ChefAgence updateChefAgence = (ChefAgence) compteRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Compte inexistant"));
-        updateCompte.setLogin(compte.getLogin());
-        updateCompte.setPassword(compte.getPassword());
-        return compteRepository.save(updateCompte); // Ca permet de renvoyer l'objet qui est mis à jour
+        updateChefAgence.setNom(request.getNom());
+        updateChefAgence.setPrenom(request.getPrenom());
+        return compteRepository.save(updateChefAgence);
     }
 
-    public void deleteById(Integer id) { // DELETE FROM heros WHERE id=?
+    public void deleteById(Integer id) {
+        ChefAgence chefAgence = (ChefAgence) compteRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Compte inexistant"));
+        Agence agence = agenceRepository.findById(chefAgence.getAgence().getId()).orElse(null);
+        agence.setChefAgence(null);
+        chefAgence.setAgence(null);
         compteRepository.deleteById(id);
     }
 
     public void deleteCompte(Compte compte) {
         compteRepository.delete(compte);
-    }
+    }*/
 
     public Compte getByLoginAndPassword(String login, String password) {
         return compteRepository.findByLoginAndPassword(login, password);
