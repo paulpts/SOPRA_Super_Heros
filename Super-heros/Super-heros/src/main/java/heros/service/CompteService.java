@@ -8,18 +8,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import heros.dto.request.CreateUpdateChefAgenceRequest;
-import heros.dto.request.CreateUpdateHerosRequest;
 import heros.model.Admin;
-import heros.model.Agence;
-import heros.model.Alpha;
-import heros.model.Beta;
 import heros.model.ChefAgence;
 import heros.model.Compte;
-import heros.model.Heros;
-import heros.model.Omega;
 import heros.repo.AgenceRepository;
 import heros.repo.CompteRepository;
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CompteService {
@@ -54,16 +47,16 @@ public class CompteService {
         return compteRepository.save(chefAgence);
     }
 
-    public Compte createAdmin(Admin admin) {
+   /* public Compte createAdmin(Admin admin) {
         if (admin.getId() != null) {
             throw new IllegalArgumentException("Le compte ne doit pas avoir d'id !");
         }
         return compteRepository.save(admin);
-    }
+    }*/
 
 
 
-    public ChefAgence updateChefAgence(Integer id, CreateUpdateChefAgenceRequest request) {
+   /* public ChefAgence updateChefAgence(Integer id, CreateUpdateChefAgenceRequest request) {
         ChefAgence updateChefAgence = (ChefAgence) compteRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Compte inexistant"));
         updateChefAgence.setNom(request.getNom());
@@ -82,7 +75,7 @@ public class CompteService {
 
     public void deleteCompte(Compte compte) {
         compteRepository.delete(compte);
-    }
+    }*/
 
     public Compte getByLoginAndPassword(String login, String password) {
         return compteRepository.findByLoginAndPassword(login, password);

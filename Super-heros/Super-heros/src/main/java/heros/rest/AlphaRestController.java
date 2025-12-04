@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import heros.dto.request.CreateUpdateHerosRequest;
-import heros.dto.response.AlphaResponse;
+import heros.dto.response.HerosResponse;
 import heros.model.Alpha;
 import heros.service.HerosService;
 
@@ -27,28 +27,28 @@ public class AlphaRestController {
     private HerosService herosService;
 
     @GetMapping
-    public List<AlphaResponse> allAlpha() {
-        return herosService.getAllAlpha().stream().map(AlphaResponse::convert).toList();
+    public List<HerosResponse> allAlpha() {
+        return herosService.getAllAlpha().stream().map(HerosResponse::convert).toList();
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<AlphaResponse> ficheAlpha(@PathVariable Integer id) {
+    public ResponseEntity<HerosResponse> ficheAlpha(@PathVariable Integer id) {
         Alpha alpha = (Alpha) herosService.getAlphaById(id);
         if (alpha == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(AlphaResponse.convert(alpha));
+        return ResponseEntity.ok(HerosResponse.convert(alpha));
     }
 
     @PostMapping
-    public AlphaResponse ajouterAlpha(@RequestBody CreateUpdateHerosRequest request) {
-        return AlphaResponse.convert((Alpha) herosService.createAlpha(request));
+    public HerosResponse ajouterAlpha(@RequestBody CreateUpdateHerosRequest request) {
+        return HerosResponse.convert((Alpha) herosService.createAlpha(request));
     }
 
     @PutMapping("/{id}")
-    public AlphaResponse modifierAlpha(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
-        return AlphaResponse.convert((Alpha) herosService.updateAlpha(id, request));   
+    public HerosResponse modifierAlpha(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
+        return HerosResponse.convert((Alpha) herosService.updateAlpha(id, request));   
     }
 
     @DeleteMapping("/{id}")
@@ -57,12 +57,12 @@ public class AlphaRestController {
     }
 
     @GetMapping("/alias/{alias}")
-    public AlphaResponse getHerosByAlias(@PathVariable String alias) {
-        return AlphaResponse.convert((Alpha) herosService.getByAlias(alias));
+    public HerosResponse getHerosByAlias(@PathVariable String alias) {
+        return HerosResponse.convert((Alpha) herosService.getByAlias(alias));
     }
 
     @GetMapping("/agence/{agenceId}")
-    public List<AlphaResponse> getAlphaByAgenceId(@PathVariable Integer agenceId) {
-        return herosService.getAlphaByAgenceId(agenceId).stream().map(AlphaResponse::convert).toList();
+    public List<HerosResponse> getAlphaByAgenceId(@PathVariable Integer agenceId) {
+        return herosService.getAlphaByAgenceId(agenceId).stream().map(HerosResponse::convert).toList();
     }
 }
