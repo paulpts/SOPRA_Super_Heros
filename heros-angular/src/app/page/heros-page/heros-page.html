@@ -32,73 +32,67 @@
 
     </div> <!-- FIN colonne gauche -->
 
-    <!-- COLONNE CENTRE -->
-    <div class="colonne_centre">
+   <!-- COLONNE CENTRE -->
+<div class="colonne_centre">
 
-      <h1 class="page-title">
-        Liste des heros
-        <span style="font-size: 14px; color: grey;">
-          (Nombre de heros correspondant aux filtre(s) : {{ filteredHeros.length }})
-        </span>
-      </h1>
+  <h1 class="page-title">
+    Liste des héros
+    <span style="font-size: 14px; color: grey;">
+      (Nombre de héros correspondant aux filtre(s) : {{ filteredHeros.length }})
+    </span>
+  </h1>
 
-      <div class="hero-legende">
-        <label class="legende-item">
-          <input
-            type="checkbox"
-            class="legende-carre"
-            [(ngModel)]="showAlpha"
-            (ngModelChange)="updateFiltered()"
-          />
-          <span>Alpha</span>
-        </label>
-
-        <label class="legende-item">
-          <input
-            type="checkbox"
-            class="legende-carre"
-            [(ngModel)]="showBeta"
-            (ngModelChange)="updateFiltered()"
-          />
-          <span>Beta</span>
-        </label>
-
-        <label class="legende-item">
-          <input
-            type="checkbox"
-            class="legende-carre"
-            [(ngModel)]="showOmega"
-            (ngModelChange)="updateFiltered()" 
-          />
-          <span>Omega</span>
-        </label>
-      </div>
-
-      <div class="liste-heros">
-
-        <div class="no-results" *ngIf="filteredHeros.length === 0">
-          Aucune heros ne correspond aux critères sélectionnés.
-        </div>
-
-        <div
-          class="hero-card"
-          *ngFor="let hero of filteredHeros"
-          (click)="selectHero(hero)"
-        >
-          <div class="hero-photo">
-            Heros {{ hero.id }}
-          </div>
-
-          <div class="hero-infos">
-            Nom : {{ hero.alias }}
-            — Popularité : {{ hero.popularite }}
-            - Salaire : {{ hero.salaire }} €
-          </div>
-        </div>
-
-      </div>
-
+  <!-- Bloc rouge pour les cases Alpha / Beta / Omega -->
+  <div class="hero-legende-block">
+    <div class="hero-categories">
+      <label class="category-item">
+        <input type="checkbox" class="legende-carre"
+               [(ngModel)]="showAlpha"
+               (ngModelChange)="updateFiltered()" />
+        <span>Alpha</span>
+      </label>
+      <label class="category-item">
+        <input type="checkbox" class="legende-carre"
+               [(ngModel)]="showBeta"
+               (ngModelChange)="updateFiltered()" />
+        <span>Beta</span>
+      </label>
+      <label class="category-item">
+        <input type="checkbox" class="legende-carre"
+               [(ngModel)]="showOmega"
+               (ngModelChange)="updateFiltered()" />
+        <span>Omega</span>
+      </label>
     </div>
+  </div>
+
+  <!-- Liste des héros -->
+  <div class="liste-heros">
+
+    <div class="no-results" *ngIf="filteredHeros.length === 0">
+      Aucun héros ne correspond aux critères sélectionnés.
+    </div>
+
+    <div
+      class="hero-card"
+      *ngFor="let hero of filteredHeros"
+      (click)="selectHero(hero)"
+    >
+      <div class="hero-photo">
+        Héros {{ hero.id }}
+      </div>
+
+      <div class="hero-infos">
+        Nom : {{ hero.alias }}
+        — Popularité : {{ hero.popularite }}
+        - Salaire : {{ hero.salaire }} €
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
 
   </div> <!-- FIN main-container -->
 
