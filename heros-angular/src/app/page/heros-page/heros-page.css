@@ -133,16 +133,6 @@
   padding-left: 20px;
 }
 
-/* =========================================
-   COLONNE DROITE (Ratio 1/4)
-   ========================================= */
-.colonne_droite {
-  flex: 1;                  /* 1 part du gâteau */
-  
-  display: flex;
-  flex-direction: column;
-  /* align-items: flex-end; Si tu veux coller le bouton à droite */
-}
 
 .zone-action {
   width: 100%;
