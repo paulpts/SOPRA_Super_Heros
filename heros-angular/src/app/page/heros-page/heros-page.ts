@@ -1,52 +1,137 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 import { HerosDto } from '../../dto/heros-dto';
+import { MissionDto } from '../../dto/mission-dto';
 import { HerosService } from '../../service/heros-service';
+import { MissionService } from '../../service/mission-service';
 
 @Component({
-  imports: [ CommonModule ],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './heros-page.html',
   styleUrl: './heros-page.css',
 })
 export class HerosPage implements OnInit {
 
-  /**
-   Liste de tous les héros (toutes agences confondues) ==>  voir  HTML avec : heros$ | async
-   */
-  protected heros$!: Observable<HerosDto[]>;
+  // Listes des héros selon leur type
+  alphaHeros: HerosDto[] = [];
+  betaHeros: HerosDto[] = [];
+  omegaHeros: HerosDto[] = [];
 
-  constructor(private herosService: HerosService) { }
+  // Toutes les missions
+  missions: MissionDto[] = [];
+
+  // Checkbox pour les filtres
+  showAlpha = false;
+  showBeta = false;
+  showOmega = false;
+
+  constructor(
+    private herosService: HerosService,
+    private missionService: MissionService
+  ) {}
 
   ngOnInit(): void {
-    this.heros$ = this.herosService.findAll();
+
+    // Charger les héros alpha
+    this.herosService.findAllAlpha().subscribe((donneesAlpha) => {
+      this.alphaHeros = donneesAlpha;
+    });
+
+    // Charger les héros beta
+    this.herosService.findAllBeta().subscribe((donneesBeta) => {
+      this.betaHeros = donneesBeta;
+    });
+
+    // Charger les héros omega
+    this.herosService.findAllOmega().subscribe((donneesOmega) => {
+      this.omegaHeros = donneesOmega;
+    });
+
+    // Charger toutes les missions
+    this.missionService.findAll().subscribe((donneesMissions) => {
+      this.missions = donneesMissions;
+    });
   }
 
-  public trackHero(index: number, hero: HerosDto): string {
-    return hero.id;
-  }
+  // Cette fonction renvoie la liste des héros à afficher
+  getHeros(): HerosDto[] {
 
-  
-  public getStatut(hero: HerosDto): string {
-    
+    const liste: HerosDto[] = [];
 
-    
-    if (hero.sante <= 25) {
-      return 'Blessé';
-    }
+    const aucunFiltre = !this.showAlpha && !this.showBeta && !this.showOmega;
 
-    
-    if (hero.motivation <= 30) {
-      return 'En repos';
-    }
+    // Si aucun filtre n'est coché : on affiche tous les héros
+    if (aucunFiltre) {
 
-    
+      // Ajouter les alpha
+      for (let i = 0; i < this.alphaHeros.length; i++) {
+        liste.push(this.alphaHeros[i]);
+      }
+
+     
+      for (let i = 0; i < this.betaHeros.length; i++) {
+        liste.push(this.betaHeros[i]);
+      }
+
    
-    return 'Disponible';
+      for (let i = 0; i < this.omegaHeros.length; i++) {
+        liste.push(this.omegaHeros[i]);
+      }
+
+      return liste;
+    }
+
+    // Si le filtre Alpha est coché
+    if (this.showAlpha) {
+      for (let i = 0; i < this.alphaHeros.length; i++) {
+        liste.push(this.alphaHeros[i]);
+      }
+    }
+
+   
+    if (this.showBeta) {
+      for (let i = 0; i < this.betaHeros.length; i++) {
+        liste.push(this.betaHeros[i]);
+      }
+    }
+
+    // Si le filtre Omega est coché
+    if (this.showOmega) {
+      for (let i = 0; i < this.omegaHeros.length; i++) {
+        liste.push(this.omegaHeros[i]);
+      }
+    }
+
+    return liste;
+  }
+  filtrerMissionHero(hero: HerosDto): MissionDto[] {
+
+  // On récupère l'id du héros et on le convertit en nombre
+  const idHero = Number(hero.id);
+
+  // Liste dans laquelle on va mettre les missions trouvées
+  const liste: MissionDto[] = [];
+
+
+  for (let i = 0; i < this.missions.length; i++) {
+    const mission = this.missions[i];
+
+    // Si la mission appartient à ce héros
+    if (mission.herosId === idHero) {
+      liste.push(mission); // On l'ajoute
+    }
   }
 
-  
-  public recruterSuperHero(): void {
-    console.log('TODO : ouvrir le formulaire de recrutement d’un super-héros');
-  }
+  // On renvoie les missions filtrées
+  return liste;
+
 }
+recruter(): void {
+  // Pour l'instant on fait juste un log
+  console.log('TODO : ouvrir la page ou le formulaire de recrutement');
+}
+}
+
+
