@@ -1,7 +1,6 @@
 package heros.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,7 +95,8 @@ public class HerosService {
 		}
 			
 	public Heros updateOmega(Integer id,CreateUpdateHerosRequest request) {
-		Omega omega = new Omega();
+		Heros omega =  herosRepository.findById(id)
+      		  .orElseThrow(() -> new EntityNotFoundException("Héros inexistant"));
 		omega.setNom(request.getNom());
 		omega.setPrenom(request.getPrenom());
 		omega.setAlias(request.getAlias());
@@ -111,7 +111,8 @@ public class HerosService {
 		}
 
 	public Heros updateAlpha(Integer id,CreateUpdateHerosRequest request) {
-		Alpha alpha = new Alpha();
+		Heros alpha =  herosRepository.findById(id)
+	      		  .orElseThrow(() -> new EntityNotFoundException("Héros inexistant"));
 		alpha.setNom(request.getNom());
 		alpha.setPrenom(request.getPrenom());
 		alpha.setAlias(request.getAlias());
@@ -126,7 +127,8 @@ public class HerosService {
 		}
 
 	public Heros updateBeta(Integer id,CreateUpdateHerosRequest request) {
-		Beta beta = new Beta();
+		Heros beta =  herosRepository.findById(id)
+	      		  .orElseThrow(() -> new EntityNotFoundException("Héros inexistant"));
 		beta.setNom(request.getNom());
 		beta.setPrenom(request.getPrenom());
 		beta.setAlias(request.getAlias());

@@ -76,6 +76,43 @@
   }
 }
 
+.hero-legende {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.legende-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legende-carre {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  margin: 0;
+  padding: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  border: 1px solid #999;
+  cursor: pointer;
+  display: inline-block;
+
+  
+  background-color: #d9d9d9;
+}
+.legende-carre:checked {
+  background-color: #003366;  
+  border-color: #003366;
+}
+
 .hero-photo {
   width: 80px;      /* Taille fixe pour la photo */
   height: 80px;
@@ -96,16 +133,6 @@
   padding-left: 20px;
 }
 
-/* =========================================
-   COLONNE DROITE (Ratio 1/4)
-   ========================================= */
-.colonne_droite {
-  flex: 1;                  /* 1 part du gâteau */
-  
-  display: flex;
-  flex-direction: column;
-  /* align-items: flex-end; Si tu veux coller le bouton à droite */
-}
 
 .zone-action {
   width: 100%;

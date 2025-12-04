@@ -18,6 +18,7 @@ export class HerosPage implements OnInit {
   alphaHeros: HerosDto[] = [];
   betaHeros: HerosDto[] = [];
   omegaHeros: HerosDto[] = [];
+  heros: HerosDto[] = [];
 
   // Toutes les missions
   missions: MissionDto[] = [];
@@ -26,6 +27,9 @@ export class HerosPage implements OnInit {
   showAlpha = false;
   showBeta = false;
   showOmega = false;
+
+ //propriété pour stocker le héros sélectionné
+  selectedHero: HerosDto | null = null;
 
   constructor(
     private herosService: HerosService,
@@ -58,7 +62,7 @@ export class HerosPage implements OnInit {
   // Cette fonction renvoie la liste des héros à afficher
   getHeros(): HerosDto[] {
 
-    const liste: HerosDto[] = [];
+    //const liste: HerosDto[] = [];
 
     const aucunFiltre = !this.showAlpha && !this.showBeta && !this.showOmega;
 
@@ -67,44 +71,44 @@ export class HerosPage implements OnInit {
 
       // Ajouter les alpha
       for (let i = 0; i < this.alphaHeros.length; i++) {
-        liste.push(this.alphaHeros[i]);
+        this.heros.push(this.alphaHeros[i]);
       }
 
      
       for (let i = 0; i < this.betaHeros.length; i++) {
-        liste.push(this.betaHeros[i]);
+        this.heros.push(this.betaHeros[i]);
       }
 
    
       for (let i = 0; i < this.omegaHeros.length; i++) {
-        liste.push(this.omegaHeros[i]);
+        this.heros.push(this.omegaHeros[i]);
       }
 
-      return liste;
+      return this.heros;
     }
 
     // Si le filtre Alpha est coché
     if (this.showAlpha) {
       for (let i = 0; i < this.alphaHeros.length; i++) {
-        liste.push(this.alphaHeros[i]);
+        this.heros.push(this.alphaHeros[i]);
       }
     }
 
    
     if (this.showBeta) {
       for (let i = 0; i < this.betaHeros.length; i++) {
-        liste.push(this.betaHeros[i]);
+        this.heros.push(this.betaHeros[i]);
       }
     }
 
     // Si le filtre Omega est coché
     if (this.showOmega) {
       for (let i = 0; i < this.omegaHeros.length; i++) {
-        liste.push(this.omegaHeros[i]);
+        this.heros.push(this.omegaHeros[i]);
       }
     }
 
-    return liste;
+    return this.heros;
   }
   filtrerMissionHero(hero: HerosDto): MissionDto[] {
 
@@ -128,6 +132,12 @@ export class HerosPage implements OnInit {
   return liste;
 
 }
+// Met a jour le héross sélectionné
+selectHero(hero: HerosDto): void {
+  this.selectedHero = hero;
+}
+
+
 recruter(): void {
   // Pour l'instant on fait juste un log
   console.log('TODO : ouvrir la page ou le formulaire de recrutement');

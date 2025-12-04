@@ -3,11 +3,9 @@ package heros.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,7 +44,7 @@ public class ChefAgenceRestController {
 
     // ok postman as admin qui ne modifie pas le login ni le password (qui est hashé
     // en bdd)
-    @PutMapping("/{id}")
+  /*  @PutMapping("/{id}")
     public ChefAgenceResponse modifierChefAgence(@PathVariable Integer id,
             @RequestBody CreateUpdateChefAgenceRequest request) {
         return ChefAgenceResponse.convert(compteService.updateChefAgence(id, request));
@@ -63,6 +61,6 @@ public class ChefAgenceRestController {
     @DeleteMapping("/{id}")
     public void supprimerChefAgence(@PathVariable Integer id) {
         compteService.deleteById(id);
-    }
+    }*/
 
 }

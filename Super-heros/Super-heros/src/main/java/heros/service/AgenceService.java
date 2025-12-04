@@ -59,7 +59,7 @@ public class AgenceService { // test
         return agenceRepository.save(updateAgence); // Ca permet de renvoyer l'objet qui est mis à jour
     }
 
-    public void deleteById(Integer id) {
+  /*  public void deleteById(Integer id) {
     	Agence agence = agenceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Agence inexistante"));
     	agence.getChefAgence().setAgence(null);
@@ -68,7 +68,7 @@ public class AgenceService { // test
 
     public void deleteAgence(Agence agence) {
         agenceRepository.delete(agence);
-    }
+    }*/
 
     public Agence getChefAgenceById(Integer chefId) { // Methode rajouté pour recuperer un chef d'agence grâce à son ID
         return agenceRepository.findByChefAgence_Id(chefId);

@@ -1,74 +1,94 @@
 <div class="main-container">
 
-  <!-- COLONNE GAUCHE -->
-  <div class="colonne_gauche">
-    
-    <div class="graph-circle">
-      Graph Statut
+
+ <!-- COLONNE GAUCHE -->
+<div class="colonne_gauche">
+
+  <!-- Rien tant qu'aucun héros n'est sélectionné -->
+  <ng-container *ngIf="selectedHero as hero">
+    <div class="hero-photo-placeholder">
+      Photo du héros
     </div>
 
-    <div class="graph-circle">
-      Graph Motivation
-    </div>
+    <p>Nom : {{ hero.prenom }} {{ hero.nom }}</p>
+    <p>Alias : {{ hero.alias }}</p>
+    <p>Popularité : {{ hero.popularite }}</p>
+    <p>Santé : {{ hero.sante }}</p>
+    <p>Salaire : {{ hero.salaire }} €</p>
+    <p>Coût de création : {{ hero.coutCreation }}</p>
+    <p>Expérience : {{ hero.experience }}</p>
+    <p>Dégâts : {{ hero.degats }}</p>
+    <p>Motivation : {{ hero.motivation }}</p>
+  </ng-container>
 
-    <div class="graph-circle">
-      Graph Popularité
-    </div>
-
-  </div>
-
+</div>
   <!-- COLONNE CENTRE -->
   <div class="colonne_centre">
 
+    <!-- Titre de la page avec DEBUGUEUR -->
     <h1 class="page-title">
-      Liste des héros de l'agence
+      Liste des heros
+      <!-- 
+         DEBUG : Affiche le nombre brut reçu du backend.
+         Si ça affiche 0 ici, c'est que le problème vient de la connexion (Service/Back), pas du filtre.
+      -->
+      <span style="font-size: 14px; color: grey;">(Nombres de heros correspondante(s) aux filtre(s): {{ heros.length }})</span>
     </h1>
-    
-    <div class="liste-heros">
 
-      <div class="hero-card">
-        <div class="hero-photo">PHOTO</div>
-        <div class="hero-infos">
-          <strong>#1 - Batman</strong><br>
-          <span>Statut: En mission</span>
-        </div>
-      </div>
+    <!-- Légende avec les 3 checkbox -->
+    <div class="hero-legende">
+      <label class="legende-item">
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showAlpha"
+        />
+        <span>Alpha</span>
+      </label>
 
-      <div class="hero-card">
-        <div class="hero-photo">PHOTO</div>
-        <div class="hero-infos">
-          <strong>#2 - Superman</strong><br>
-          <span>Statut: Disponible</span>
-        </div>
-      </div>
+      <label class="legende-item">
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showBeta"
+        />
+        <span>Beta</span>
+      </label>
 
-      <div class="hero-card">
-        <div class="hero-photo">PHOTO</div>
-        <div class="hero-infos">
-          <strong>#3 - Wonder Woman</strong><br>
-          <span>Statut: Blessé</span>
-        </div>
-      </div>
-
-      <div class="hero-card">
-        <div class="hero-photo">PHOTO</div>
-        <div class="hero-infos">
-          <strong>#4 - Flash</strong><br>
-          <span>Statut: En repos</span>
-        </div>
-      </div>
-
+      <label class="legende-item">
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showOmega"
+        />
+        <span>Omega</span>
+      </label>
     </div>
 
-  <!-- COLONNE DROITE -->
-  <div class="colonne_droite">
+    <!-- Liste des heros filtrées -->
+    <div class="liste-heros">
 
-    <div class="zone-action">
-      <button class="btn-creer" routerLink="/recruter-hero">
-        Recruter un super-héros
-      </button>
+      <div
+        class="hero-card"
+        *ngFor="let hero of getHeros()"
+        (click)="selectHero(hero)"
+      >
+        <div class="hero-id">
+          Heros {{ hero.id }}
+        </div>
+        <div class="hero-infos">
+          Nom : {{ hero.alias }} — Popularité: {{ hero.popularite }} - Salaire : {{ hero.salaire }} €
+        </div>
+        <body
+        *ngIf="heros.length === 0"
+      >
+        Aucune heros ne correspond aux critères sélectionnés.
+      </body>
+      </div>
+
     </div>
 
   </div>
+
 
 </div>
