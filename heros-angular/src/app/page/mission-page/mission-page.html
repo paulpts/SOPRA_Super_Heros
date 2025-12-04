@@ -64,11 +64,10 @@
       <div
         class="mission-card"
         *ngFor="let mission of filtrerMissions()"
-        (click)="selectMission(mission)"
       >
-        <div class="mission-id">
+        <button class="mission-id" (click)="selectMission(mission)">
           Mission {{ mission.id }}
-        </div>
+        </button>
         <div class="mission-infos">
           {{ mission.description }} — {{ mission.statut }}
         </div>

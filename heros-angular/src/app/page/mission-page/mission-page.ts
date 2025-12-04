@@ -62,19 +62,21 @@ public selectedHeroAlias: string = ''; // chaîne vide au début
 
     
     return false;
-  }
-
- public selectMission(mission: MissionDto): void {
-    this.selectedMission = mission;
-    this.selectedHeroAlias = '';
-
+  });
+} 
+  public selectMission(mission: MissionDto): void {
+    this.selectedMission = mission; 
+    // Récupérer l'alias du héros assigné à la mission
     if (mission.herosId) {
-      this.herosService.findById(mission.herosId).subscribe(hero => {
-        this.selectedHeroAlias = hero.alias;
-      }); 
-
-}
-
-}
-  
+      this.herosService.findById(mission.herosId).subscribe((heros) => {
+        this.selectedHeroAlias = heros.alias;
+      });
+    } else {
+      this.selectedHeroAlias = '';
+    }
   }
+  public clearSelection(): void {
+    this.selectedMission = undefined;
+    this.selectedHeroAlias = '';
+  }   
+}
