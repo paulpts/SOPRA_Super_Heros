@@ -1,24 +1,27 @@
 <div class="main-container">
 
-  <!-- COLONNE GAUCHE -->
-  <div class="colonne_gauche">
-    
-    <div class="graph-circle">
-      Graph Statut
+
+ <!-- COLONNE GAUCHE -->
+<div class="colonne_gauche">
+
+  <!-- Rien tant qu'aucun héros n'est sélectionné -->
+  <ng-container *ngIf="selectedHero as hero">
+    <div class="hero-photo-placeholder">
+      Photo du héros
     </div>
 
-    <div class="graph-circle">
-      Graph Motivation
-    </div>
+    <p>Nom : {{ hero.prenom }} {{ hero.nom }}</p>
+    <p>Alias : {{ hero.alias }}</p>
+    <p>Popularité : {{ hero.popularite }}</p>
+    <p>Santé : {{ hero.sante }}</p>
+    <p>Salaire : {{ hero.salaire }} €</p>
+    <p>Coût de création : {{ hero.coutCreation }}</p>
+    <p>Expérience : {{ hero.experience }}</p>
+    <p>Dégâts : {{ hero.degats }}</p>
+    <p>Motivation : {{ hero.motivation }}</p>
+  </ng-container>
 
-    <div class="graph-circle">
-      Graph Popularité
-    </div>
-
-  </div>
-
-
-  
+</div>
   <!-- COLONNE CENTRE -->
   <div class="colonne_centre">
 
@@ -68,6 +71,7 @@
       <div
         class="hero-card"
         *ngFor="let hero of getHeros()"
+        (click)="selectHero(hero)"
       >
         <div class="hero-id">
           Heros {{ hero.id }}
