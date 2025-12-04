@@ -37,7 +37,7 @@ public class OmegaRestControllerTest {
 	private final double HEROS_DEGATS =400;
 	private final int HEROS_MOTIVATION =100;
 	private static final String API_URL_BY_ID = API_URL + "/" + HEROS_ID;
-	private static final String API_URL_BY_ALIAS = API_URL + "/by-name/" + HEROS_ALIAS;
+	private static final String API_URL_BY_ALIAS = API_URL + "/alias/" + HEROS_ALIAS;
 	
 	 @MockitoBean
 	private HerosRepository herosRepository;
@@ -190,6 +190,8 @@ public class OmegaRestControllerTest {
 		o.setDegats(HEROS_DEGATS);
 		o.setMotivation(HEROS_MOTIVATION);
 		
+		System.out.println();
+		
 		Mockito.when(this.herosRepository.findById(HEROS_ID)).thenReturn(Optional.of(o));
 
 		// when
@@ -207,6 +209,7 @@ public class OmegaRestControllerTest {
 		result.andExpect(MockMvcResultMatchers.jsonPath("$.coutExperience").exists());
 		result.andExpect(MockMvcResultMatchers.jsonPath("$.coutDegats").exists());
 		result.andExpect(MockMvcResultMatchers.jsonPath("$.coutMotivation").exists());
+	
 	}
 
 	@Test

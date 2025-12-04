@@ -19,7 +19,7 @@ export class AuthRequestDto {
 
     public toJson(): any {
         return {
-            username: this.username,
+            login: this.username,
             password: this.password
         };
     }

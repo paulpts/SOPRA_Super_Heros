@@ -44,5 +44,5 @@ public class Omega extends Heros {
 
 		return (this.getExperience() * 1000) + (this.getPopularite() * 500);
 	}
-
+	
 }
