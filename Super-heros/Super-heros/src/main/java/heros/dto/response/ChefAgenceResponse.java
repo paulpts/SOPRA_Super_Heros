@@ -5,8 +5,8 @@ import heros.model.ChefAgence;
 public class ChefAgenceResponse {
 
     private Integer id;
-    private String login;
-    private String password;
+   /* private String login;
+    private String password;*/
     private String nom;
     private String prenom;
     private int agenceId;
@@ -19,7 +19,7 @@ public class ChefAgenceResponse {
         this.id = id;
     }
 
-    public String getLogin() {
+   /* public String getLogin() {
         return login;
     }
 
@@ -33,7 +33,7 @@ public class ChefAgenceResponse {
 
     public void setPassword(String password) {
         this.password = password;
-    }
+    }*/
 
     public String getNom() {
         return nom;
@@ -63,8 +63,8 @@ public class ChefAgenceResponse {
         ChefAgenceResponse response = new ChefAgenceResponse();
 
         response.setId(chefAgence.getId());
-        response.setLogin(chefAgence.getLogin());
-        response.setPassword(chefAgence.getPassword());
+       // response.setLogin(chefAgence.getLogin());
+       // response.setPassword(chefAgence.getPassword());
         response.setNom(chefAgence.getNom());
         response.setPrenom(chefAgence.getPrenom());
 
