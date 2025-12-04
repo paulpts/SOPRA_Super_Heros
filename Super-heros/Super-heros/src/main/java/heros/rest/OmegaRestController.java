@@ -46,8 +46,8 @@ public class OmegaRestController {
     }
 
     @PutMapping("/{id}")
-    public OmegaResponse modifierOmega(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
-        return OmegaResponse.convert((Omega) herosService.updateOmega(id, request));
+    public HerosResponse modifierOmega(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
+        return HerosResponse.convert((Omega) herosService.updateHeros(id, request));
     }
 
     @DeleteMapping("/{id}")
