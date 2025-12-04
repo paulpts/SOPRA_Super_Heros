@@ -7,7 +7,7 @@ export class ChefAgenceDto  {
     private _password: string,         // password 
     private _nom: string,
     private _prenom: string,
-    private _agenceID?: number,
+    private _agenceId?: number,
 ) {}
 
   public get id(): number | null {
@@ -31,11 +31,11 @@ export class ChefAgenceDto  {
     this._password = value;
   }
 
-  public get agenceID(): number | undefined {
-    return this._agenceID;
+  public get agenceId(): number | undefined {
+    return this._agenceId;
   }
-  public set agenceID(value: number | undefined) {
-    this._agenceID = value;
+  public set agenceId(value: number | undefined) {
+    this._agenceId = value;
   }
 
   public get nom(): string {
@@ -52,7 +52,7 @@ export class ChefAgenceDto  {
       password: this.password,
       nom: this.nom,
       prenom: this.prenom,
-      agenceID: this.agenceID,
+      agenceId: this.agenceId,
       // Retrait de  degats, et  motivation
     };
   }
