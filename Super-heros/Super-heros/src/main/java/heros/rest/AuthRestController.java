@@ -3,7 +3,7 @@ package heros.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,16 +22,13 @@ public class AuthRestController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private PasswordEncoder passEncoder;
-
-    @Autowired
     private CompteService compteSrv;
 
     @PostMapping("/auth")
     public AuthResponse auth(@RequestBody AuthUserRequest request) {
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(request.getLogin(),
                 request.getPassword());
-
+        System.out.println("Request login: " + request.getLogin() + " password: " + request.getPassword());
         // On demande à Spring Security si le user / password sont OK
         this.authenticationManager.authenticate(auth);
 

@@ -19,7 +19,7 @@ export class App {
       filter(event => event instanceof NavigationEnd) // On attend la fin de la navigation
     ).subscribe((event: any) => {
       // Si l'url contient '/login', on cache le header
-      if (event.url.includes('/login')) {
+      if (event.url.includes('/auth')) {
         this.showHeader = false;
       } else {
         this.showHeader = true;
