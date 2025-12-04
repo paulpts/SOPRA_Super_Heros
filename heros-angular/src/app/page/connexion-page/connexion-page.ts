@@ -23,7 +23,7 @@ export class ConnexionPage implements OnInit {
 
   ngOnInit(): void {
     this.usernameCtrl = this.formBuilder.control('', Validators.required);
-    this.passwordCtrl = this.formBuilder.control('', [ Validators.required, Validators.minLength(6) ]);
+    this.passwordCtrl = this.formBuilder.control('', [ Validators.required ]);
 
     this.userForm = this.formBuilder.group({
       username: this.usernameCtrl,
@@ -32,15 +32,27 @@ export class ConnexionPage implements OnInit {
   }
 
   public async connecter() {
+
+    // Sécurité : On arrête si le formulaire est vide
+    if (this.userForm.invalid) {
+      console.log("Bouton cliqué !");
+    console.log("Valeurs du formulaire :", this.userForm.value);
+    console.log("État du formulaire (Valid ?) :", this.userForm.valid);
+    console.log("Erreurs Login :", this.usernameCtrl.errors);
+    console.log("Erreurs Password :", this.passwordCtrl.errors);
+      return;
+    }
+
     try {
       await this.authService.auth(new AuthRequestDto(this.usernameCtrl.value, this.passwordCtrl.value));
       this.idUtilisateur = this.authService.id;
-      this.router.navigate([ `/${this.idUtilisateur}` ]);
+      this.router.navigate([ `home/${this.idUtilisateur}` ]);
     }
 
     // Si la connexion n'a pas pu se faire, affichage de l'erreur sur le template
-    catch {
+    catch (error) {
       this.loginError = true;
+      console.error("Erreur login", error);
     }
   }
 }

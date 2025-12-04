@@ -12,8 +12,6 @@ import { jwtDecode } from 'jwt-decode';
 // à ce que ton BACKEND a mis dans le token. Vérifie sur jwt.io !
 interface MonTokenDecode {
   sub: string;    // Le sujet (souvent le login)
-  iat: number;    // "Issued At" (Date de création)
-  exp: number;    // "Expiration" (Date de fin)
   id: number;     // <--- L'ID du chef d'agence que tu veux récupérer
 }
 
@@ -28,7 +26,7 @@ export class AuthService {
 
   // L'adresse de ton Backend Spring Boot.
   // On tape sur le port 8080 car c'est là que vit la sécurité.
-  private apiUrl = 'http://localhost:8080/auth'; 
+  private apiUrl = 'http://localhost:8080/api/auth'; 
 
   constructor(private http: HttpClient) {
     // --- AU DÉMARRAGE DE L'APPLI (F5) ---
