@@ -1,3 +1,14 @@
+.my-div {
+  width: 70px;
+  height: 70px;
+  background-image: url('/assets/images/vought.png');
+  background-size: contain;   /* ajuste l'image sans la déformer */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+
 .top-nav {
   display: flex;              
   align-items: center;        
