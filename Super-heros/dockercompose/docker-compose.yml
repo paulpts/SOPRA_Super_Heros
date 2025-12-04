@@ -1,0 +1,43 @@
+name: superheros-compose
+
+
+services:
+
+  superheros-boot:
+
+    image: superheros:boot
+    container_name: superheros-boot
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://${DB_HOST}:3326/${DB_NAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASS}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER} 
+
+    ports:
+      - 8080:8080
+
+
+    networks:
+      - superheros
+
+
+  superheros-angular:
+    image: superheros:angular
+    container_name: superheros-angular
+
+    ports:
+      - 82:80
+
+    depends_on:
+      - superheros-boot
+
+    networks:
+      - superheros
+
+
+networks:
+  superheros:
+    name: superheros
+
+    env_file:
+      - .env

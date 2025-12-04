@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:lts-bullseye'
+                    args '''
+                        -v $HOME/.npm:/root/.npm:z
+                        -u root
+                        --network superheros
+                    '''
+                    reuseNode true // Sans ça, il y aura un 2eme workspace
+                }
+            }
+
+            stages {
+                stage('Installation dependances') {
+                    steps {
+                        dir('heros-angular') {
+                            sh 'npm install'
+                        }
+                    }
+                }
+
+                stage('Analyse Sonar') {
+                    steps {
+                        dir('heros-angular') {
+                            withSonarQubeEnv('SonarQube') {
+                                sh './node_modules/.bin/sonar-scanner -Dsonar.projectKey=heros-angular'
+                            }
+                        }
+                    }
+                }
+
+                stage('Build heros-angular') {
+                    steps {
+                        dir('heros-angular') {
+                            sh './node_modules/.bin/ng build'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                dir('heros-angular') {
+                    sh 'docker build -t supeheros:angular .'
+                }
+            }
+        }
+
+        stage('Docker Deploy') {
+            steps {
+                dir('Super-heros/dockercompose') {
+                    sh 'docker compose up -d --build superheros-angular'
+                }
+            }
+        }
+    }
+}
