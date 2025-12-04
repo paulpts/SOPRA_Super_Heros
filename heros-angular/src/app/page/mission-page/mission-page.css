@@ -12,7 +12,7 @@ html, body {
 }
 
 body {
-  font-family: "Arial", "Helvetica", sans-serif;
+  font-family: "Orbitron", sans-serif; /* POLICE ORBITRON */
   background-color: #0A3161; /* Bleu foncé général */
   color: #000;
 }
@@ -44,7 +44,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  align-items: center; /* centre horizontalement le contenu */
+  align-items: stretch; /* pour que le bandeau titre soit full-width */
 }
 
 .colonne_droite {
@@ -55,19 +55,28 @@ body {
 }
 
 /* =========================================
-   TITRE DE PAGE
+   TITRE DE PAGE – BANDEAU ROUGE
    ========================================= */
 .page-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #000;
+  position: relative;
+  left: -30px; /* décale vers la gauche pour compenser le padding */
+  width: calc(100% + 60px); /* largeur + padding gauche/droite */
+  background-color: #B31942;
+  color: #fff;
   text-align: center;
-  margin-bottom: 15px;
+  padding: 20px 0 20px 0; /* haut, droite, bas, gauche */
+  font-size: 28px;
+  font-weight: 800;
+  border: 3px solid #000;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 #000;
+  margin-bottom: 20px;
 }
+
 
 .page-title span {
   font-size: 14px;
-  color: grey;
+  color: #fff;
 }
 
 /* =========================================
@@ -120,9 +129,10 @@ body {
   border: 3px solid #000;
   border-radius: 8px;
   background-color: #B31942;
-  color: #000;
+  color: #fff;
   box-shadow: 3px 3px 0 #000;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .mission-id {
@@ -188,4 +198,3 @@ body {
   background-color: #FF3A5C;  /* Rouge plus clair au survol */
   box-shadow: 3px 3px 0 #000; /* Effet comics renforcé */
 }
-

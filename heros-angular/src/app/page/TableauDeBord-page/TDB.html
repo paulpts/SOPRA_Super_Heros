@@ -1,68 +1,70 @@
+<!-- IMPORT DE LA POLICE ORBITRON -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<div class="welcome-banner">
-  <div class="welcome-text">
-    <h2>Welcome {{ chefConnecte?.nom }} </h2>
-  </div>
-  <div class="budget">
-    Budget Actuel : {{ monAgence.budget }} Crédits
-  </div>
-</div>
+<div style="font-family: 'Orbitron', sans-serif;">
 
-<div class="dashboard-container">
-
-  <!-- === COLONNE GAUCHE : MISSIONS DISPO + RECRUTEMENT === -->
-  <div class="col-left"
-  >
-    
-    <!-- Bloc Missions Disponibles -->
-    <div class="card grey-card mb-20">
-      <h3 class="card-title">Missions disponibles</h3>
-      <ul class="clean-list" *ngFor="let mission of missions" >
-        <li *ngIf="mission.statut === 'Disponible'">Mission {{ mission.id }} - {{ mission.description }} - {{ mission.creditMission }}</li>
-      </ul>
+  <div class="welcome-banner">
+    <div class="welcome-text">
+      <h2>Welcome {{ chefConnecte?.nom }} </h2>
     </div>
-
-    <!-- Bloc Recrutement & Top Héros -->
-    <div class="card grey-card">
-      <div class="recrutement-header">
-        Recruter un héros
-      </div>
-      <div class="top-heros-list">
-        <h4 class="sub-title">Heros disponibles</h4>
-        <ol class="numbered-list" *ngFor="let hero of herosDisponibles" >
-          <li *ngIf="hero.agenceId == null">{{ hero.nom }} - Cout de creation : {{ hero.coutCreation }} <button (click)="recruterHero(hero)">Recruter</button></li>
-          
-        </ol>
-      </div>
+    <div class="budget">
+      Budget Actuel : {{ monAgence.budget }} Crédits
     </div>
-
   </div>
 
+  <div class="dashboard-container">
 
-  <!-- === COLONNE CENTRE : INFOS DIVERSES === -->
-  <div class="col-center">
-    
-    <div class="card white-card border-card">
-      <h3 class="card-title text-center">Infos diverses</h3>
+    <!-- === COLONNE GAUCHE : MISSIONS DISPO + RECRUTEMENT === -->
+    <div class="col-left">
       
-      <ul class="bullet-list">
-        <li>{{monAgence.ville}}</li>
-        <li>{{monAgence.popularite}}</li>
-      </ul>
+      <!-- Bloc Missions Disponibles -->
+      <div class="card grey-card mb-20">
+        <h3 class="card-title">Missions disponibles</h3>
+        <ul class="clean-list" *ngFor="let mission of missions">
+          <li *ngIf="mission.statut === 'Disponible'">
+            Mission {{ mission.id }} - {{ mission.description }} - {{ mission.creditMission }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Bloc Recrutement & Top Héros -->
+      <div class="card grey-card">
+        <div class="recrutement-header">
+          Recruter un héros
+        </div>
+        <div class="top-heros-list">
+          <h4 class="sub-title">Heros disponibles</h4>
+          <ol class="numbered-list" *ngFor="let hero of herosDisponibles">
+            <li *ngIf="hero.agenceId == null">
+              {{ hero.nom }} - Cout de creation : {{ hero.coutCreation }}
+              <button (click)="recruterHero(hero)">Recruter</button>
+            </li>
+          </ol>
+        </div>
+      </div>
+
     </div>
 
-  </div>
+    <!-- === COLONNE CENTRE : INFOS DIVERSES === -->
+    <div class="col-center">
+      <div class="card white-card border-card">
+        <h3 class="card-title text-center">Infos diverses</h3>
 
+        <ul class="bullet-list">
+          <li>{{ monAgence.ville }}</li>
+          <li>{{ monAgence.popularite }}</li>
+        </ul>
+      </div>
+    </div>
 
-  <!-- === COLONNE DROITE : MISSIONS EN COURS === -->
-  <div class="col-right">
-    
-    <div class="grey-sidebar">
-      <h3 class="sidebar-title">Missions en cours</h3>
-      <ul class="clean-list mb-40" *ngFor="let mission of missions" >
-        <li>Mission {{ mission.id }} - {{mission.description}}</li>
-      </ul>
-
+    <!-- === COLONNE DROITE : MISSIONS EN COURS === -->
+    <div class="col-right">
+      <div class="grey-sidebar">
+        <h3 class="sidebar-title">Missions en cours</h3>
+        <ul class="clean-list mb-40" *ngFor="let mission of missions">
+          <li>Mission {{ mission.id }} - {{ mission.description }}</li>
+        </ul>
+      </div>
     </div>
 
   </div>
