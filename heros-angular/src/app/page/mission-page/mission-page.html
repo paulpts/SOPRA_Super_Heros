@@ -1,90 +1,64 @@
 <div class="main-container">
 
-  <!-- COLONNE GAUCHE-->
-  <div class="colonne_gauche">
-    
-   <div class="colonne_gauche" *ngIf="selectedMission as mission">
-  <h2>Détails de la mission {{ mission.id }}</h2>
+  <!-- COLONNE GAUCHE : Détails de la mission -->
+  <div class="colonne_gauche" *ngIf="selectedMission as mission">
+    <div class="mission-info-box">
+      <h2>Détails de la mission {{ mission.id }}</h2>
+      <p><strong>Description :</strong> {{ mission.description }}</p>
+      <p><strong>Crédit mission :</strong> {{ mission.creditMission }}</p>
+      <p><strong>Difficulté :</strong> {{ mission.difficulte }}</p>
+      <p><strong>Niveau de danger :</strong> {{ mission.niveauDanger }}</p>
+      <p><strong>Statut :</strong> {{ mission.statut }}</p>
+      <p><strong>Ville :</strong> {{ mission.ville }}</p>
+      <p><strong>Héros :</strong> {{ selectedHeroAlias || 'Aucun héros affecté' }}</p>
+    </div>
+  </div>
 
-  <p><strong>Description :</strong> {{ mission.description }}</p>
-  <p><strong>Crédit mission :</strong> {{ mission.creditMission }}</p>
-  <p><strong>Difficulté :</strong> {{ mission.difficulte }}</p>
-  <p><strong>Niveau de danger :</strong> {{ mission.niveauDanger }}</p>
-  <p><strong>Statut :</strong> {{ mission.statut }}</p>
-  <p><strong>Ville :</strong> {{ mission.ville }}</p>
-  <p><strong>Héros :</strong> {{ selectedHeroAlias || 'Aucun héros affecté' }}</p>
-</div>
-
-  <!-- COLONNE CENTRE :-->
+  <!-- COLONNE CENTRE : Liste des missions + barre de navigation -->
   <div class="colonne_centre">
 
-    <!-- Titre de la page avec DEBUGUEUR -->
     <h1 class="page-title">
       Liste des missions
-      <!-- 
-         DEBUG : Affiche le nombre brut reçu du backend.
-         Si ça affiche 0 ici, c'est que le problème vient de la connexion (Service/Back), pas du filtre.
-      -->
-      <span style="font-size: 14px; color: grey;">(Nombres de missions correspondante(s) aux filtre(s): {{ missions.length }})</span>
+      <span style="font-size: 14px; color: grey;">
+        (Nombre de missions : {{ missions.length }})
+      </span>
     </h1>
 
-    <!-- Légende avec les 3 checkbox -->
+    <!-- BARRE DE NAVIGATION / FILTRE -->
     <div class="mission-legende">
       <label class="legende-item">
-        <input
-          type="checkbox"
-          class="legende-carre"
-          [(ngModel)]="showDisponibles"
-        />
+        <input type="checkbox" class="legende-carre" [(ngModel)]="showDisponibles" />
         <span>Disponibles</span>
       </label>
 
       <label class="legende-item">
-        <input
-          type="checkbox"
-          class="legende-carre"
-          [(ngModel)]="showEnCours"
-        />
+        <input type="checkbox" class="legende-carre" [(ngModel)]="showEnCours" />
         <span>En cours</span>
       </label>
 
       <label class="legende-item">
-        <input
-          type="checkbox"
-          class="legende-carre"
-          [(ngModel)]="showTerminees"
-        />
+        <input type="checkbox" class="legende-carre" [(ngModel)]="showTerminees" />
         <span>Terminées</span>
       </label>
     </div>
 
-    <!-- Liste des missions filtrées -->
+    <!-- LISTE DES MISSIONS -->
     <div class="liste-missions">
-
-      <div
-        class="mission-card"
-        *ngFor="let mission of filtrerMissions()"
-      >
+      <div class="mission-card" *ngFor="let mission of filtrerMissions()">
         <button class="mission-id" (click)="selectMission(mission)">
           Mission {{ mission.id }}
         </button>
         <div class="mission-infos">
           {{ mission.description }} — {{ mission.statut }}
         </div>
-        <body
-        *ngIf="missions.length === 0"
-      >
-        Aucune mission ne correspond aux critères sélectionnés.
-      </body>
       </div>
-      
+
       <div *ngIf="filtrerMissions().length === 0" class="empty-message">
         Aucune mission ne correspond aux filtres. <br>
         <small *ngIf="missions.length === 0" style="color: red;">
-           (Attention : Aucune donnée reçue du serveur !)
+          (Attention : Aucune donnée reçue du serveur !)
         </small>
       </div>
-
     </div>
 
   </div>
