@@ -32,12 +32,12 @@ pipeline {
             }
         }
 
-        // stage('Docker Deploy') {
-        //     steps {
-        //         dir('DOCKER/commandes/compose/quest') {
-        //             sh 'docker compose up -d --no-deps --build boot'
-        //         }
-        //     }
-        // }
+        stage('Docker Deploy') {
+            steps {
+                dir('Super-heros/dockercompose') {
+                    sh 'docker compose up -d --no-deps --build superheros-boot'
+                }
+            }
+        }
     }
 }
