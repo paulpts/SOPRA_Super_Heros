@@ -21,14 +21,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Entity // Table à part entière
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Strategie pour stocker les entités dans la table, on veut tout dans une table
-@DiscriminatorColumn(name="type_heros",columnDefinition = "ENUM('alpha','beta','omega')") // La colonne avec le type de héros s'appellera "type_heros", annotation associée aux DiscriminatorValue des classes filles.
+@Entity 
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type_heros",columnDefinition = "ENUM('alpha','beta','omega')")
 @Table(name="heros")
 public abstract class Heros {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //AUTO INCREMENT
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name="identifiant")
 	protected Integer id;
 	@Column (length=25, nullable=false)
@@ -50,13 +50,13 @@ public abstract class Heros {
 	@ManyToOne
 	@JoinColumn(nullable=true)
 	protected Agence agence;
-	@ElementCollection //Une table SQL ne peut pas stocker une LIST dans une seule colonne. Donc elles sont stockées dans une table séparée mais cette annotation sert à dire que ce n'est pas une entité mais une collection d'enum. 
+	@ElementCollection 
 	@CollectionTable(
     name = "heros_pouvoirs",
-    joinColumns = @JoinColumn(name = "heros_id") // Fait une jointure sur l'ID donc on aura une table avec 2 colonnes (ID Heros et Nom du pouvoir)
+    joinColumns = @JoinColumn(name = "heros_id") 
 	)
 	@Column(name = "pouvoir")
-	@Enumerated(EnumType.STRING) // Permet de stocker la valeur de l'enum dans la base de données
+	@Enumerated(EnumType.STRING) 
 	protected List<Pouvoirs> pouvoirs = new ArrayList<>();
 	
 	@Column(name = "mission")
