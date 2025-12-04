@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import heros.dto.request.CreateUpdateHerosRequest;
+import heros.dto.response.AlphaResponse;
 import heros.dto.response.HerosResponse;
 import heros.model.Alpha;
 import heros.service.HerosService;
@@ -48,7 +49,7 @@ public class AlphaRestController {
 
     @PutMapping("/{id}")
     public HerosResponse modifierAlpha(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
-        return HerosResponse.convert((Alpha) herosService.updateAlpha(id, request));   
+        return HerosResponse.convert((Alpha) herosService.updateHeros(id, request));   
     }
 
     @DeleteMapping("/{id}")
