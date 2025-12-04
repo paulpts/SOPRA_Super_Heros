@@ -8,7 +8,7 @@ import { HerosDto } from '../dto/heros-dto';
   providedIn: 'root',
 })
 export class HerosService {
-  private apiUrl: string = '/api/heros'; //  car  au niveau du back on a : @RequestMapping("/api/heros")
+  private apiUrl: string = 'http://localhost:8080/api/heros'; //  car  au niveau du back on a : @RequestMapping("/api/heros")
   private refresh$: Subject<void> = new Subject<void>();
 
   constructor(private http: HttpClient) { }
@@ -51,6 +51,10 @@ export class HerosService {
     this.http.put<HerosDto>(`${this.apiUrl}/${herosDto.id}`, payload)
       .subscribe(() => this.refresh());
   }
+
+public update(hero: HerosDto): Observable<HerosDto> {
+     return this.http.put<HerosDto>(`${this.apiUrl}`, hero);
+}
 
   public deleteById(id: string): void {
     this.http.delete<void>(`${this.apiUrl}/${id}`).subscribe(() => this.refresh());

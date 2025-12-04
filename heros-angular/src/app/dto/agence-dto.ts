@@ -1,15 +1,24 @@
 export class AgenceDto {
   constructor(
     private _id: string,
+    private _ville: string,
     private _budget: number,
     private _popularite: number,
   ) { }
+
 
   public get id(): string {
     return this._id;
   }
   public set id(value: string) {
     this._id = value;
+  }
+
+  public get ville(): string {
+    return this._ville;
+  } 
+  public set ville(value: string) {
+    this._ville = value;
   }
 
   public get budget(): number {

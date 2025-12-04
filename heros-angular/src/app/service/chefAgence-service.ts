@@ -7,7 +7,7 @@ import { ChefAgenceDto } from '../dto/chefAgence-dto';
   providedIn: 'root',    
 })
 export class ChefAgenceService {
-  private apiUrl: string = '/ChefAgence'; // adapter au backend
+  private apiUrl: string = 'http://localhost:8080/api/chefagence'; // adapter au backend
   private refresh$: Subject<void> = new Subject<void>();
 
   constructor(private http: HttpClient) {}
