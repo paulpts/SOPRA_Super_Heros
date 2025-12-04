@@ -28,6 +28,9 @@ export class HerosPage implements OnInit {
   showBeta = false;
   showOmega = false;
 
+ //propriété pour stocker le héros sélectionné
+  selectedHero: HerosDto | null = null;
+
   constructor(
     private herosService: HerosService,
     private missionService: MissionService
@@ -129,6 +132,12 @@ export class HerosPage implements OnInit {
   return liste;
 
 }
+// Met a jour le héross sélectionné
+selectHero(hero: HerosDto): void {
+  this.selectedHero = hero;
+}
+
+
 recruter(): void {
   // Pour l'instant on fait juste un log
   console.log('TODO : ouvrir la page ou le formulaire de recrutement');
