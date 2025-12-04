@@ -3,7 +3,7 @@ FROM nginx:latest
 # On copie la configuration NGINX
 COPY nginx-default.conf /etc/nginx/conf.d/default.conf
 
-COPY dist/heros-angular /usr/share/nginx/html
+COPY ./dist/heros-angular/browser /usr/share/nginx/html
 
 # Au démarrage du container, cette commande sera exécutée - elle pourra être remplacée par autre chose car CMD est utilisé (au lieu de ENTRYPOINT)
 CMD [ "nginx", "-g", "daemon off;" ]
