@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import heros.dto.request.CreateUpdateHerosRequest;
 
 import heros.dto.response.HerosResponse;
 import heros.model.Heros;
@@ -37,7 +41,7 @@ public class HerosRestController {
     }
 
 
-  /*  @PutMapping("/{id}")
+   @PutMapping("/{id}")
     public HerosResponse modifierHeros(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
         return HerosResponse.convert(herosService.updateHeros(id, request));
     }
@@ -46,7 +50,7 @@ public class HerosRestController {
     @DeleteMapping("/{id}")
     public void supprimerHeros(@PathVariable Integer id) {
         herosService.deleteById(id);
-    }*/
+    }
 
     @GetMapping("/alias/{alias}")
     public HerosResponse getHerosByAlias(@PathVariable String alias) {
