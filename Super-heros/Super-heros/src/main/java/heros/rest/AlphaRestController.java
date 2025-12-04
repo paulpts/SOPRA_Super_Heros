@@ -48,7 +48,7 @@ public class AlphaRestController {
 
     @PutMapping("/{id}")
     public HerosResponse modifierAlpha(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
-        return HerosResponse.convert((Alpha) herosService.updateAlpha(id, request));   
+        return HerosResponse.convert((Alpha) herosService.updateHeros(id, request));   
     }
 
     @DeleteMapping("/{id}")

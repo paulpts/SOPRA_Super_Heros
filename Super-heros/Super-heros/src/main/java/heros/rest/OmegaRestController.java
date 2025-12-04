@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import heros.dto.request.CreateUpdateHerosRequest;
 import heros.dto.response.HerosResponse;
-import heros.dto.response.OmegaResponse;
 import heros.model.Omega;
 import heros.service.HerosService;
 
@@ -61,7 +60,7 @@ public class OmegaRestController {
     }
 
     @GetMapping("/agence/{agenceId}")
-    public List<OmegaResponse> getOmegaByAgenceId(@PathVariable Integer agenceId) {
-        return herosService.getOmegaByAgenceId(agenceId).stream().map(OmegaResponse::convert).toList();
+    public List<HerosResponse> getOmegaByAgenceId(@PathVariable Integer agenceId) {
+        return herosService.getOmegaByAgenceId(agenceId).stream().map(HerosResponse::convert).toList();
     }
 }

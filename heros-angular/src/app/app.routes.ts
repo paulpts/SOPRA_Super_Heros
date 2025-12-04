@@ -3,6 +3,7 @@ import { HerosPage} from './page/heros-page/heros-page';
 import { ConnexionPage } from './page/connexion-page/connexion-page';
 import { TDB } from './page/TableauDeBord-page/TDB';
 import { MissionPage } from './page/mission-page/mission-page';
+import { authGuard } from './guard/auth-guard';
 
 export const routes: Routes = [
   // Redirection par défaut vers /home si l'utilisateur écrit / dans l'URL
@@ -12,13 +13,14 @@ export const routes: Routes = [
   { path: 'auth', component: ConnexionPage },
 
   // Tableau de bord
-  { path: 'home', component: TDB },
+  { path: 'home', component: TDB, canActivate: [authGuard]}, 
+  // pour protéger la route avec le guard
 
   // Gestion des héros 
-  { path: 'heros', component: HerosPage },
+  { path: 'heros', component: HerosPage, canActivate: [authGuard] },
 
   // Gestion des missions 
-  { path: 'mission', component: MissionPage },
+  { path: 'mission', component: MissionPage , canActivate: [authGuard]},
 
   // Tableau de bord
   //{ path: 'dashboard', component: TableauDeBordPage },
