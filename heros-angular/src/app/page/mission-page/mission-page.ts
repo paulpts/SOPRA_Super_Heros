@@ -75,4 +75,8 @@ public selectedHeroAlias: string = ''; // chaîne vide au début
       this.selectedHeroAlias = 'Cette mission n\'est pas attribuée';
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 }
