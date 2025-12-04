@@ -46,7 +46,7 @@ export class ConnexionPage implements OnInit {
     try {
       await this.authService.auth(new AuthRequestDto(this.usernameCtrl.value, this.passwordCtrl.value));
       this.idUtilisateur = this.authService.id;
-      this.router.navigate([ `home/${this.idUtilisateur}` ]);
+      this.router.navigate([ `home` ]); // ${this.idUtilisateur} Navigation vers la page d'accueil 
     }
 
     // Si la connexion n'a pas pu se faire, affichage de l'erreur sur le template
