@@ -41,7 +41,7 @@ public class SecurityConfig {
             auth.requestMatchers(HttpMethod.GET, "/api/omega").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/mission").permitAll(); 
             auth.requestMatchers(HttpMethod.GET, "/api/chefagence/**").permitAll(); 
-            auth.requestMatchers(HttpMethod.GET, "/api/agence/**").permitAll();
+            auth.requestMatchers("/api/agence/**").permitAll();
 			
             
             auth.requestMatchers(HttpMethod.GET,
