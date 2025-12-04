@@ -170,10 +170,10 @@ font-size: 10px;
   overflow-y: auto;
   padding-right: 5px;
 
-  /* 🔥 Centre le conteneur par rapport à la colonne */
-  margin: 0 auto;          /* Centre horizontalement */
-  width: 80%;              /* Ajuste la largeur pour que ce soit aligné sous la légende */
-  max-width: 600px;        /* Limite la largeur */
+  margin-left: 0;        /* commence à gauche */
+  margin-right: 600px;   /* décale tout le bloc vers la gauche */
+  width: calc(80% - 100px); /* ajuste la largeur pour compenser le margin */
+  max-width: 600px;
 }
 
 .liste-heros-container {
@@ -249,10 +249,10 @@ input.legende-carre {
   flex-direction: column;
   align-items: center;              /* Centrer la photo et textes */
   gap: 15px;                        /* Espacement entre photo et textes */
-  width: 70%;                       /* Prend toute la largeur disponible */
+  width: 100%;                       /* Prend toute la largeur disponible */
   max-width: 500px;                 /* Largeur maximale */
   margin: 0 auto;                   /* Centre le bloc si max-width est inférieur à la colonne */
-  font-weight: bold;                /* Texte en gras */
+  font-weight: bold;               /* Texte en gras */
 }
 
 
@@ -263,4 +263,38 @@ input.legende-carre {
   text-align: left;            /* Alignement à gauche pour lecture */
   margin: 0;                   /* Supprimer marges par défaut */
   font-size: 16px;
+}
+
+/* =========================================
+   Bloc rouge “comics” pour Alpha / Beta / Omega
+   ========================================= */
+.hero-legende-block {
+  display: flex;
+  justify-content: center;       /* centre le bloc horizontalement */
+  margin-right: 600px;
+}
+
+.hero-categories {
+  background-color: #B31942;     /* rouge comics */
+  border: 3px solid #000;        /* bordure noire comics */
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 #000;    /* effet comics */
+  padding: 15px 25px;            /* espacement interne */
+  display: flex;
+  gap: 20px;                      /* espace entre chaque case */
+  font-weight: bold;
+  color: #fff;                    /* texte blanc */
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.category-item input.legende-carre {
+  width: 40px;
+  height: 20px;
+  accent-color: #fff;             /* coche blanche pour contraster */
 }
