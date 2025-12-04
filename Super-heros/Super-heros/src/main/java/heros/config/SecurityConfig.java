@@ -38,7 +38,8 @@ public class SecurityConfig {
             		"/api/chefAgence",
             		"/api/agence", 
             		"api/heros", 
-            		"api/alpha", 
+            		"api/alpha",
+                   // "/api/alpha/**", 
             		"api/beta", 
             		"api/omega", 
             		"api/mission").hasRole("ADMIN");
@@ -120,7 +121,7 @@ public class SecurityConfig {
    @Bean
     PasswordEncoder passwordEncoder() {
     	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    	System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("chef1") + "\r\n");
+    	//System.out.println("\r\nMot de passe ===> " + passwordEncoder.encode("chef2") + "\r\n");
     	return passwordEncoder;
     }
 
