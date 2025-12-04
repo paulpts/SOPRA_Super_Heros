@@ -48,9 +48,11 @@ public class MissionRestController {
         return MissionResponse.convert(missionService.update(id, request));
     }
 
+    
+    /*
     @DeleteMapping("/{id}")
     public void supprimerMission(@PathVariable Integer id) {
         missionService.deleteById(id);
-    }    
+    } */
     
 }
