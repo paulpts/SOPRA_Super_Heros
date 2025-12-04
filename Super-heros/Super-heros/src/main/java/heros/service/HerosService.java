@@ -30,7 +30,9 @@ public class HerosService {
 	public List<Heros> getAll() {
 		return herosRepository.findAll();    
 	}
-	
+
+
+
 	public Heros createOmega(CreateUpdateHerosRequest request) {
 		Omega omega = new Omega(
 			request.getNom(),
@@ -77,10 +79,24 @@ public class HerosService {
 			request.getPouvoirs());
 			return herosRepository.save(beta);
 		}
+
+	public Heros updateHeros(Integer id, CreateUpdateHerosRequest request){
+			Heros heros =  herosRepository.findById(id)
+        		  .orElseThrow(() -> new EntityNotFoundException("Héros inexistant"));
+			if (heros instanceof Omega){
+				return updateOmega(id, request);
+			}
+			if (heros instanceof Alpha){
+				return updateAlpha(id, request);
+			}
+			if (heros instanceof Beta){
+				return updateBeta(id, request);
+			}
+			return null;
+		}
 			
 	public Heros updateOmega(Integer id,CreateUpdateHerosRequest request) {
-		Omega omega = (Omega) herosRepository.findById(id)
-        		  .orElseThrow(() -> new EntityNotFoundException("Héros Oméga inexistant"));
+		Omega omega = new Omega();
 		omega.setNom(request.getNom());
 		omega.setPrenom(request.getPrenom());
 		omega.setAlias(request.getAlias());
@@ -95,8 +111,7 @@ public class HerosService {
 		}
 
 	public Heros updateAlpha(Integer id,CreateUpdateHerosRequest request) {
-		Alpha alpha = (Alpha) herosRepository.findById(id)
-        		  .orElseThrow(() -> new EntityNotFoundException("Héros Oméga inexistant"));
+		Alpha alpha = new Alpha();
 		alpha.setNom(request.getNom());
 		alpha.setPrenom(request.getPrenom());
 		alpha.setAlias(request.getAlias());
@@ -111,8 +126,7 @@ public class HerosService {
 		}
 
 	public Heros updateBeta(Integer id,CreateUpdateHerosRequest request) {
-		Beta beta = (Beta) herosRepository.findById(id)
-        		  .orElseThrow(() -> new EntityNotFoundException("Héros Oméga inexistant"));
+		Beta beta = new Beta();
 		beta.setNom(request.getNom());
 		beta.setPrenom(request.getPrenom());
 		beta.setAlias(request.getAlias());
@@ -159,26 +173,32 @@ public class HerosService {
 	
 	public Omega getOmegaById(Integer id)
 	{
-		if(id==null) {
-			throw new RuntimeException("L'id d'un héros ne peut pas être null");
+		Heros heros = herosRepository.findById(id)
+              .orElseThrow(() -> new EntityNotFoundException("Héros introuvable"));
+		if(!(heros instanceof Omega)){
+			return null;
 		}
-		return (Omega) herosRepository.findById(id).orElse(null);
+		return (Omega) heros;
 	}
 	
 	public Beta getBetaById(Integer id)
 	{
-		if(id==null) {
-			throw new RuntimeException("L'id d'un héros ne peut pas être null");
+		Heros heros = herosRepository.findById(id)
+              .orElseThrow(() -> new EntityNotFoundException("Héros introuvable"));
+		if(!(heros instanceof Beta)){
+			return null;
 		}
-		return (Beta) herosRepository.findById(id).orElse(null);
+		return (Beta) heros;
 	}
 	
 	public Alpha getAlphaById(Integer id)
 	{
-		if(id==null) {
-			throw new RuntimeException("L'id d'un héros ne peut pas être null");
+		Heros heros = herosRepository.findById(id)
+              .orElseThrow(() -> new EntityNotFoundException("Héros introuvable"));
+		if(!(heros instanceof Alpha)){
+			return null;
 		}
-		return (Alpha) herosRepository.findById(id).orElse(null);
+		return (Alpha) heros;
 	}
 	
 	public List<Alpha> getAlphaByAgenceId(Integer agenceId) {
