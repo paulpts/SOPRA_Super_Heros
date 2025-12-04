@@ -3,16 +3,17 @@
   <!-- COLONNE GAUCHE-->
   <div class="colonne_gauche">
     
-    <!-- Graphique 1 : Statut (Ex: camembert des missions) -->
-    <div class="graph-circle">
-      Graph Statut
-    </div>
+   <div class="colonne_gauche" *ngIf="selectedMission as mission">
+  <h2>Détails de la mission {{ mission.id }}</h2>
 
-    <!-- Graphique 2 : Taux de réussite (KPI important) -->
-    <div class="graph-circle">
-      Graph Taux de réussite
-    </div>
-  </div>
+  <p><strong>Description :</strong> {{ mission.description }}</p>
+  <p><strong>Crédit mission :</strong> {{ mission.creditMission }}</p>
+  <p><strong>Difficulté :</strong> {{ mission.difficulte }}</p>
+  <p><strong>Niveau de danger :</strong> {{ mission.niveauDanger }}</p>
+  <p><strong>Statut :</strong> {{ mission.statut }}</p>
+  <p><strong>Ville :</strong> {{ mission.ville }}</p>
+  <p><strong>Héros :</strong> {{ selectedHeroAlias || 'Aucun héros affecté' }}</p>
+</div>
 
   <!-- COLONNE CENTRE :-->
   <div class="colonne_centre">
@@ -63,6 +64,7 @@
       <div
         class="mission-card"
         *ngFor="let mission of filtrerMissions()"
+        (click)="selectMission(mission)"
       >
         <div class="mission-id">
           Mission {{ mission.id }}

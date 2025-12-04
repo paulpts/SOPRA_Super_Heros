@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import heros.dto.request.CreateUpdateHerosRequest;
-import heros.dto.response.AlphaResponse;
 import heros.dto.response.HerosResponse;
 import heros.model.Alpha;
 import heros.service.HerosService;
