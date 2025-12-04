@@ -32,6 +32,11 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(auth -> {
 
 			auth.requestMatchers(HttpMethod.POST, "/api/auth").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/heros").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/alpha").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/beta").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/omega").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/mission").permitAll();
 
 			auth.requestMatchers(HttpMethod.GET,
 					//"/api/chefAgence",
