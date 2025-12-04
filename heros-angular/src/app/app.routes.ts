@@ -17,7 +17,7 @@ export const routes: Routes = [
   // pour protéger la route avec le guard
 
   // Gestion des héros 
-  { path: 'heros', component: HerosPage}, //, canActivate: [authGuard] },
+  { path: 'heros', component: HerosPage, canActivate: [authGuard] },
 
   // Gestion des missions 
   { path: 'mission', component: MissionPage , canActivate: [authGuard]},
