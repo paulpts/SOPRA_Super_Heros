@@ -1,134 +1,177 @@
-/* =========================================
-   GLOBAL
-   ========================================= */
-.dashboard-container {
-  display: flex;            /* Les 3 colonnes côte à côte */
-  width: 100%;
-  min-height: 80vh;
-  padding: 20px;
-  gap: 20px;                /* Espace entre les colonnes */
-  box-sizing: border-box;
-  font-family: sans-serif;
+* {
+  box-sizing: border-box; /* J'uniformise les elements*/
+  margin: 0;
+  padding: 0;
 }
 
-ul { padding: 0; list-style: none; } /* Reset des listes */
+html,body {
+  height:100%;
+}
 
-/* =========================================
-   BANNIÈRE WELCOME
-   ========================================= */
+body {
+  font-family: "Arial", "Helvetica", sans-serif;
+  background: #0A3161;
+}
+
+
 .welcome-banner {
-  background-color: #d9d9d9;
-  padding: 20px 40px;
+  width: 100%;
+  padding: 20px 20px; /* Place que prend la banniere de bv*/
   display: flex;
-  justify-content: space-between; /* Ecarte le texte à gauche et le bouton à droite */
   align-items: center;
-  margin-bottom: 20px;      /* Espace avant les colonnes */
+  justify-content: center;       
+  background-color: #0A3161; 
+  border: 4px solid #000;
+  box-shadow: 1px 1px 0 #000;
+}
+
+.welcome-text {
+  text-align: center;
+  width: 100%;
 }
 
 .welcome-text h2 {
-  margin: 0;
-  font-size: 18px;
-  color: #333;
+  font-size: 24px;
+  color: #fff;
 }
 
 .budget {
-  padding: 10px 30px;
-  background-color: #cccccc; /* Un peu plus foncé */
-  border: none;
+  position: absolute; /*permet de mettre sur une ligne*/
+  right: 50px;
+  background-color: #B31942;
+  color: #fff;
+  padding: 10px 20px;
+  border: 3px solid #000;
+  border-radius: 6px;
   font-weight: bold;
+  box-shadow: 3px 3px 0 #000;
 }
 
-/* =========================================
-   COLONNE GAUCHE (Missions Dispo + Top Héros)
-   ========================================= */
+
+.dashboard-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px 30px;
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  background-color: #fff; 
+}
+
+
 .col-left {
-  flex: 1;                  /* Largeur standard */
+  flex: 1; 
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
-.mb-20 { margin-bottom: 20px; }
 
-.grey-card {
-  background-color: #d9d9d9;
+.card {
   padding: 20px;
-  text-align: center;       /* Textes centrés */
+  border: 3px solid #000;
+  border-radius: 8px;
+  box-shadow: 6px 6px 0 #000;
+  text-align: center;
+  background-color: #B31942; 
+  color: #fff;               
 }
 
 .card-title {
-  margin-top: 0;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 15px;
+  color: #fff;               
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 #000;
 }
 
 .recrutement-header {
-  background-color: #ffffff; /* Fond blanc pour le titre "Recruter" */
-  padding: 10px;
-  border: 1px solid #333;
-  margin-bottom: 10px;
+  font-size: 18px;
   font-weight: bold;
+  background-color: #B31942;
+  color: #fff;
+  padding: 12px;
+  border: 3px solid #000;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 0 #000;
 }
 
 .sub-title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
+  color: #fff;              
 }
 
 .numbered-list li {
-  margin-bottom: 10px;
+  margin-bottom: 15px; 
 }
 
-/* =========================================
-   COLONNE CENTRE (Infos Diverses)
-   ========================================= */
-.col-center {
-  flex: 1;
+.numbered-list button {
+  background-color: #fff;  
+  color: #B31942;          
+  border: 3px solid #000;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: auto;       
 }
 
-.white-card {
-  background-color: #ffffff;
-  padding: 20px;
-  height: 100%;             /* Prend toute la hauteur disponible */
+.numbered-list button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 #000;
 }
 
-.border-card {
-  border: 1px solid #333;   /* Le cadre noir autour */
-}
 
-.bullet-list {
-  text-align: left;         /* Liste alignée à gauche */
-  padding-left: 20px;       /* Marge pour les puces */
-  list-style-type: disc;    /* Force les puces rondes */
-}
-
-.bullet-list li {
-  margin-bottom: 10px;
-  font-size: 15px;
-}
-
-/* =========================================
-   COLONNE DROITE (Sidebar Missions)
-   ========================================= */
 .col-right {
-  flex: 1;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
+
 
 .grey-sidebar {
-  background-color: #d9d9d9;
+  background-color: #B31942; 
+  color: #fff;               
   padding: 20px;
-  height: 100%;             /* Descend jusqu'en bas */
+  border: 3px solid #000;
+  border-radius: 8px;
+  box-shadow: 6px 6px 0 #000;
   text-align: center;
 }
 
 .sidebar-title {
   font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 18px;
+  color: #fff;               
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.clean-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 15px;
 }
 
 .clean-list li {
-  margin-bottom: 15px;      /* Espace les missions */
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 5px 10px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  box-shadow: 3px 3px 0 #000;
 }
 
-.mb-40 { margin-bottom: 40px; } /* Espace entre les deux listes */
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+.col-center {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
