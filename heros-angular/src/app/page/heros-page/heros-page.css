@@ -25,7 +25,8 @@ body {
   gap: 20px;
   padding: 20px 30px;
   width: 100%;
-  min-height: calc(100vh - 100px); /* Prend toute la hauteur sous la bannière */
+  min-height: calc(100vh - 100px); 
+  background-color:  #c0c0c0;/* Prend toute la hauteur sous la bannière */
 }
 
 /* =========================================
@@ -57,6 +58,8 @@ body {
   gap: 20px;
 }
 
+
+
 /* =========================================
    PHOTO DU HÉROS
    ========================================= */
@@ -79,11 +82,19 @@ body {
    TITRE DE PAGE
    ========================================= */
 .page-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #000;
-  text-align: left;
-  margin-bottom: 15px;
+  position: relative;
+  left: -280px; /* décale plus vers la gauche */
+  width: calc(100% + 500px); /* largeur augmentée pour compenser le décalage total */
+  background-color: #B31942;
+  color: #fff;
+  text-align: center;
+  padding: 20px 30px;
+  font-size: 28px;
+  font-weight: 800;
+  border: 3px solid #000;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 #000;
+  margin-bottom: 20px;
 }
 
 .page-title span {
@@ -165,19 +176,36 @@ font-size: 10px;
   max-width: 600px;        /* Limite la largeur */
 }
 
-.hero-card {
-  width: 100%;             /* Remplit le conteneur centré */
+.liste-heros-container {
+  background-color: #B31942;    /* Fond rouge comics */
+  border: 3px solid #000;       /* Bordure noire */
+  border-radius: 8px;           /* Coins arrondis */
+  box-shadow: 3px 3px 0 #000;   /* Effet comics */
+  padding: 20px;                /* Espacement interne */
+  width: 80%;                   /* Largeur du conteneur */
+  max-width: 600px;             /* Largeur maximale */
+  margin: 0 auto 20px auto;     /* Centré horizontalement + marge bas */
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  gap: 15px;                     /* Espacement entre chaque hero-card */
+}
+
+
+.hero-card {
+  background-color: #B31942;    /* Rouge un peu plus vif pour les cartes */
+  color: #fff;
   border: 3px solid #000;
   border-radius: 8px;
-  background-color: #B31942;
-  color: #fff;
   box-shadow: 3px 3px 0 #000;
-  cursor: pointer;
+  padding: 15px;
   font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;          /* Centrer le texte à l'intérieur */
+  text-align: center;
 }
+
 
 
 .hero-id {

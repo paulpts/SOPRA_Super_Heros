@@ -13,8 +13,11 @@ html, body {
 
 body {
   font-family: "Orbitron", sans-serif; /* POLICE ORBITRON */
-  background-color: #0A3161; /* Bleu foncé général */
+  background-color: grey; /* gris clair global */
   color: #000;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* =========================================
@@ -25,7 +28,9 @@ body {
   gap: 20px;
   padding: 20px 30px;
   width: 100%;
+  flex: 1; /* occupe tout l'espace disponible pour que footer reste en bas */
   min-height: calc(100vh - 100px);
+  background-color:  #c0c0c0;
 }
 
 /* =========================================
@@ -59,12 +64,12 @@ body {
    ========================================= */
 .page-title {
   position: relative;
-  left: -30px; /* décale vers la gauche pour compenser le padding */
-  width: calc(100% + 60px); /* largeur + padding gauche/droite */
+  left: -230px; /* décale plus vers la gauche */
+  width: calc(100% + 500px); /* largeur augmentée pour compenser le décalage total */
   background-color: #B31942;
   color: #fff;
   text-align: center;
-  padding: 20px 0 20px 0; /* haut, droite, bas, gauche */
+  padding: 20px 30px;
   font-size: 28px;
   font-weight: 800;
   border: 3px solid #000;
@@ -104,7 +109,7 @@ body {
 }
 
 .legende-carre {
-  width: 16px;
+  width: 40px;
   height: 16px;
   accent-color: #fff;
 }
@@ -182,7 +187,7 @@ body {
 }
 
 .liste-missions::-webkit-scrollbar-track {
-  background: #0A3161;       /* Fond bleu foncé */
+  background: #f0f0f0;       /* Fond gris clair global */
   border: 3px solid #000;    /* Bordure noire type comics */
   border-radius: 8px;        /* Coins arrondis */
 }
@@ -197,4 +202,19 @@ body {
 .liste-missions::-webkit-scrollbar-thumb:hover {
   background-color: #FF3A5C;  /* Rouge plus clair au survol */
   box-shadow: 3px 3px 0 #000; /* Effet comics renforcé */
+}
+
+/* =========================================
+   FOOTER BLEU FONCÉ
+   ========================================= */
+.site-footer {
+  width: 100%;
+  background-color: #0A3161; /* bleu foncé */
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  border-top: 3px solid #000; /* bordure noire style comics */
+  box-shadow: 0 -3px 0 #000;   /* effet pop-art */
+  font-weight: bold;
+  font-family: "Orbitron", sans-serif;
 }
