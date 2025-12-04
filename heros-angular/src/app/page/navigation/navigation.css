@@ -1,11 +1,10 @@
 .my-div {
   width: 70px;
   height: 70px;
-  background-image: url('/assets/images/vought.png');
-  background-size: contain;   /* ajuste l'image sans la déformer */
-  background-repeat: no-repeat;
-  background-position: center;
+  object-fit: contain;   /* ajuste l'image sans la déformer */
+  display: block;        /* supprime l’espace blanc sous l’image */
 }
+
 
 
 
@@ -16,8 +15,8 @@
   border-bottom: 4px solid #000;  
   box-shadow: 4px 4px 0 #000;     
   padding: 0 40px;            
-  height: 60px;               
-  font-family: "Bangers", "Comic Sans MS", sans-serif;
+  height:70px;               
+  font-family: "", "Comic Sans MS", sans-serif;
   position: relative;
 }
 
