@@ -6,27 +6,30 @@
 
     <!-- Affiche les infos seulement si un héros est sélectionné -->
     <ng-container *ngIf="selectedHero as hero">
-      <div class="hero-photo-placeholder">
-        Photo du héros
-      </div>
+      <div class="hero-info-box">
 
-      <p>Nom : {{ hero.prenom }} {{ hero.nom }}</p>
-      <p>Alias : {{ hero.alias }}</p>
-      <p>Popularité : {{ hero.popularite }}</p>
-      <p>Santé : {{ hero.sante }}</p>
-      <p>Salaire : {{ hero.salaire }} €</p>
-      <p>Coût de création : {{ hero.coutCreation }}</p>
-      <p>Expérience : {{ hero.experience }}</p>
-      <p>Dégâts : {{ hero.degats }}</p>
-      <p>Motivation : {{ hero.motivation }}</p>
+        <div class="hero-photo-placeholder">
+          Photo du héros
+        </div>
+
+        <p>Nom : {{ hero.prenom }} {{ hero.nom }}</p>
+        <p>Alias : {{ hero.alias }}</p>
+        <p>Popularité : {{ hero.popularite }}</p>
+        <p>Santé : {{ hero.sante }}</p>
+        <p>Salaire : {{ hero.salaire }} €</p>
+        <p>Coût de création : {{ hero.coutCreation }}</p>
+        <p>Expérience : {{ hero.experience }}</p>
+        <p>Dégâts : {{ hero.degats }}</p>
+        <p>Motivation : {{ hero.motivation }}</p>
+
+      </div>
     </ng-container>
 
-  </div>
+  </div> <!-- FIN colonne gauche -->
 
   <!-- COLONNE CENTRE -->
   <div class="colonne_centre">
 
-    <!-- Titre de la page -->
     <h1 class="page-title">
       Liste des heros
       <span style="font-size: 14px; color: grey;">
@@ -34,7 +37,6 @@
       </span>
     </h1>
 
-    <!-- Légende avec les 3 checkbox -->
     <div class="hero-legende">
       <label class="legende-item">
         <input
@@ -67,15 +69,12 @@
       </label>
     </div>
 
-    <!-- Liste des heros filtrés -->
     <div class="liste-heros">
 
-      <!-- Message si aucun héros -->
       <div class="no-results" *ngIf="filteredHeros.length === 0">
         Aucune heros ne correspond aux critères sélectionnés.
       </div>
 
-      <!-- Cartes héros -->
       <div
         class="hero-card"
         *ngFor="let hero of filteredHeros"
@@ -84,6 +83,7 @@
         <div class="hero-photo">
           Heros {{ hero.id }}
         </div>
+
         <div class="hero-infos">
           Nom : {{ hero.alias }}
           — Popularité : {{ hero.popularite }}
