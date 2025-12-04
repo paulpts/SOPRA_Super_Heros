@@ -108,7 +108,16 @@ body {
   width: 16px;
   height: 16px;
 }
-
+.hero-photo {
+width: 80px; /* Taille fixe pour la photo */
+height: 80px;
+flex-shrink: 0; /* Empêche la photo de s'écraser si l'écran est petit */
+background-color: #d9d9d9;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 10px;
+}
 /* =========================================
    LISTE DES HÉROS
    ========================================= */
