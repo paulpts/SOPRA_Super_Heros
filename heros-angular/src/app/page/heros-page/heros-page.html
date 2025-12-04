@@ -55,13 +55,13 @@
         />
         <span>Beta</span>
       </label>
-
+     <!--  (ngModelChange)="updateFiltered() ==> appel de la fonction updateFiltered() pour recalculer la liste filteredHeros qu'on doit afficher  -->
       <label class="legende-item">
         <input
           type="checkbox"
           class="legende-carre"
           [(ngModel)]="showOmega"
-          (ngModelChange)="updateFiltered()"
+          (ngModelChange)="updateFiltered()" 
         />
         <span>Omega</span>
       </label>

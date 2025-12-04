@@ -13,20 +13,23 @@ import { HerosDto } from '../../dto/heros-dto';
 })
 export class HerosPage implements OnInit {
 
+  //listes de héros récupérées selon leur type 
   alphaHeros: HerosDto[] = [];
   betaHeros: HerosDto[] = [];
   omegaHeros: HerosDto[] = [];
 
+  //liste final qu'on affiche à l'écran après avoir filtrer
   filteredHeros: HerosDto[] = [];
-
-  showAlpha: boolean = false;
-  showBeta: boolean = false;
-  showOmega: boolean = false;
+  
+  // checkbox décochées au chargement de la page
+  protected showAlpha: boolean = false;
+  protected showBeta: boolean = false;
+  protected showOmega: boolean = false;
 
   selectedHero: HerosDto | undefined;
 
   constructor(private herosService: HerosService) {}
-
+   // au chargement de la page, on récupère tous les types de héros 
   ngOnInit(): void {
     this.loadAlpha();
     this.loadBeta();
@@ -37,7 +40,7 @@ export class HerosPage implements OnInit {
     this.herosService.findAllAlpha().subscribe(
       (heros: HerosDto[]) => {
         this.alphaHeros = heros;
-        this.updateFiltered();
+        this.updateFiltered(); //
       }
     );
   }
@@ -46,7 +49,7 @@ export class HerosPage implements OnInit {
     this.herosService.findAllBeta().subscribe(
       (heros: HerosDto[]) => {
         this.betaHeros = heros;
-        this.updateFiltered();
+        this.updateFiltered(); // on refait la liste filteredHeros
       }
     );
   }
