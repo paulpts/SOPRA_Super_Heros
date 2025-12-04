@@ -17,6 +17,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.security.config.Customizer;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
@@ -31,12 +33,12 @@ public class SecurityConfig {
 
 		http.authorizeHttpRequests(auth -> {
 
-			auth.requestMatchers(HttpMethod.POST, "/api/auth").permitAll();
-            auth.requestMatchers(HttpMethod.GET, "/api/heros").permitAll();
+			auth.requestMatchers("/api/auth").anonymous();
+            /* auth.requestMatchers(HttpMethod.GET, "/api/heros").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/alpha").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/beta").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/omega").permitAll();
-            auth.requestMatchers(HttpMethod.GET, "/api/mission").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/mission").permitAll(); */
 
 			auth.requestMatchers(HttpMethod.GET,
 					//"/api/chefAgence",
@@ -110,21 +112,25 @@ public class SecurityConfig {
 			logout.logoutSuccessUrl("/login");
 		});
 
-		http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"));
+		/* http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/**")); */
 
-		http.cors(cors -> {
+        http.csrf(csrf -> csrf.disable());
+        http.cors(Customizer.withDefaults());
+		 /*http.cors(cors -> {
 			CorsConfigurationSource source = request -> {
 				CorsConfiguration config = new CorsConfiguration();
 
 				config.setAllowedHeaders(List.of("*"));
 				config.setAllowedMethods(List.of("*"));
-				config.setAllowedOrigins(List.of("*"));
+				config.setAllowedOrigins(List.of("http://localhost:4200/"));
 
 				return config;
 			};
 
 			cors.configurationSource(source);
-		});
+		}); */ 
+
+        
 
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -142,4 +148,18 @@ public class SecurityConfig {
 	AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
 	}
+
+     @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+    UrlBasedCorsConfigurationSource corsSource = new UrlBasedCorsConfigurationSource();
+    CorsConfiguration corsConfiguration = new CorsConfiguration();
+
+    corsConfiguration.setAllowedHeaders(List.of("*"));
+    corsConfiguration.setAllowedMethods(List.of("*"));
+    corsConfiguration.setAllowedOrigins(List.of("*"));
+
+    corsSource.registerCorsConfiguration("/**", corsConfiguration);
+
+    return corsSource;
+}
 }
