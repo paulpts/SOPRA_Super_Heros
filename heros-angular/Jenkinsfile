@@ -47,7 +47,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 dir('heros-angular') {
-                    sh 'docker build -t supeheros:angular .'
+                    sh 'docker build -t superheros:angular .'
                 }
             }
         }
