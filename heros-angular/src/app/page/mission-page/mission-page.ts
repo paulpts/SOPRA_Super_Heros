@@ -75,8 +75,5 @@ public selectedHeroAlias: string = ''; // chaîne vide au début
       this.selectedHeroAlias = '';
     }
   }
-  public clearSelection(): void {
-    this.selectedMission = undefined;
-    this.selectedHeroAlias = '';
-  }   
+
 }
