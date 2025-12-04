@@ -45,7 +45,7 @@ public class SecurityConfig {
             		"api/mission").hasRole("ADMIN");
             auth.requestMatchers(HttpMethod.POST, 
             		"/api/chefAgence",
-            		"/api/admin",
+            		//"/api/admin",
             		"/api/agence", 
             		"api/heros", 
             		"api/alpha", 
@@ -54,8 +54,8 @@ public class SecurityConfig {
             		"api/mission").hasRole("ADMIN");
             auth.requestMatchers(HttpMethod.PUT, 
             		"/api/chefAgence",
-            		"/api/admin",
-            		"/api/agence", 
+            		//"/api/admin",
+            		//"/api/agence", 
             		"api/heros", 
             		"api/alpha", 
             		"api/beta", 
@@ -63,8 +63,8 @@ public class SecurityConfig {
             		"api/mission").hasRole("ADMIN");
             auth.requestMatchers(HttpMethod.DELETE,
             		"/api/chefAgence",
-            		"/api/admin",
-            		"/api/agence", 
+            		//"/api/admin",
+            		//"/api/agence", 
             		"api/heros", 
             		"api/alpha", 
             		"api/beta", 

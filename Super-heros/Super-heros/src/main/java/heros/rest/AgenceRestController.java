@@ -3,7 +3,6 @@ package heros.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,10 +44,11 @@ public class AgenceRestController {
     	return AgenceResponse.convert(agenceService.update(id, request));
     }
 
+    /* Utilité de pouvoir supprimer une agence ? 
     @DeleteMapping("/{id}")
     public void supprimerAgence(@PathVariable Integer id) {
         agenceService.deleteById(id);
-    }
+    }*/
 
     @GetMapping("/chef/{chefId}")
     public Agence getAgenceByChef(@PathVariable Integer chefId) {
