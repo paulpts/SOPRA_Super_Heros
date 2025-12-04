@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MissionService } from '../../service/mission-service';
 import { MissionDto } from '../../dto/mission-dto';
-
+import { HerosService } from '../../service/heros-service';
 @Component({
   standalone: true,
   imports: [CommonModule, FormsModule],
@@ -14,13 +14,15 @@ export class MissionPage implements OnInit {
 
   // Toutes les missions reçues du back
  public missions: MissionDto[] = [];
+ public selectedMission?: MissionDto;   // peut être vide au début
+public selectedHeroAlias: string = ''; // chaîne vide au début
 
   //les 3 checkbox apparaissent décochées quand la page se charge.
-  showDisponibles = false;
-  showEnCours = false;
-  showTerminees = false;
+  protected showDisponibles : boolean = false;
+  protected showEnCours : boolean = false;
+  protected showTerminees : boolean  = false;
 
-  constructor(private missionService: MissionService) {}
+  constructor(private missionService: MissionService,private herosService: HerosService ) {}
 
   ngOnInit(): void { 
     this.missionService.findAll().subscribe((missions) => { 
@@ -60,7 +62,19 @@ export class MissionPage implements OnInit {
 
     
     return false;
-  });
+  }
+
+ public selectMission(mission: MissionDto): void {
+    this.selectedMission = mission;
+    this.selectedHeroAlias = '';
+
+    if (mission.herosId) {
+      this.herosService.findById(mission.herosId).subscribe(hero => {
+        this.selectedHeroAlias = hero.alias;
+      }); 
+
 }
 
 }
+  
+  }

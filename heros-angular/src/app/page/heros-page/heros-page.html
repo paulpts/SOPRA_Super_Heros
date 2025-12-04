@@ -1,47 +1,49 @@
+<!-- CONTENEUR GLOBAL -->
 <div class="main-container">
 
+  <!-- COLONNE GAUCHE -->
+  <div class="colonne_gauche">
 
- <!-- COLONNE GAUCHE -->
-<div class="colonne_gauche">
+    <!-- Affiche les infos seulement si un héros est sélectionné -->
+    <ng-container *ngIf="selectedHero as hero">
+      <div class="hero-info-box">
 
-  <!-- Rien tant qu'aucun héros n'est sélectionné -->
-  <ng-container *ngIf="selectedHero as hero">
-    <div class="hero-photo-placeholder">
-      Photo du héros
-    </div>
+        <div class="hero-photo-placeholder">
+          Photo du héros
+        </div>
 
-    <p>Nom : {{ hero.prenom }} {{ hero.nom }}</p>
-    <p>Alias : {{ hero.alias }}</p>
-    <p>Popularité : {{ hero.popularite }}</p>
-    <p>Santé : {{ hero.sante }}</p>
-    <p>Salaire : {{ hero.salaire }} €</p>
-    <p>Coût de création : {{ hero.coutCreation }}</p>
-    <p>Expérience : {{ hero.experience }}</p>
-    <p>Dégâts : {{ hero.degats }}</p>
-    <p>Motivation : {{ hero.motivation }}</p>
-  </ng-container>
+        <p>Nom : {{ hero.prenom }} {{ hero.nom }}</p>
+        <p>Alias : {{ hero.alias }}</p>
+        <p>Popularité : {{ hero.popularite }}</p>
+        <p>Santé : {{ hero.sante }}</p>
+        <p>Salaire : {{ hero.salaire }} €</p>
+        <p>Coût de création : {{ hero.coutCreation }}</p>
+        <p>Expérience : {{ hero.experience }}</p>
+        <p>Dégâts : {{ hero.degats }}</p>
+        <p>Motivation : {{ hero.motivation }}</p>
 
-</div>
+      </div>
+    </ng-container>
+
+  </div> <!-- FIN colonne gauche -->
+
   <!-- COLONNE CENTRE -->
   <div class="colonne_centre">
 
-    <!-- Titre de la page avec DEBUGUEUR -->
     <h1 class="page-title">
       Liste des heros
-      <!-- 
-         DEBUG : Affiche le nombre brut reçu du backend.
-         Si ça affiche 0 ici, c'est que le problème vient de la connexion (Service/Back), pas du filtre.
-      -->
-      <span style="font-size: 14px; color: grey;">(Nombres de heros correspondante(s) aux filtre(s): {{ heros.length }})</span>
+      <span style="font-size: 14px; color: grey;">
+        (Nombre de heros correspondant aux filtre(s) : {{ filteredHeros.length }})
+      </span>
     </h1>
 
-    <!-- Légende avec les 3 checkbox -->
     <div class="hero-legende">
       <label class="legende-item">
         <input
           type="checkbox"
           class="legende-carre"
           [(ngModel)]="showAlpha"
+          (ngModelChange)="updateFiltered()"
         />
         <span>Alpha</span>
       </label>
@@ -51,44 +53,46 @@
           type="checkbox"
           class="legende-carre"
           [(ngModel)]="showBeta"
+          (ngModelChange)="updateFiltered()"
         />
         <span>Beta</span>
       </label>
-
+     <!--  (ngModelChange)="updateFiltered() ==> appel de la fonction updateFiltered() pour recalculer la liste filteredHeros qu'on doit afficher  -->
       <label class="legende-item">
         <input
           type="checkbox"
           class="legende-carre"
           [(ngModel)]="showOmega"
+          (ngModelChange)="updateFiltered()" 
         />
         <span>Omega</span>
       </label>
     </div>
 
-    <!-- Liste des heros filtrées -->
     <div class="liste-heros">
+
+      <div class="no-results" *ngIf="filteredHeros.length === 0">
+        Aucune heros ne correspond aux critères sélectionnés.
+      </div>
 
       <div
         class="hero-card"
-        *ngFor="let hero of getHeros()"
+        *ngFor="let hero of filteredHeros"
         (click)="selectHero(hero)"
       >
-        <div class="hero-id">
+        <div class="hero-photo">
           Heros {{ hero.id }}
         </div>
+
         <div class="hero-infos">
-          Nom : {{ hero.alias }} — Popularité: {{ hero.popularite }} - Salaire : {{ hero.salaire }} €
+          Nom : {{ hero.alias }}
+          — Popularité : {{ hero.popularite }}
+          - Salaire : {{ hero.salaire }} €
         </div>
-        <body
-        *ngIf="heros.length === 0"
-      >
-        Aucune heros ne correspond aux critères sélectionnés.
-      </body>
       </div>
 
     </div>
 
   </div>
-
 
 </div>

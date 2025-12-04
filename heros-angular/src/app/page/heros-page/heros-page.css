@@ -1,155 +1,237 @@
 /* =========================================
+   STYLE GLOBAL
+   ========================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Arial", "Helvetica", sans-serif;
+  background-color: #0A3161; /* Bleu foncé général */
+  color: #000;               /* Texte noir par défaut */
+}
+
+/* =========================================
    CONTENEUR PRINCIPAL
    ========================================= */
 .main-container {
-  display: flex;            /* Active Flexbox */
-  width: 100%;              /* Prend toute la largeur de l'écran */
-  min-height: 90vh;         
-  background-color: #ffffff;
-  padding: 40px;            /* Un peu de marge autour pour ne pas coller aux bords */
-  gap: 20px;                /* Espace entre les colonnes */
-    
+  display: flex;
+  gap: 20px;
+  padding: 20px 30px;
+  width: 100%;
+  min-height: calc(100vh - 100px); /* Prend toute la hauteur sous la bannière */
 }
 
 /* =========================================
-   COLONNE GAUCHE (Ratio 1/4)
+   COLONNES
    ========================================= */
 .colonne_gauche {
-  flex: 1;                  /* 1 part du gâteau */
-  padding-top: 100px;
-  min-width: 200px;         
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 30px;
-  
-  /* Juste pour voir la zone */
-  /* background-color: #f9f9f9; */
-  /* border-radius: 8px; */
+  gap: 20px;
+  padding-top: 120px;
 }
 
-.graph-circle {
-  width: 120px;
-  height: 120px;
-  background-color: #d9d9d9;
-  border-radius: 50%;
+
+.colonne_centre {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  /* 🔥 Centre tout horizontalement */
+  align-items: center;
+}
+
+.colonne_droite {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =========================================
+   PHOTO DU HÉROS
+   ========================================= */
+.hero-photo-placeholder {
+  background-color: #fff;       /* Fond blanc pour la photo */
+  color: #000;                  /* Texte noir si aucun visuel */
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
   font-weight: bold;
-  font-size: 14px;
-  color: #333;
+  text-align: center;
+  border: 3px solid #000;       /* Bordure noire */
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 #000;
 }
 
 /* =========================================
-   COLONNE CENTRE (Ratio 2/4)
+   TITRE DE PAGE
    ========================================= */
-.colonne_centre {
-  flex: 2;                  /* 2 parts du gâteau (Le double des autres) */
-  
-  display: flex;
-  flex-direction: column;
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  text-align: left;
+  margin-bottom: 15px;
 }
 
-.page-title {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 30px;
-  font-weight: 500;
+.page-title span {
+  font-size: 14px;
+  color: grey;
+}
+
+/* =========================================
+   LEGENDE DES HÉROS
+   ========================================= */
+.hero-legende {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.legende-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+  color: #000;
+}
+
+.legende-carre {
+  width: 16px;
+  height: 16px;
+}
+.hero-photo {
+width: 80px; /* Taille fixe pour la photo */
+height: 80px;
+flex-shrink: 0; /* Empêche la photo de s'écraser si l'écran est petit */
+background-color: #d9d9d9;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 10px;
+}
+/* =========================================
+   LISTE DES HÉROS
+   ========================================= */
+/* =========================================
+   LISTE DES HÉROS
+   ========================================= */
+
+   .liste-heros::-webkit-scrollbar {
+  width: 16px;               /* Barre plus épaisse pour effet comics */
+}
+
+.liste-heros::-webkit-scrollbar-track {
+  background: #0A3161;       /* Fond bleu foncé */
+  border: 3px solid #000;    /* Bordure noire type comics */
+  border-radius: 8px;        /* Coins arrondis */
+}
+
+.liste-heros::-webkit-scrollbar-thumb {
+  background-color: #B31942; /* Rouge vibrant */
+  border: 3px solid #000;    /* Bordure noire pour effet comics */
+  border-radius: 8px;        /* Coins arrondis */
+  box-shadow: 2px 2px 0 #000; /* Ombre pour effet pop-art */
+}
+
+.liste-heros::-webkit-scrollbar-thumb:hover {
+  background-color: #FF3A5C;  /* Rouge plus clair au survol */
+  box-shadow: 3px 3px 0 #000; /* Effet comics renforcé */
 }
 
 .liste-heros {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 5px;
+
+  /* 🔥 Centre le conteneur par rapport à la colonne */
+  margin: 0 auto;          /* Centre horizontalement */
+  width: 80%;              /* Ajuste la largeur pour que ce soit aligné sous la légende */
+  max-width: 600px;        /* Limite la largeur */
 }
 
 .hero-card {
+  width: 100%;             /* Remplit le conteneur centré */
   display: flex;
-  gap: 15px;
+  flex-direction: column;
+  padding: 15px;
+  border: 3px solid #000;
+  border-radius: 8px;
+  background-color: #B31942;
+  color: #000;
+  box-shadow: 3px 3px 0 #000;
   cursor: pointer;
-  transition: transform 0.2s;
-  
-  &:hover {
-    transform: translateX(5px);
-  }
 }
 
-.hero-legende {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  align-items: center;
-  margin-bottom: 25px;
-  font-size: 14px;
-}
 
-.legende-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.legende-carre {
-  width: 14px;
-  height: 14px;
-  border-radius: 2px;
-  margin: 0;
-  padding: 0;
-
-  appearance: none;
-  -webkit-appearance: none;
-
-  border: 1px solid #999;
-  cursor: pointer;
-  display: inline-block;
-
-  
-  background-color: #d9d9d9;
-}
-.legende-carre:checked {
-  background-color: #003366;  
-  border-color: #003366;
-}
-
-.hero-photo {
-  width: 80px;      /* Taille fixe pour la photo */
-  height: 80px;
-  flex-shrink: 0;   /* Empêche la photo de s'écraser si l'écran est petit */
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 10px;
+.hero-id {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .hero-infos {
-  flex: 1;          /* Prend le reste de la largeur de la carte */
-  background-color: #e6e6e6;
+  font-size: 14px;
+}
+
+/* Message "aucun héros" */
+.empty-message {
+  background-color: #fff;      /* Fond blanc pour contraste */
+  color: #B31942;              /* Texte rouge */
+  border: 3px solid #000;
+  border-radius: 6px;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 3px 3px 0 #000;
+}
+
+
+/* Input checkbox dans la légende */
+input.legende-carre {
+  accent-color: #B31942;
+}
+
+/* =========================================
+   CADRE INFOS HÉROS (colonne gauche)
+   ========================================= */
+.hero-info-box {
+  background-color: #B31942;       /* Fond rouge comics */
+  color: #fff;                      /* Texte blanc */
+  border: 3px solid #000;           /* Bordure noire */
+  border-radius: 8px;               /* Coins arrondis */
+  padding: 20px;                    /* Espacement interne */
+  box-shadow: 3px 3px 0 #000;       /* Effet comics */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-left: 20px;
+  align-items: center;              /* Centrer la photo et textes */
+  gap: 15px;                        /* Espacement entre photo et textes */
+  width: 70%;                       /* Prend toute la largeur disponible */
+  max-width: 500px;                 /* Largeur maximale */
+  margin: 0 auto;                   /* Centre le bloc si max-width est inférieur à la colonne */
+  font-weight: bold;                /* Texte en gras */
 }
 
 
-.zone-action {
-  width: 100%;
-}
-
-.btn-creer {
-  width: 100%;
-  padding: 20px;
-  background-color: #d9d9d9;
-  border: none;
+.hero-info-box p {
+  font-size: 14px;
+  line-height: 1.4;
+  width: 100%;                 /* Texte prend toute la largeur du bloc */
+  text-align: left;            /* Alignement à gauche pour lecture */
+  margin: 0;                   /* Supprimer marges par défaut */
   font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s;
-  
-  &:hover {
-    background-color: #c0c0c0;
-  }
 }
