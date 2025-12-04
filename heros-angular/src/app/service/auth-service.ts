@@ -66,7 +66,7 @@
               
               // 2. On sauvegarde dans le navigateur (pour ne pas perdre la connexion au refresh)
               // localStorage.setItem("token", this._token);
-              sessionStorage.setItem("token", this._token);
+              localStorage.setItem("token", this._token);
               // 3. On extrait l'ID caché dans le token
               try {
                 this.decoderToken();

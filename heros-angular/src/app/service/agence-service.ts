@@ -8,7 +8,7 @@ import { AgenceDto } from '../dto/agence-dto';
 })
 export class AgenceService {
 
-  private apiUrl: string = '/api/agence';
+  private apiUrl: string = 'http://localhost:8080/api/agence';
 
   private refresh$: Subject<void> = new Subject<void>();
 
@@ -53,7 +53,11 @@ export class AgenceService {
       .subscribe(() => this.refresh());
   }
 
-  
+  public update(agence: AgenceDto): Observable<AgenceDto> {
+    const payload = agence.toJson ? agence.toJson() : agence;
+    return this.http.put<AgenceDto>(`${this.apiUrl}/${agence.id}`, payload);
+  }
+
   public deleteById(id: number | string): void {
     this.http.delete<void>(`${this.apiUrl}/${id}`)
       .subscribe(() => this.refresh());

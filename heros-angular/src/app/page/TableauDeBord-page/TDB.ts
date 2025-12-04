@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Utile pour les futures boucles *ngFor
-import { MissionDto } from '../../dto/mission-dto';
+import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+// DTOs
+import { MissionDto } from '../../dto/mission-dto';
 import { AgenceDto } from '../../dto/agence-dto';
+import { HerosDto } from '../../dto/heros-dto';
+import { ChefAgenceDto } from '../../dto/chefAgence-dto';
+
+// Services
 import { MissionService } from '../../service/mission-service';
 import { AgenceService } from '../../service/agence-service';
-import { HerosDto } from '../../dto/heros-dto';
-
-interface HeroTest {
-  id: number;
-  nom: string;
-  coutCreation: number; // J'ai repris le nom de ton erreur
-  agenceId: number | undefined | null;
-}
+import { HerosService } from '../../service/heros-service'; 
+import { ChefAgenceService } from '../../service/chefAgence-service';
 
 @Component({
   selector: 'app-agency-dashboard',
@@ -21,78 +22,155 @@ interface HeroTest {
   templateUrl: './TDB.html',
   styleUrls: ['./TDB-page.css']
 })
-export class TDB {
+export class TDB implements OnInit {
 
+  // --- VARIABLES DYNAMIQUES ---
   public missions: MissionDto[] = [];
-  public agences: AgenceDto[] = [];
-  // public agence : AgenceDto = new AgenceDto();
+  public herosDisponibles: HerosDto[] = [];
+  public mesHeros: HerosDto[] = [];
+  
+  public monAgence: AgenceDto = {} as AgenceDto; 
+  
+  public chefConnecte: ChefAgenceDto | null = null;
+  // Pas forcément besoin de doubler avec agenceConnecte si monAgence fait le travail, 
+  // mais je le laisse si tu t'en sers ailleurs.
+  public agenceConnecte: AgenceDto | null = null;
 
-  //constructor(private missionService: MissionService, private agenceService: AgenceService) {}
- // //ngOnInit(): void { 
-  //   this.missionService.findAll().subscribe((missions) => { 
-  //     this.missions = missions;
-  //   });
-  //   this.agenceService.findAll().subscribe((agences) => { 
-  //     this.agences = agences;
-  //   })
-  // }
+  constructor(
+    private missionService: MissionService, 
+    private agenceService: AgenceService,
+    private herosService: HerosService,
+    private chefAgenceService: ChefAgenceService, 
+    private router: Router
+  ) {}
 
-  // --- 1. LES DONNÉES DE L'AGENCE (Simulation) ---
-  monAgenceId: number = 10;      // ID fictif de ton agence connectée
-  budgetAgence: number = 5000;   // On commence avec 5000 crédits
-
-  // --- 2. LA LISTE DES HÉROS DISPONIBLES (Simulation Back) ---
-  herosDisponibles: HeroTest[] = [
-    { id: 1, nom: 'Spiderman', coutCreation: 1000, agenceId: null },
-    { id: 2, nom: 'Thor', coutCreation: 3000, agenceId: null },
-    { id: 3, nom: 'Hulk', coutCreation: 4500, agenceId: null }, // Trop cher si on recrute Thor avant !
-    { id: 4, nom: 'Ant-Man', coutCreation: 500, agenceId: 1 }
-  ];
-
-  // Liste de MES héros (vide au début)
-  mesHeros: HeroTest[] = [];
-
-  constructor() {}
-
-  ngOnInit(): void {
-    console.log("Budget initial :", this.budgetAgence);
+  ngOnInit(): void { 
+    this.chargerDonnees();
   }
 
-  // --- 3. LA FONCTION DE RECRUTEMENT (Le Script) ---
-  recruterHero(hero: HeroTest) {
-    
-    // ÉTAPE A : Vérifier si le héros est déjà pris
-    if (hero.agenceId !== null) {
+  chargerDonnees() {
+    let chefIdStr = localStorage.getItem('userId'); 
+
+    if (!chefIdStr) {
+      console.warn("⚠️ Pas d'userId dans le stockage. Tentative d'extraction depuis le token...");
+      const idRecupere = this.extraireIdDuToken();
+      
+      if (idRecupere) {
+        console.log("✅ ID récupéré avec succès depuis le token :", idRecupere);
+        chefIdStr = idRecupere.toString();
+        localStorage.setItem('userId', chefIdStr);
+      }
+    }
+
+    if (!chefIdStr) {
+      console.error("❌ Echec critique : Aucun ID utilisateur trouvé. Redirection...");
+      this.router.navigate(['/auth']);
+      return;
+    }
+
+    const chefId = Number(chefIdStr); 
+    console.log("Chargement des données pour le Chef ID :", chefId);
+
+    // 1. Récupérer les infos du Chef
+    this.chefAgenceService.findById(chefId).subscribe({
+      next: (chef) => {
+        this.chefConnecte = chef;
+        console.log("Infos du chef chargées :", this.chefConnecte);
+
+        // --- CORRECTION ETAPE 2 : On utilise l'ID contenu dans l'objet Chef ---
+        // Vérifie bien si ton DTO utilise 'agenceId' ou 'agenceID' (je mets agenceId par convention)
+        if (this.chefConnecte && this.chefConnecte.agenceId) {
+            
+            console.log("🔍 Recherche de l'agence ID :", this.chefConnecte.agenceId);
+
+            this.agenceService.findById(this.chefConnecte.agenceId).subscribe({
+                next: (agence) => {
+                    this.monAgence = agence;
+                    this.agenceConnecte = agence; // Synchro des deux variables
+                    console.log("Agence chargée via ID :", this.monAgence);
+                    
+                    // Une fois l'agence chargée, on lance le reste
+                    this.chargerListesHeros();
+                    this.chargerMissions();
+                },
+                error: (err: any) => console.error("Erreur chargement agence via ID", err)
+            });
+
+        } else {
+            console.warn("⚠️ Ce chef n'a pas d'agenceId associé !");
+        }
+      },
+      error: (err: any) => console.error("Impossible de charger le chef", err)
+    });
+  }
+
+
+  // Méthode pour extraire l'ID du token JWT stocké dans le localStorage (Merci Gemini!)
+  private extraireIdDuToken(): number | null {
+    const token = localStorage.getItem('token') || localStorage.getItem('access_token');
+    if (!token) return null;
+
+    try {
+      const payloadBase64 = token.split('.')[1];
+      const payloadJson = atob(payloadBase64);
+      const payload = JSON.parse(payloadJson);
+      return payload.id ? Number(payload.id) : null;
+    } catch (e) {
+      console.error("Erreur décodage token", e);
+      return null;
+    }
+  }
+
+  chargerListesHeros() {
+    this.herosService.findAll().subscribe({
+      next: (tousLesHeros) => {
+        this.mesHeros = tousLesHeros.filter(h => h.agenceId === this.monAgence.id);
+        this.herosDisponibles = tousLesHeros.filter(h => !h.agenceId);
+      },
+      error: (err: any) => console.error("Erreur chargement héros", err)
+    });
+  }
+
+  chargerMissions() {
+    this.missionService.findAll().subscribe({
+      next: (missions) => this.missions = missions,
+      error: (err: any) => console.error("Erreur chargement missions", err)
+    });
+  }
+
+  recruterHero(hero: HerosDto) {
+    if (hero.agenceId) {
       alert(`Impossible ! ${hero.nom} travaille déjà pour quelqu'un.`);
       return;
     }
 
-    // ÉTAPE B : Vérifier le budget (Business Logic)
-    if (this.budgetAgence < hero.coutCreation) {
-      alert(`Pas assez d'argent ! Il te manque ${hero.coutCreation - this.budgetAgence} crédits pour recruter ${hero.nom}.`);
-      return; // On arrête tout, pas de recrutement.
+    // J'utilise 'budget' comme dans ton code (vérifie que c'est bien 'budget' et pas 'argent' dans ton DTO)
+    if (this.monAgence.budget < hero.coutCreation) {
+      alert(`Pas assez de budget ! Il te manque ${hero.coutCreation - this.monAgence.budget} crédits.`);
+      return; 
     }
 
-    // ÉTAPE C : La Transaction (Si tout est OK)
-    
-    // 1. On retire les sous
-    this.budgetAgence = this.budgetAgence - hero.coutCreation;
+    const ancienAgenceId = hero.agenceId; 
+    hero.agenceId = this.monAgence.id;
 
-    // 2. On change l'attribut agence du héros (Signature du contrat)
-    hero.agenceId = this.monAgenceId;
+    this.herosService.update(hero).subscribe({
+      next: (heroSauvegarde: HerosDto) => {
+        console.log(`Succès ! ${heroSauvegarde.nom} recruté.`);
 
-    // 3. Mise à jour visuelle (Optionnel mais sympa)
-    // On le retire de la liste "Disponibles"
-    this.herosDisponibles = this.herosDisponibles.filter(h => h.id !== hero.id);
-    // On l'ajoute à "Mes Héros"
-    this.mesHeros.push(hero);
+        this.monAgence.budget -= hero.coutCreation;
+        
+        this.agenceService.update(this.monAgence).subscribe({
+          next: () => console.log("Budget mis à jour en BDD"),
+          error: (err: any) => console.error("Erreur mise à jour budget", err)
+        });
 
-    // Feedback
-    console.log(`Succès ! ${hero.nom} a rejoint l'agence.`);
-    console.log("Nouveau budget :", this.budgetAgence);
+        this.herosDisponibles = this.herosDisponibles.filter(h => h.id !== hero.id);
+        this.mesHeros.push(heroSauvegarde);
+      },
+      error: (err: any) => {
+        console.error("Erreur recrutement", err);
+        hero.agenceId = ancienAgenceId;
+      }
+    });
   }
- 
-
- 
- 
 }

@@ -1,10 +1,10 @@
 
 <div class="welcome-banner">
   <div class="welcome-text">
-    <h2>Welcome  nomChefAgence </h2>
+    <h2>Welcome {{ chefConnecte?.nom }} </h2>
   </div>
   <div class="budget">
-    Budget Actuel : {{ budgetAgence }} Crédits
+    Budget Actuel : {{ monAgence.budget }} Crédits
   </div>
 </div>
 
@@ -45,12 +45,9 @@
     <div class="card white-card border-card">
       <h3 class="card-title text-center">Infos diverses</h3>
       
-      <ul class="bullet-list" *ngFor="let a of agences">
-        <li>popularité moyenne agence</li>
-        <li>popularité moyenne héros</li>
-        <li>coûts moyens mission</li>
-        <li>Nombre de héros</li>
-        <li>Motivation moyenne</li>
+      <ul class="bullet-list">
+        <li>{{monAgence.ville}}</li>
+        <li>{{monAgence.popularite}}</li>
       </ul>
     </div>
 
@@ -62,19 +59,10 @@
     
     <div class="grey-sidebar">
       <h3 class="sidebar-title">Missions en cours</h3>
-      <ul class="clean-list mb-40">
-        <li>Mission 1</li>
-        <li>Mission 2</li>
-        <li>Mission 3</li>
-        <li>Mission 4</li>
-        <li>Mission 5</li>
-        <li>Mission 6</li>
+      <ul class="clean-list mb-40" *ngFor="let mission of missions" >
+        <li>Mission {{ mission.id }} - {{mission.description}}</li>
       </ul>
 
-      <h3 class="sidebar-title">Dernières missions</h3>
-      <ul class="clean-list">
-        <!-- Vide pour l'instant -->
-      </ul>
     </div>
 
   </div>

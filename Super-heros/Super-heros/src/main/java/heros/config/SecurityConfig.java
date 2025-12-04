@@ -35,12 +35,16 @@ public class SecurityConfig {
 
 			auth.requestMatchers("/api/auth").anonymous();
              auth.requestMatchers(HttpMethod.GET, "/api/heros").permitAll();
+             auth.requestMatchers(HttpMethod.PUT, "/api/heros/**").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/alpha").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/beta").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/omega").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/mission").permitAll(); 
-
-			auth.requestMatchers(HttpMethod.GET,
+            auth.requestMatchers(HttpMethod.GET, "/api/chefagence/**").permitAll(); 
+            auth.requestMatchers(HttpMethod.GET, "/api/agence/**").permitAll();
+			
+            
+            auth.requestMatchers(HttpMethod.GET,
 					//"/api/chefAgence",
 					"/api/agence/**", 
 					"/api/heros/**", 
@@ -50,7 +54,7 @@ public class SecurityConfig {
 					"/api/mission/**").hasRole("CHEFAGENCE");
 			auth.requestMatchers(HttpMethod.PUT, 
 					//"/api/agence/**", 
-					"/api/heros/**", 
+					//"/api/heros/**", 
 					"/api/alpha/**", 
 					"/api/beta/**", 
 					"/api/omega/**", 
@@ -58,7 +62,7 @@ public class SecurityConfig {
 
 			auth.requestMatchers(HttpMethod.GET,
 					"/api/admin/**",
-					"/api/chefAgence/**",
+					// "/api/chefAgence/**",
 					"/api/agence/**", 
 					"api/heros/**", 
 					"/api/alpha/**",
