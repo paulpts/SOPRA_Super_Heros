@@ -64,7 +64,7 @@ export class TDB implements OnInit {
 
     if (!chefIdStr) {
       console.error("❌ Echec critique : Aucun ID utilisateur trouvé. Redirection...");
-      this.router.navigate(['/login']);
+      this.router.navigate(['/auth']);
       return;
     }
 
