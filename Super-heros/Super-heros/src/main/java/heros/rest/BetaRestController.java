@@ -33,13 +33,11 @@ public class BetaRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BetaResponse> ficheBeta(@PathVariable Integer id) {
-    Beta beta = (Beta) herosService.getById(id);
-
-    if (beta == null) {
-        return ResponseEntity.notFound().build();
-    }
-
-    return ResponseEntity.ok(BetaResponse.convert(beta));
+        Beta beta = (Beta) herosService.getById(id);
+        if (beta == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(BetaResponse.convert(beta));
     }
 
     @PostMapping
@@ -48,9 +46,8 @@ public class BetaRestController {
     }
 
     @PutMapping("/{id}")
-    public BetaResponse modifierBeta(@PathVariable Integer id, @RequestBody Beta beta) {
-        beta.setId(id);
-        return BetaResponse.convert((Beta) herosService.update(beta));
+    public BetaResponse modifierBeta(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
+        return BetaResponse.convert((Beta) herosService.updateBeta(id, request));
     }
 
     @DeleteMapping("/{id}")

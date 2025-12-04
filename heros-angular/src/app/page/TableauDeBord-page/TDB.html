@@ -4,22 +4,21 @@
     <h2>Welcome  nomChefAgence </h2>
   </div>
   <div class="budget">
-    budget
+    {{ budgetAgence }} Crédits
   </div>
 </div>
 
 <div class="dashboard-container">
 
   <!-- === COLONNE GAUCHE : MISSIONS DISPO + RECRUTEMENT === -->
-  <div class="col-left">
+  <div class="col-left"
+  >
     
     <!-- Bloc Missions Disponibles -->
     <div class="card grey-card mb-20">
       <h3 class="card-title">Missions disponibles</h3>
-      <ul class="clean-list">
-        <li>Mission 1</li>
-        <li>Mission 2</li>
-        <li>Mission 3</li>
+      <ul class="clean-list" *ngFor="let mission of missions" >
+        <li *ngIf="mission.statut === 'Disponible'">Mission {{ mission.id }} - {{ mission.description }} - {{ mission.creditMission }}</li>
       </ul>
     </div>
 
@@ -29,11 +28,10 @@
         Recruter un héros
       </div>
       <div class="top-heros-list">
-        <h4 class="sub-title">Top héros (selon critère ?)</h4>
-        <ol class="numbered-list">
-          <li>nom_super</li>
-          <li>nom_super</li>
-          <li>nom_super</li>
+        <h4 class="sub-title">Heros disponibles</h4>
+        <ol class="numbered-list" *ngFor="let hero of herosDisponibles" >
+          <li *ngIf="hero.agenceId == null">{{ hero.nom }} - Cout de creation : {{ hero.coutCreation }} <button (click)="recruterHero(hero)">Recruter</button></li>
+          
         </ol>
       </div>
     </div>
@@ -47,7 +45,7 @@
     <div class="card white-card border-card">
       <h3 class="card-title text-center">Infos diverses</h3>
       
-      <ul class="bullet-list">
+      <ul class="bullet-list" *ngFor="let a of agences">
         <li>popularité moyenne agence</li>
         <li>popularité moyenne héros</li>
         <li>coûts moyens mission</li>

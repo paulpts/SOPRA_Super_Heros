@@ -3,6 +3,7 @@ package heros.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import heros.dto.request.CreateUpdateHerosRequest;
+import heros.dto.response.HerosResponse;
 import heros.dto.response.OmegaResponse;
 import heros.model.Omega;
 import heros.service.HerosService;
@@ -21,19 +23,21 @@ import heros.service.HerosService;
 @RequestMapping("/api/omega")
 public class OmegaRestController {
 
-
     @Autowired
     private HerosService herosService;
 
-
     @GetMapping
-    public List<OmegaResponse> allOmega() {
-        return herosService.getAllOmega().stream().map(OmegaResponse::convert).toList();
+    public List<HerosResponse> allOmega() {
+        return herosService.getAllOmega().stream().map(HerosResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
-    public OmegaResponse ficheOmega(@PathVariable Integer id) {
-        return OmegaResponse.convert((Omega) herosService.getById(id));
+    public ResponseEntity<HerosResponse> ficheOmega(@PathVariable Integer id) {
+        Omega omega = (Omega) herosService.getOmegaById(id);
+        if (omega == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(HerosResponse.convert(omega));
     }
 
     @PostMapping
@@ -42,21 +46,8 @@ public class OmegaRestController {
     }
 
     @PutMapping("/{id}")
-    public OmegaResponse modifierOmega(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
-        Omega omega = new Omega(
-                request.getNom(),
-                request.getPrenom(),
-                request.getAlias(),
-                request.getPopularite(),
-                request.getSante(),
-                request.getSalaire(),
-                request.getExperience(),
-                request.getDegats(),
-                request.getMotivation(),
-                request.getPouvoirs());
-        omega.setId(id);
-        omega.setAgence(herosService.getById(id).getAgence());
-        return OmegaResponse.convert((Omega) herosService.update(omega));
+    public HerosResponse modifierOmega(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
+        return HerosResponse.convert((Omega) herosService.updateHeros(id, request));
     }
 
     @DeleteMapping("/{id}")

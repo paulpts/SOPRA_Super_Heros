@@ -49,7 +49,7 @@ export class MissionPage implements OnInit {
     }
 
     
-    if (this.showEnCours && statut === 'en-cours') {
+    if (this.showEnCours && statut === 'en cours') {
       return true;
     }
 

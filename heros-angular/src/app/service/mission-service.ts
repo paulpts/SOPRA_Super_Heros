@@ -8,7 +8,7 @@ import { MissionDto } from '../dto/mission-dto';
 })
 export class MissionService {
 
-  private apiUrl: string = '/api/mission';
+  private apiUrl: string = 'http://localhost:8080/api/mission';
 
   
   private refresh$: Subject<void> = new Subject<void>();

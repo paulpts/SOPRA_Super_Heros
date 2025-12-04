@@ -3,24 +3,25 @@ package heros.dto.response;
 import java.util.List;
 
 import heros.enumerator.Pouvoirs;
+import heros.model.Alpha;
 import heros.model.Beta;
+import heros.model.Heros;
+import heros.model.Omega;
 
-public class BetaResponse extends HerosResponse {
-      private int id;
+public class HerosResponse {
+    private int id;
      private String nom;
      private String prenom;
      private String alias;
      private int popularite;
      private int sante;
      private double salaire;
-     private double coutCreation = 500_000;
+     private double coutCreation;
      private double degats;
      private int experience;
      private int motivation;
      private Integer agenceId;
      private List<Pouvoirs> pouvoirs;
-
-
 
      public int getId() {
           return id;
@@ -126,8 +127,32 @@ public class BetaResponse extends HerosResponse {
           this.pouvoirs = pouvoirs;
      }
 
-     public static BetaResponse convert(Beta beta) {
-          BetaResponse response = new BetaResponse();
+     public static HerosResponse convert(Heros h) {
+
+        if (h instanceof Alpha alpha){
+          HerosResponse response = new HerosResponse();
+          response.setId(alpha.getId());
+          response.setNom(alpha.getNom());
+          response.setPrenom(alpha.getPrenom());
+          response.setAlias(alpha.getAlias());
+          response.setPopularite(alpha.getPopularite());
+          response.setSante(alpha.getSante());
+          response.setSalaire(alpha.getSalaire());
+          response.setCoutCreation(1_500_000);
+          response.setDegats(alpha.getDegats());
+          response.setExperience(alpha.getExperience());
+          response.setMotivation(alpha.getMotivation());
+          if (alpha.getAgence() != null) {
+               response.setAgenceId(alpha.getAgence().getId());
+          } else {
+               response.setAgenceId(null);
+          }
+          response.setPouvoirs(alpha.getPouvoirs());
+          return response;
+        } 
+
+        if (h instanceof Beta beta){
+          HerosResponse response = new HerosResponse();
           response.setId(beta.getId());
           response.setNom(beta.getNom());
           response.setPrenom(beta.getPrenom());
@@ -135,7 +160,7 @@ public class BetaResponse extends HerosResponse {
           response.setPopularite(beta.getPopularite());
           response.setSante(beta.getSante());
           response.setSalaire(beta.getSalaire());
-          response.setCoutCreation(beta.getCoutCreation());
+          response.setCoutCreation(500_000);
           response.setDegats(beta.getDegats());
           response.setExperience(beta.getExperience());
           response.setMotivation(beta.getMotivation());
@@ -145,9 +170,32 @@ public class BetaResponse extends HerosResponse {
                response.setAgenceId(null);
           }
           response.setPouvoirs(beta.getPouvoirs());
-
           return response;
+        } 
 
-     }
+        if (h instanceof Omega omega) {
+          HerosResponse response = new HerosResponse();
+          response.setId(omega.getId());
+          response.setNom(omega.getNom());
+          response.setPrenom(omega.getPrenom());
+          response.setAlias(omega.getAlias());
+          response.setPopularite(omega.getPopularite());
+          response.setSante(omega.getSante());
+          response.setSalaire(omega.getSalaire());
+          response.setCoutCreation(3_000_000);
+          response.setDegats(omega.getDegats());
+          response.setExperience(omega.getExperience());
+          response.setMotivation(omega.getMotivation());
+          if (omega.getAgence() != null) {
+               response.setAgenceId(omega.getAgence().getId());
+          } else {
+               response.setAgenceId(null);
+          }
+          response.setPouvoirs(omega.getPouvoirs());
+          return response;
+        }
+
+        throw new IllegalArgumentException("Type de héros inconnu : " + h.getClass());
+    }
 
 }
