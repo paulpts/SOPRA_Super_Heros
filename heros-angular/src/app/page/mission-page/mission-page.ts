@@ -56,7 +56,7 @@ public selectedHeroAlias: string = ''; // chaîne vide au début
     }
 
     
-    if (this.showTerminees && statut === 'terminee') {
+    if (this.showTerminees && statut === 'terminée') {
       return true;
     }
 
