@@ -57,15 +57,15 @@ export class HerosService {
   }
 
  public findAllOmega(): Observable<HerosDto[]> {
-    return this.http.get<HerosDto[]>('/api/omega');
+    return this.http.get<HerosDto[]>('http://localhost:8080/api/omega');
   }
 
   public findAllBeta(): Observable<HerosDto[]> {
-    return this.http.get<HerosDto[]>('/api/beta');
+    return this.http.get<HerosDto[]>('http://localhost:8080/api/beta');
   }
 
   public findAllAlpha(): Observable<HerosDto[]> {
-    return this.http.get<HerosDto[]>('/api/alpha');
+    return this.http.get<HerosDto[]>('http://localhost:8080/api/alpha');
   }
 }
 
