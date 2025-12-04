@@ -10,4 +10,7 @@ import { RouterModule } from '@angular/router';
 })
 export class Navigation {
 
+  public logout(): void {
+    sessionStorage.removeItem("token");
+  }
 }
