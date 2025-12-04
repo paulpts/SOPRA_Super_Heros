@@ -3,7 +3,6 @@ package heros.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.request.CreateAgenceRequest;
+import heros.dto.response.AgenceResponse;
 import heros.model.Agence;
 import heros.service.AgenceService;
-
 
 @RestController
 @RequestMapping("/api/agence")
@@ -25,38 +25,33 @@ public class AgenceRestController {
     private AgenceService agenceService;
 
     @GetMapping
-    public List<Agence> allAgences() {
-        return agenceService.getAll();
+    public List<AgenceResponse> allAgences() {
+        return agenceService.getAllAgence().stream().map(AgenceResponse::convert).toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Agence> ficheAgence(@PathVariable Integer id) {  // J'ai du mal à capter le ResponseEntity j'ai repris pour exemple celui de MatiereRestController
-        Agence a = agenceService.getById(id);
-
-        if (a == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(a);
+    public AgenceResponse ficheAgence(@PathVariable Integer id) { 
+        Agence a = (Agence) agenceService.getById(id);
+        return AgenceResponse.convert(a);
     }
-    
+
     @PostMapping
-    public Agence ajouterAgence(@RequestBody Agence agence) {
-        return agenceService.create(agence);
+    public AgenceResponse ajouterAgence(@RequestBody CreateAgenceRequest request) {
+        return AgenceResponse.convert(agenceService.create(new Agence(), request));
     }
 
     @PutMapping("/{id}")
-    public Agence modifierAgence(@PathVariable Integer id, @RequestBody Agence agence) {
-        return agenceService.update(agence);
+    public AgenceResponse modifierAgence(@PathVariable Integer id, @RequestBody CreateAgenceRequest request) {
+    	return AgenceResponse.convert(agenceService.update(id, request));
     }
-    
 
     @DeleteMapping("/{id}")
-    public void supprimerAgence(@PathVariable Integer id){
+    public void supprimerAgence(@PathVariable Integer id) {
         agenceService.deleteById(id);
     }
 
     @GetMapping("/chef/{chefId}")
     public Agence getAgenceByChef(@PathVariable Integer chefId) {
         return agenceService.getChefAgenceById(chefId);
-    }     
+    }
 }

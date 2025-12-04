@@ -23,16 +23,18 @@ public class AdminRestController {
     @Autowired
     private CompteService compteService;
 
+    // ok postman as admin
     @GetMapping
     public List<Admin> allChefAgence() {
         return compteService.getAllAdmin();
     }
 
+    // ok postman as admin
     @GetMapping("/{id}")
     public ResponseEntity<Admin> ficheChefAgence(@PathVariable Integer id) {
         Admin a = (Admin) compteService.getById(id);
 
-        if(a == null) {
+        if (a == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(a);
@@ -40,19 +42,18 @@ public class AdminRestController {
 
     @PostMapping
     public Admin ajouterAdmin(@RequestBody Admin admin) {
-        return (Admin)compteService.create(admin);
+        return (Admin) compteService.create(admin);
     }
 
     @PutMapping("/{id}")
-    public Admin modifierAdmin(@PathVariable Integer id,@RequestBody Admin admin) {
+    public Admin modifierAdmin(@PathVariable Integer id, @RequestBody Admin admin) {
         admin.setId(id);
-        return (Admin) compteService.update(admin);
+        return (Admin) compteService.update(id, admin);
     }
 
+    // ok postman as admin
     @DeleteMapping("/{id}")
     public void supprimerAdmin(@PathVariable Integer id) {
-    	compteService.deleteById(id);
-    }   
+        compteService.deleteById(id);
+    }
 }
-    
-

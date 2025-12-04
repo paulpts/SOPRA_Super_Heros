@@ -30,13 +30,18 @@ public class Mission {
 	@Column(nullable = false)	
 	private double creditMission;
 	@ManyToOne
-	@JoinColumn(name = "agence_id", nullable = false)
+	@JoinColumn(name = "agence_id")
 	private Agence agence;		
 	
 	@ManyToOne
-	@JoinColumn(name = "hero_id", nullable = false)
+	@JoinColumn(name = "hero_id")
 	private Heros hero;
 	
+	
+	
+	public Mission() {
+
+	}
 	
 	
 	public Mission(int difficulte, String description, int niveauDanger, String ville, String statut,

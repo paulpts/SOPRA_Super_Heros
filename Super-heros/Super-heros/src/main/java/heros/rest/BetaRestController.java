@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.request.CreateUpdateHerosRequest;
 import heros.dto.response.BetaResponse;
 import heros.model.Beta;
 import heros.service.HerosService;
@@ -32,24 +33,21 @@ public class BetaRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BetaResponse> ficheBeta(@PathVariable Integer id) {
-    Beta beta = (Beta) herosService.getById(id);
-
-    if (beta == null) {
-        return ResponseEntity.notFound().build();
-    }
-
-    return ResponseEntity.ok(BetaResponse.convert(beta));
+        Beta beta = (Beta) herosService.getById(id);
+        if (beta == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(BetaResponse.convert(beta));
     }
 
     @PostMapping
-    public BetaResponse ajouterBeta(@RequestBody Beta beta) {
-        return BetaResponse.convert((Beta) herosService.create(beta));
+    public BetaResponse ajouterBeta(@RequestBody CreateUpdateHerosRequest request) {
+        return BetaResponse.convert((Beta) herosService.createBeta(request));
     }
 
     @PutMapping("/{id}")
-    public BetaResponse modifierBeta(@PathVariable Integer id, @RequestBody Beta beta) {
-        beta.setId(id);
-        return BetaResponse.convert((Beta) herosService.update(beta));
+    public BetaResponse modifierBeta(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
+        return BetaResponse.convert((Beta) herosService.updateBeta(id, request));
     }
 
     @DeleteMapping("/{id}")

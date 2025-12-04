@@ -1,0 +1,110 @@
+/* =========================================
+   CONTENEUR GLOBAL
+   ========================================= */
+.login-page-container {
+  min-height: 100vh;        /* Prend toute la hauteur de l'écran */
+  width: 100%;
+  display: flex;
+  flex-direction: column;   /* On empile le header et le reste */
+  background-color: #ffffff;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: sans-serif;  /* Police moderne simple */
+}
+
+/* =========================================
+   EN-TÊTE (LOGO + NOM) - Reste inchangé
+   ========================================= */
+.header-zone {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 50px;
+  height: 80px;
+}
+
+.logo-box,
+.site-name-box {
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.logo-box { width: 150px; }
+.site-name-box { flex: 1; text-transform: uppercase; }
+
+/* =========================================
+   ZONE FORMULAIRE (CENTRÉE)
+   ========================================= */
+.form-zone {
+  flex: 1;                  /* Prend tout l'espace restant en hauteur */
+  display: flex;
+  justify-content: center;  /* Centre horizontalement */
+  align-items: center;      /* Centre verticalement */
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;                /* Espace vertical entre les champs */
+  width: 350px;             /* Un peu plus large pour le style */
+  text-align: center;       /* Centre tout le contenu */
+}
+
+/* Le Titre "SUPER HÉRO" (Ajoute un <h1> dans ton HTML si tu ne l'as pas) */
+.form-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #000;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   STYLE DES CHAMPS (INPUTS)
+   ========================================= */
+.custom-input {
+  width: 100%;
+  padding: 18px 25px;       
+  background-color: #333333; 
+  border: none;
+  border-radius: 30px;      /* Gros arrondi (pilule) */
+  text-align: center;      
+  font-size: 16px;
+  color: #ffffff;           
+  outline: none;
+  box-sizing: border-box;   /* Important pour que le padding ne casse pas la largeur */
+}
+
+/* Couleur du texte fantôme (Placeholder) */
+.custom-input::placeholder {
+  color: #bbbbbb;           /* Gris clair pour le placeholder */
+  text-transform: uppercase; /* LOGIN et PASSWORD en majuscules */
+}
+
+/* =========================================
+   STYLE DU BOUTON
+   ========================================= */
+.btn-connect {
+  width: 100%;
+  padding: 18px 25px;
+  background-color: #333333; 
+  border: none;
+  border-radius: 30px;      /* Même arrondi */
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;        /* Texte en gras */
+  color: #ffffff;           /* Couleur du Texte blanc */
+  text-transform: uppercase; /* en majuscules */
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+/* Effet au survol */
+.btn-connect:hover {
+  background-color: #444444; 
+  transform: translateY(-2px); /* Petit effet de levier */
+}
+

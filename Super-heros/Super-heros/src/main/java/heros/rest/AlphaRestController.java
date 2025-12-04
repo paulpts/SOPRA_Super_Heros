@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heros.dto.request.CreateUpdateHerosRequest;
 import heros.dto.response.AlphaResponse;
 import heros.model.Alpha;
 import heros.service.HerosService;
@@ -30,26 +31,24 @@ public class AlphaRestController {
         return herosService.getAllAlpha().stream().map(AlphaResponse::convert).toList();
     }
 
+
     @GetMapping("/{id}")
-    public ResponseEntity<AlphaResponse> ficheBeta(@PathVariable Integer id) {
-    Alpha alpha = (Alpha) herosService.getById(id);
-
-    if (alpha == null) {
-        return ResponseEntity.notFound().build();
-    }
-
-    return ResponseEntity.ok(AlphaResponse.convert(alpha));
+    public ResponseEntity<AlphaResponse> ficheAlpha(@PathVariable Integer id) {
+        Alpha alpha = (Alpha) herosService.getAlphaById(id);
+        if (alpha == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(AlphaResponse.convert(alpha));
     }
 
     @PostMapping
-    public AlphaResponse ajouterAlpha(@RequestBody Alpha alpha) {
-        return AlphaResponse.convert((Alpha) herosService.create(alpha));
+    public AlphaResponse ajouterAlpha(@RequestBody CreateUpdateHerosRequest request) {
+        return AlphaResponse.convert((Alpha) herosService.createAlpha(request));
     }
 
     @PutMapping("/{id}")
-    public AlphaResponse modifierAlpha(@PathVariable Integer id, @RequestBody Alpha alpha) {
-        alpha.setId(id);
-        return AlphaResponse.convert((Alpha) herosService.update(alpha));
+    public AlphaResponse modifierAlpha(@PathVariable Integer id, @RequestBody CreateUpdateHerosRequest request) {
+        return AlphaResponse.convert((Alpha) herosService.updateAlpha(id, request));   
     }
 
     @DeleteMapping("/{id}")

@@ -1,139 +1,153 @@
 package heros.dto.response;
 
+import java.util.List;
+
+import heros.enumerator.Pouvoirs;
 import heros.model.Beta;
 
-public class BetaResponse {
-    private String nom;
-    private String prenom;
-    private String alias;
-    private int popularite;
-    private int sante;
-    private double salaire;
-    private double degats;
-    private int experience;
-    private int motivation;
-    private Integer agenceId;
+public class BetaResponse extends HerosResponse {
+      private int id;
+     private String nom;
+     private String prenom;
+     private String alias;
+     private int popularite;
+     private int sante;
+     private double salaire;
+     private double coutCreation = 500_000;
+     private double degats;
+     private int experience;
+     private int motivation;
+     private Integer agenceId;
+     private List<Pouvoirs> pouvoirs;
 
-    public BetaResponse() {
-    }
 
-    public BetaResponse(String nom, String prenom, String alias, int popularite, int sante, double salaire,
-                         double degats, int experience, int motivation, Integer agenceId) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.alias = alias;
-        this.popularite = popularite;
-        this.sante = sante;
-        this.salaire = salaire;
-        this.degats = degats;
-        this.experience = experience;
-        this.motivation = motivation;
-        this.agenceId = agenceId;
-    }
 
-    public String getNom() {
-         return nom; 
-    }
+     public int getId() {
+          return id;
+     }
 
-    public void setNom(String nom) {
-         this.nom = nom; 
-    }
+     public void setId(int id) {
+          this.id = id;
+     }
 
-    public String getPrenom() {
-         return prenom; 
-    }
+     public String getNom() {
+          return nom;
+     }
 
-    public void setPrenom(String prenom) {
-         this.prenom = prenom; 
-    }
+     public void setNom(String nom) {
+          this.nom = nom;
+     }
 
-    public String getAlias() {
-        return alias; 
-    }
+     public String getPrenom() {
+          return prenom;
+     }
 
-    public void setAlias(String alias) {
-         this.alias = alias; 
-    }
+     public void setPrenom(String prenom) {
+          this.prenom = prenom;
+     }
 
-    public int getPopularite() {
-         return popularite; 
-    }
+     public String getAlias() {
+          return alias;
+     }
 
-    public void setPopularite(int popularite) {
-         this.popularite = popularite; 
-    }
+     public void setAlias(String alias) {
+          this.alias = alias;
+     }
 
-    public int getSante() {
-         return sante; 
-    }
+     public int getPopularite() {
+          return popularite;
+     }
 
-    public void setSante(int sante) {
-         this.sante = sante; 
-    }
+     public void setPopularite(int popularite) {
+          this.popularite = popularite;
+     }
 
-    public double getSalaire() {
-         return salaire; 
-    }
+     public int getSante() {
+          return sante;
+     }
 
-    public void setSalaire(double salaire) {
-         this.salaire = salaire; 
-    }
+     public void setSante(int sante) {
+          this.sante = sante;
+     }
 
-    public double getDegats() {
-         return degats; 
-    }
+     public double getSalaire() {
+          return salaire;
+     }
 
-    public void setDegats(double degats) {
-         this.degats = degats; 
-    }
+     public void setSalaire(double salaire) {
+          this.salaire = salaire;
+     }
 
-    public int getExperience() {
-         return experience; 
-    }
+     public double getCoutCreation() {
+          return coutCreation;
+     }
 
-    public void setExperience(int experience) {
-         this.experience = experience; 
-    }
+     public void setCoutCreation(double coutCreation) {
+          this.coutCreation = coutCreation;
+     }
 
-    public int getMotivation() {
-         return motivation; 
-    }
+     public double getDegats() {
+          return degats;
+     }
 
-    public void setMotivation(int motivation) {
-         this.motivation = motivation; 
-    }
+     public void setDegats(double degats) {
+          this.degats = degats;
+     }
 
-    public Integer getAgenceId() {
-         return agenceId; 
-    }
+     public int getExperience() {
+          return experience;
+     }
 
-    public void setAgenceId(Integer agenceId) {
-         this.agenceId = agenceId; 
-    }
+     public void setExperience(int experience) {
+          this.experience = experience;
+     }
 
-    public static BetaResponse convert(Beta beta) {
-        BetaResponse response = new BetaResponse();
+     public int getMotivation() {
+          return motivation;
+     }
 
-        response.setNom(beta.getNom());
-        response.setPrenom(beta.getPrenom());
-        response.setAlias(beta.getAlias());
-        response.setPopularite(beta.getPopularite());
-        response.setSante(beta.getSante());
-        response.setSalaire(beta.getSalaire());
-        response.setDegats(beta.getDegats());
-        response.setExperience(beta.getExperience());
-        response.setMotivation(beta.getMotivation());
-        if (beta.getAgence() != null) {
-        response.setAgenceId(beta.getAgence().getId());
-        } else {
-        response.setAgenceId(null);
-        }
+     public void setMotivation(int motivation) {
+          this.motivation = motivation;
+     }
 
-    
-        return response;
+     public Integer getAgenceId() {
+          return agenceId;
+     }
 
-    }
+     public void setAgenceId(Integer agenceId) {
+          this.agenceId = agenceId;
+     }
 
-    
+     public List<Pouvoirs> getPouvoirs() {
+          return pouvoirs;
+     }
+
+     public void setPouvoirs(List<Pouvoirs> pouvoirs) {
+          this.pouvoirs = pouvoirs;
+     }
+
+     public static BetaResponse convert(Beta beta) {
+          BetaResponse response = new BetaResponse();
+          response.setId(beta.getId());
+          response.setNom(beta.getNom());
+          response.setPrenom(beta.getPrenom());
+          response.setAlias(beta.getAlias());
+          response.setPopularite(beta.getPopularite());
+          response.setSante(beta.getSante());
+          response.setSalaire(beta.getSalaire());
+          response.setCoutCreation(beta.getCoutCreation());
+          response.setDegats(beta.getDegats());
+          response.setExperience(beta.getExperience());
+          response.setMotivation(beta.getMotivation());
+          if (beta.getAgence() != null) {
+               response.setAgenceId(beta.getAgence().getId());
+          } else {
+               response.setAgenceId(null);
+          }
+          response.setPouvoirs(beta.getPouvoirs());
+
+          return response;
+
+     }
 
 }

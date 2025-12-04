@@ -1,0 +1,95 @@
+<div class="main-container">
+
+  <!-- COLONNE GAUCHE-->
+  <div class="colonne_gauche">
+    
+    <!-- Graphique 1 : Statut (Ex: camembert des missions) -->
+    <div class="graph-circle">
+      Graph Statut
+    </div>
+
+    <!-- Graphique 2 : Taux de réussite (KPI important) -->
+    <div class="graph-circle">
+      Graph Taux de réussite
+    </div>
+  </div>
+
+  <!-- COLONNE CENTRE :-->
+  <div class="colonne_centre">
+
+    <!-- Titre de la page avec DEBUGUEUR -->
+    <h1 class="page-title">
+      Liste des missions
+      <!-- 
+         DEBUG : Affiche le nombre brut reçu du backend.
+         Si ça affiche 0 ici, c'est que le problème vient de la connexion (Service/Back), pas du filtre.
+      -->
+      <span style="font-size: 14px; color: grey;">(Nombres de missions correspondante(s) aux filtre(s): {{ missions.length }})</span>
+    </h1>
+
+    <!-- Légende avec les 3 checkbox -->
+    <div class="mission-legende">
+      <label class="legende-item">
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showDisponibles"
+        />
+        <span>Disponibles</span>
+      </label>
+
+      <label class="legende-item">
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showEnCours"
+        />
+        <span>En cours</span>
+      </label>
+
+      <label class="legende-item">
+        <input
+          type="checkbox"
+          class="legende-carre"
+          [(ngModel)]="showTerminees"
+        />
+        <span>Terminées</span>
+      </label>
+    </div>
+
+    <!-- Liste des missions filtrées -->
+    <div class="liste-missions">
+
+      <div
+        class="mission-card"
+        *ngFor="let mission of filtrerMissions()"
+      >
+        <div class="mission-id">
+          Mission {{ mission.id }}
+        </div>
+        <div class="mission-infos">
+          {{ mission.description }} — {{ mission.statut }}
+        </div>
+        <body
+        *ngIf="missions.length === 0"
+      >
+        Aucune mission ne correspond aux critères sélectionnés.
+      </body>
+      </div>
+      
+      <div *ngIf="filtrerMissions().length === 0" class="empty-message">
+        Aucune mission ne correspond aux filtres. <br>
+        <small *ngIf="missions.length === 0" style="color: red;">
+           (Attention : Aucune donnée reçue du serveur !)
+        </small>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- COLONNE DROITE : vide pour l'instant -->
+  <div class="colonne_droite">
+  </div>
+
+</div>

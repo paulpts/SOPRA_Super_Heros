@@ -1,0 +1,39 @@
+<div class="login-page-container">
+
+  <header class="header-zone">
+    <div class="logo-box">
+      LOGO
+    </div>
+    <div class="site-name-box">
+      NOM DU SITE
+    </div>
+  </header>
+
+
+  <main class="form-zone">
+    
+    <div class="login-form">
+      
+      
+      <div class="input-group">
+        <input type="text" placeholder="Entrer Login" class="custom-input" [formControl]="usernameCtrl">
+      </div>
+
+      
+      <div class="input-group">
+        <input type="password" placeholder="Entrer password" class="custom-input" [formControl]="passwordCtrl">
+      </div>
+
+      
+      <div class="action-group">
+ 
+        <button class="btn-connect" (click)="connecter()">
+          Se connecter
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
