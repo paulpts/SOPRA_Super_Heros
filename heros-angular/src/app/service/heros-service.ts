@@ -53,7 +53,7 @@ export class HerosService {
   }
 
 public update(hero: HerosDto): Observable<HerosDto> {
-     return this.http.put<HerosDto>(`${this.apiUrl}`, hero);
+     return this.http.put<HerosDto>(`${this.apiUrl}/${hero.id}`, hero);
 }
 
   public deleteById(id: string): void {
