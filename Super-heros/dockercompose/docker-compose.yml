@@ -7,6 +7,8 @@ services:
 
     image: superheros:boot
     container_name: superheros-boot
+    env_file:
+      - .env
 
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://${DB_HOST}:3326/${DB_NAME}
