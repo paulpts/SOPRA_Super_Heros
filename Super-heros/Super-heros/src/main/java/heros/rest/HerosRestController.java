@@ -57,4 +57,9 @@ public class HerosRestController {
         return HerosResponse.convert(herosService.getByAlias(alias));
     }
 
+    @GetMapping("/agence/{agenceId}")
+    public List<HerosResponse> getHerosByAgenceId(@PathVariable Integer agenceId) {
+        return herosService.getHerosByAgenceId(agenceId).stream().map(HerosResponse::convert).toList();
+    }
+
 }

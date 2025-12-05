@@ -36,5 +36,8 @@ public interface HerosRepository extends JpaRepository<Heros, Integer> {  //Inte
 	
 	@Query("SELECT o FROM Omega o WHERE o.agence.id =:agenceId")
 	List<Omega> findOmegaByAgence_Id(@Param("agenceId") Integer agenceId);
+
+	@Query("SELECT h FROM Heros h WHERE h.agence.id =:agenceId")
+	List<Heros> findHerosByAgence_Id(@Param("agenceId") Integer agenceId);
     
 }

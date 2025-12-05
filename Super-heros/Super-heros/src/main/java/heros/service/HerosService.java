@@ -206,6 +206,10 @@ public class HerosService {
 		return (Alpha) heros;
 	}
 
+	public List<Heros> getHerosByAgenceId(Integer agenceId) {
+		return herosRepository.findHerosByAgence_Id(agenceId);
+	}
+
 	public List<Alpha> getAlphaByAgenceId(Integer agenceId) {
 		return herosRepository.findAlphaByAgence_Id(agenceId);
 	}

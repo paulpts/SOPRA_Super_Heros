@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MissionService } from '../../service/mission-service';
 import { MissionDto } from '../../dto/mission-dto';
 import { HerosService } from '../../service/heros-service';
+import { HerosDto } from '../../dto/heros-dto';
 @Component({
   standalone: true,
   imports: [CommonModule, FormsModule],
@@ -11,68 +12,105 @@ import { HerosService } from '../../service/heros-service';
   styleUrl: './mission-page.css',
 })
 export class MissionPage implements OnInit {
-
+  
   // Toutes les missions reçues du back
- public missions: MissionDto[] = [];
- public selectedMission?: MissionDto;   // peut être vide au début
-public selectedHeroAlias: string = ''; // chaîne vide au début
-
+  public missions: MissionDto[] = [];
+  public selectedMission?: MissionDto;   // peut être vide au début
+  public selectedHeroAlias: string = ''; // chaîne vide au début
+  
+  public herosAgence: HerosDto[] = [];
+  public selectedHeroId?: number;
+  
+  
   //les 3 checkbox apparaissent décochées quand la page se charge.
   protected showDisponibles : boolean = false;
   protected showEnCours : boolean = false;
   protected showTerminees : boolean  = false;
-
+  
   constructor(private missionService: MissionService,private herosService: HerosService ) {}
-
+  
   ngOnInit(): void { 
     this.missionService.findAll().subscribe((missions) => { 
       this.missions = missions;
     });
+    
+    // Récupérer les héros de l'agence (ici agenceId = 1 à ajuster)
+    this.herosService.findByAgence(1).subscribe((heros) => {
+      this.herosAgence = heros;
+    });
   }
-
-  // Liste des missions filtrées 
-       
-  public filtrerMissions(): MissionDto[] {
-
   
-  if (!this.showDisponibles && !this.showEnCours && !this.showTerminees) {// si aucune checkbox cochées alors pas de filtrage ==> on renvoit toutes les missions 
-     
-    return this.missions;
-  }
-
-   return this.missions.filter((mission) => {
-
-    //  le statut en modifié en minuscule 
-    const statut = (mission.statut || '').toLowerCase();
-
-    // si on veut voir les "disponible" et que le statut de la mission est "disponible"
-    if (this.showDisponibles && statut === 'disponible') {
-      return true;
-    }
-
+  // Liste des missions filtrées 
+  
+  public filtrerMissions(): MissionDto[] {
     
-    if (this.showEnCours && statut === 'en cours') {
-      return true;
-    }
-
     
-    if (this.showTerminees && statut === 'terminee') {
-      return true;
+    if (!this.showDisponibles && !this.showEnCours && !this.showTerminees) {// si aucune checkbox cochées alors pas de filtrage ==> on renvoit toutes les missions 
+      
+      return this.missions;
     }
-
     
-    return false;
-  });
-} 
+    return this.missions.filter((mission) => {
+      
+      //  le statut en modifié en minuscule 
+      const statut = (mission.statut || '').toLowerCase();
+      
+      // si on veut voir les "disponible" et que le statut de la mission est "disponible"
+      if (this.showDisponibles && statut === 'disponible') {
+        return true;
+      }
+      
+      
+      if (this.showEnCours && statut === 'en cours') {
+        return true;
+      }
+      
+      
+      if (this.showTerminees && statut === 'terminee') {
+        return true;
+      }
+      
+      
+      return false;
+    });
+  } 
   public selectMission(mission: MissionDto): void {
     this.selectedMission = mission; 
     // Récupérer l'alias du héros assigné à la mission
     if (mission.herosId) {
       this.herosService.findById(mission.herosId).subscribe((heros) => {
+        console.log("Réponse du service :", heros);
         this.selectedHeroAlias = heros.alias;
       });
     } else {
+      this.selectedHeroId = undefined;
       this.selectedHeroAlias = 'Cette mission n\'est pas attribuée';
     }
   }
+  
+  
+    public assignHeroToMission(): void {
+    if (!this.selectedMission || !this.selectedHeroId) return;
+  
+    this.selectedMission.herosId = this.selectedHeroId;
+  
+    //this.missionService.save(this.selectedMission);
+  }
+  
+  
+  public saveMission(): void {
+    if (!this.selectedMission) return;
+    
+    this.missionService.save(this.selectedMission).subscribe({
+      next: (saved) => {
+        console.log("Mission sauvegardée :", saved);
+        this.missionService.refresh();
+      },
+      error: (err) => {
+        console.error("Erreur lors de la sauvegarde :", err);
+      }
+    });
+  }
+  
+  
 }

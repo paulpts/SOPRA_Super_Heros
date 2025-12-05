@@ -36,6 +36,7 @@ public class SecurityConfig {
 			auth.requestMatchers("/api/auth").anonymous();
              auth.requestMatchers(HttpMethod.GET, "/api/heros").permitAll();
              auth.requestMatchers(HttpMethod.PUT, "/api/heros/**").permitAll();
+			 auth.requestMatchers(HttpMethod.GET, "/api/heros/**").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/alpha").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/beta").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/omega").permitAll();
