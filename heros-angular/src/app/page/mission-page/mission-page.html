@@ -8,9 +8,11 @@
 
     <!-- COLONNE GAUCHE : Détails de la mission -->
     <div class="colonne_gauche" *ngIf="selectedMission as mission">
+      <div class="mission-legende">
+      <h2>Détails de la mission {{ mission.id }}</h2>
+      </div>
       <div class="mission-info-box">
-        <h2>Détails de la mission {{ mission.id }}</h2>
-        <p><strong>Description :</strong> {{ mission.description }}</p>
+        <p><strong>Description :</strong> {{ mission.description }}</p> <br>
         <p><strong>Crédit mission :</strong> {{ mission.creditMission }}</p>
         <p><strong>Difficulté :</strong> {{ mission.difficulte }}</p>
         <p><strong>Niveau de danger :</strong> {{ mission.niveauDanger }}</p>
@@ -69,9 +71,6 @@
 
     </div>
 
-    <!-- COLONNE DROITE : vide pour l'instant -->
-    <div class="colonne_droite">
-    </div>
 
   </div> <!-- FIN main-container -->
 
