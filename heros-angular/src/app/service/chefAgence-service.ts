@@ -10,6 +10,8 @@ export class ChefAgenceService {
   private apiUrl: string = 'http://localhost:8080/api/chefagence'; // adapter au backend
   private refresh$: Subject<void> = new Subject<void>();
 
+  public agenceDuChefId: string | null = null;
+
   constructor(private http: HttpClient) {}
 
   public findAll(): Observable<ChefAgenceDto[]> {

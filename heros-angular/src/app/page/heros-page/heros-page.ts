@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HerosService } from '../../service/heros-service';
 import { HerosDto } from '../../dto/heros-dto';
+import { ChefAgenceService } from '../../service/chefAgence-service';
 
 @Component({
   standalone: true,
@@ -20,7 +21,7 @@ export class HerosPage implements OnInit {
 
   //liste final qu'on affiche à l'écran après avoir filtrer
   filteredHeros: HerosDto[] = [];
-  
+
   // checkbox décochées au chargement de la page
   protected showAlpha: boolean = false;
   protected showBeta: boolean = false;
@@ -28,8 +29,8 @@ export class HerosPage implements OnInit {
 
   selectedHero: HerosDto | undefined;
 
-  constructor(private herosService: HerosService) {}
-   // au chargement de la page, on récupère tous les types de héros 
+  constructor(private herosService: HerosService, private chefAgenceService: ChefAgenceService) { }
+  // au chargement de la page, on récupère tous les types de héros 
   ngOnInit(): void {
     this.loadAlpha();
     this.loadBeta();
@@ -39,7 +40,13 @@ export class HerosPage implements OnInit {
   private loadAlpha(): void {
     this.herosService.findAllAlpha().subscribe(
       (heros: HerosDto[]) => {
-        this.alphaHeros = heros;
+        const agenceId = this.chefAgenceService.agenceDuChefId;
+        if (!agenceId) {
+          console.error("Impossible de filtrer : agence du chef non chargée.");
+          this.alphaHeros = [];
+          return;
+        }
+        this.alphaHeros = heros.filter(h => h.agenceId === agenceId);
         this.updateFiltered(); //
       }
     );
@@ -48,20 +55,32 @@ export class HerosPage implements OnInit {
   private loadBeta(): void {
     this.herosService.findAllBeta().subscribe(
       (heros: HerosDto[]) => {
-        this.betaHeros = heros;
+        const agenceId = this.chefAgenceService.agenceDuChefId;
+        if (!agenceId) {
+          console.error("Impossible de filtrer : agence du chef non chargée.");
+          this.betaHeros = [];
+          return;
+        }
+        this.betaHeros = heros.filter(h => h.agenceId === agenceId);
         this.updateFiltered(); // on refait la liste filteredHeros
       }
     );
   }
 
-  private loadOmega(): void {
+    private loadOmega(): void {
     this.herosService.findAllOmega().subscribe(
       (heros: HerosDto[]) => {
-        this.omegaHeros = heros;
+        const agenceId = this.chefAgenceService.agenceDuChefId;
+        if (!agenceId) {
+          console.error("Impossible de filtrer : agence du chef non chargée.");
+          this.omegaHeros = [];
+          return;
+        }
+        this.omegaHeros = heros.filter(h => h.agenceId === agenceId);
         this.updateFiltered();
       }
     );
-  }
+    }
 
   updateFiltered(): void {
     const resultat: HerosDto[] = [];

@@ -30,42 +30,40 @@ body {
   width: 100%;
   flex: 1; /* occupe tout l'espace disponible pour que footer reste en bas */
   min-height: calc(100vh - 100px);
-  background-color:  #c0c0c0;
+  background-color:  c0c0c0;
 }
 
 /* =========================================
    COLONNES
    ========================================= */
 .colonne_gauche {
+   background-color:  c0c0c0;
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding-top: 120px;
+  align-items: center; /* pour centrer le bloc détails */
 }
 
 .colonne_centre {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: stretch; /* pour que le bandeau titre soit full-width */
-}
-
-.colonne_droite {
+   background-color:  c0c0c0;
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  /*align-items: center; /* pour que le bandeau titre soit full-width */
 }
+
 
 /* =========================================
    TITRE DE PAGE – BANDEAU ROUGE
    ========================================= */
 .page-title {
-  position: relative;
-  left: -230px; /* décale plus vers la gauche */
-  width: calc(100% + 500px); /* largeur augmentée pour compenser le décalage total */
+  flex: 0 0 auto;
+  /* position: relative; */
+  /*left: -230px; /* décale plus vers la gauche */
+  width: 80%; /* largeur augmentée pour compenser le décalage total */
   background-color: #B31942;
   color: #fff;
   text-align: center;
@@ -76,7 +74,8 @@ body {
   border-radius: 8px;
   box-shadow: 4px 4px 0 #000;
   margin-bottom: 20px;
-  margin-left: 300px;
+  /* margin-left: 100px; */
+
 }
 
 
@@ -91,14 +90,15 @@ body {
 .mission-legende {
   display: flex;
   gap: 20px;
+  width: 80%;
   margin-bottom: 20px;
+  color : #000000;
   background-color: #B31942;
   border: 3px solid #000;
   border-radius: 8px;
   padding: 10px 15px;
   box-shadow: 3px 3px 0 #000;
   justify-content: center;
-  margin-left: 600px;
 }
 
 .legende-item {
@@ -127,7 +127,7 @@ body {
   overflow-y: auto;
   width: 100%;
   max-width: 600px; /* largeur pour centrer correctement */
-  margin-left: 600px;
+/* margin-left: 600px; */
 }
 
 .mission-card {
@@ -177,9 +177,10 @@ body {
   font-weight: bold;
   font-size: 16px;
   line-height: 1.8;
-  margin-top: 100px;
-  max-width: 300px;
-  text-align: left;
+  /* margin-top: 100px; */
+  width: 80%;
+  list-style: none; /* On enlève les ronds par défaut */
+  padding-left: 0;
 }
 
 /* =========================================
