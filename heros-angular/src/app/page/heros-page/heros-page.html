@@ -13,9 +13,7 @@
       <ng-container *ngIf="selectedHero as hero">
         <div class="hero-info-box">
 
-          <div class="hero-photo-placeholder">
-            Photo du héros
-          </div>
+          
 
           <p>Nom : {{ hero.prenom }} {{ hero.nom }}</p>
           <p>Alias : {{ hero.alias }}</p>
@@ -78,9 +76,7 @@
       *ngFor="let hero of filteredHeros"
       (click)="selectHero(hero)"
     >
-      <div class="hero-photo">
-        Héros {{ hero.id }}
-      </div>
+      
 
       <div class="hero-infos">
         Nom : {{ hero.alias }}

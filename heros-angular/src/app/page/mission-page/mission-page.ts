@@ -50,13 +50,12 @@ public selectedHeroAlias: string = ''; // chaîne vide au début
       return true;
     }
 
-    
     if (this.showEnCours && statut === 'en cours') {
       return true;
     }
 
     
-    if (this.showTerminees && statut === 'terminee') {
+    if (this.showTerminees && statut === 'terminée') {
       return true;
     }
 

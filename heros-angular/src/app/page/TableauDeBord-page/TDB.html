@@ -38,7 +38,7 @@
           <h4 class="sub-title">Héros disponibles</h4>
           <ol class="numbered-list" *ngFor="let hero of herosDisponibles">
             <li *ngIf="hero.agenceId == null">
-              {{ hero.nom }} - Cout de creation : {{ hero.coutCreation }}
+              {{ hero.alias }} - Cout de creation : {{ hero.coutCreation }}
               <button (click)="recruterHero(hero)">Recruter</button>
             </li>
           </ol>
