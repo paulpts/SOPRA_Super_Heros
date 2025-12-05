@@ -87,6 +87,8 @@ export class TDB implements OnInit {
                 next: (agence) => {
                     this.monAgence = agence;
                     this.agenceConnecte = agence; // Synchro des deux variables
+                    this.chefAgenceService.agenceDuChefId = agence.id;
+
                     console.log("Agence chargée via ID :", this.monAgence);
                     
                     // Une fois l'agence chargée, on lance le reste

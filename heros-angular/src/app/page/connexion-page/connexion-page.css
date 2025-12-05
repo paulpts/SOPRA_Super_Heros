@@ -15,7 +15,7 @@
 /* =========================================
    EN-TÊTE (LOGO + NOM) - Reste inchangé
    ========================================= */
-.header-zone {
+/* .header-zone {
   display: flex;
   gap: 40px;
   margin-bottom: 50px;
@@ -33,7 +33,52 @@
 }
 
 .logo-box { width: 150px; }
-.site-name-box { flex: 1; text-transform: uppercase; }
+.site-name-box { flex: 1; text-transform: uppercase; } */
+
+
+
+.my-div {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;   /* ajuste l'image sans la déformer */
+  display: block;        /* supprime l’espace blanc sous l’image */
+}
+
+
+
+
+.top-nav {
+  display: flex;              
+  align-items: center;        
+  background-color: #0A3161;  
+  border-bottom: 4px solid #000;  
+  box-shadow: 4px 4px 0 #000;     
+  padding: 0 40px;            
+  height:70px;               
+  font-family: "", "Comic Sans MS", sans-serif;
+  position: relative;
+}
+
+.top-nav-logo {
+  font-weight: bold;
+  font-size: 20px;
+  color: #ffffff;              
+  text-shadow: 2px 2px 0 #000; 
+  margin-right: 40px;
+}
+
+.top-nav-menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  flex: 1;              
+  gap: 10px;
+  color: white;
+}
+
 
 /* =========================================
    ZONE FORMULAIRE (CENTRÉE)
@@ -90,7 +135,7 @@
 .btn-connect {
   width: 100%;
   padding: 18px 25px;
-  background-color: #333333; 
+  background-color: #B31942; 
   border: none;
   border-radius: 30px;      /* Même arrondi */
   cursor: pointer;

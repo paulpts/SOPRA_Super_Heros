@@ -1,70 +1,83 @@
-<div class="main-container">
+<!-- IMPORT DE LA POLICE ORBITRON -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- COLONNE GAUCHE : Détails de la mission -->
-  <div class="colonne_gauche" *ngIf="selectedMission as mission">
-    <div class="mission-info-box">
-      <h2>Détails de la mission {{ mission.id }}</h2>
-      <p><strong>Description :</strong> {{ mission.description }}</p>
-      <p><strong>Crédit mission :</strong> {{ mission.creditMission }}</p>
-      <p><strong>Difficulté :</strong> {{ mission.difficulte }}</p>
-      <p><strong>Niveau de danger :</strong> {{ mission.niveauDanger }}</p>
-      <p><strong>Statut :</strong> {{ mission.statut }}</p>
-      <p><strong>Ville :</strong> {{ mission.ville }}</p>
-      <p><strong>Héros :</strong> {{ selectedHeroAlias || 'Aucun héros affecté' }}</p>
-    </div>
-  </div>
+<body style="font-family: 'Orbitron', sans-serif; background-color: #f0f0f0; color: #000; display: flex; flex-direction: column; min-height: 100vh;">
 
-  <!-- COLONNE CENTRE : Liste des missions + barre de navigation -->
-  <div class="colonne_centre">
+  <!-- CONTENEUR PRINCIPAL -->
+  <div class="main-container" style="flex: 1;">
 
-    <h1 class="page-title">
-      Liste des missions
-      <span style="font-size: 14px; color: grey;">
-        (Nombre de missions : {{ missions.length }})
-      </span>
-    </h1>
-
-    <!-- BARRE DE NAVIGATION / FILTRE -->
-    <div class="mission-legende">
-      <label class="legende-item">
-        <input type="checkbox" class="legende-carre" [(ngModel)]="showDisponibles" />
-        <span>Disponibles</span>
-      </label>
-
-      <label class="legende-item">
-        <input type="checkbox" class="legende-carre" [(ngModel)]="showEnCours" />
-        <span>En cours</span>
-      </label>
-
-      <label class="legende-item">
-        <input type="checkbox" class="legende-carre" [(ngModel)]="showTerminees" />
-        <span>Terminées</span>
-      </label>
+    <!-- COLONNE GAUCHE : Détails de la mission -->
+    <div class="colonne_gauche" *ngIf="selectedMission as mission">
+      <div class="mission-info-box">
+        <h2>Détails de la mission {{ mission.id }}</h2>
+        <p><strong>Description :</strong> {{ mission.description }}</p>
+        <p><strong>Crédit mission :</strong> {{ mission.creditMission }}</p>
+        <p><strong>Difficulté :</strong> {{ mission.difficulte }}</p>
+        <p><strong>Niveau de danger :</strong> {{ mission.niveauDanger }}</p>
+        <p><strong>Statut :</strong> {{ mission.statut }}</p>
+        <p><strong>Ville :</strong> {{ mission.ville }}</p>
+        <p><strong>Héros :</strong> {{ selectedHeroAlias || 'Aucun héros affecté' }}</p>
+      </div>
     </div>
 
-    <!-- LISTE DES MISSIONS -->
-    <div class="liste-missions">
-      <div class="mission-card" *ngFor="let mission of filtrerMissions()">
-        <button class="mission-id" (click)="selectMission(mission)">
-          Mission {{ mission.id }}
-        </button>
-        <div class="mission-infos">
-          {{ mission.description }} — {{ mission.statut }}
+    <!-- COLONNE CENTRE : Liste des missions + barre de navigation -->
+    <div class="colonne_centre">
+
+      <h1 class="page-title">
+        Liste des missions
+        <span style="font-size: 14px; color: grey;">
+          (Nombre de missions : {{ missions.length }})
+        </span>
+      </h1>
+
+      <!-- BARRE DE NAVIGATION / FILTRE -->
+      <div class="mission-legende">
+        <label class="legende-item">
+          <input type="checkbox" class="legende-carre" [(ngModel)]="showDisponibles" />
+          <span>Disponibles</span>
+        </label>
+
+        <label class="legende-item">
+          <input type="checkbox" class="legende-carre" [(ngModel)]="showEnCours" />
+          <span>En cours</span>
+        </label>
+
+        <label class="legende-item">
+          <input type="checkbox" class="legende-carre" [(ngModel)]="showTerminees" />
+          <span>Terminées</span>
+        </label>
+      </div>
+
+      <!-- LISTE DES MISSIONS -->
+      <div class="liste-missions">
+        <div class="mission-card" *ngFor="let mission of filtrerMissions()">
+          <button class="mission-id" (click)="selectMission(mission)">
+            Mission {{ mission.id }}
+          </button>
+          <div class="mission-infos">
+            {{ mission.description }} — {{ mission.statut }}
+          </div>
+        </div>
+
+        <div *ngIf="filtrerMissions().length === 0" class="empty-message">
+          Aucune mission ne correspond aux filtres. <br>
+          <small *ngIf="missions.length === 0" style="color: red;">
+            (Attention : Aucune donnée reçue du serveur !)
+          </small>
         </div>
       </div>
 
-      <div *ngIf="filtrerMissions().length === 0" class="empty-message">
-        Aucune mission ne correspond aux filtres. <br>
-        <small *ngIf="missions.length === 0" style="color: red;">
-          (Attention : Aucune donnée reçue du serveur !)
-        </small>
-      </div>
     </div>
 
-  </div>
+    <!-- COLONNE DROITE : vide pour l'instant -->
+    <div class="colonne_droite">
+    </div>
 
-  <!-- COLONNE DROITE : vide pour l'instant -->
-  <div class="colonne_droite">
-  </div>
+  </div> <!-- FIN main-container -->
 
-</div>
+  <!-- FOOTER BLEU FONCÉ -->
+  <footer class="site-footer" style="width: 100%; background-color: #0A3161; color: #fff; text-align: center; padding: 20px 0; border-top: 3px solid #000; box-shadow: 0 -3px 0 #000; font-weight: bold; font-family: 'Orbitron', sans-serif;">
+    © 2025 Vought International. L'Agence de Super-Héros numéro 1.
+  </footer>
+
+</body>

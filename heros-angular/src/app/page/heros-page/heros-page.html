@@ -1,98 +1,114 @@
-<!-- CONTENEUR GLOBAL -->
-<div class="main-container">
+<!-- IMPORT DE LA POLICE ORBITRON -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- COLONNE GAUCHE -->
-  <div class="colonne_gauche">
+<body style="font-family: 'Orbitron', sans-serif; background-color: #f0f0f0; color: #000; display: flex; flex-direction: column; min-height: 100vh;">
 
-    <!-- Affiche les infos seulement si un héros est sélectionné -->
-    <ng-container *ngIf="selectedHero as hero">
-      <div class="hero-info-box">
+  <!-- CONTENEUR GLOBAL -->
+  <div class="main-container" style="flex: 1;">
 
-        <div class="hero-photo-placeholder">
-          Photo du héros
+    <!-- COLONNE GAUCHE -->
+    <div class="colonne_gauche">
+
+      <!-- Affiche les infos seulement si un héros est sélectionné -->
+      <ng-container *ngIf="selectedHero as hero">
+        <div class="hero-info-box">
+
+          <div class="hero-photo-placeholder">
+            Photo du héros
+          </div>
+
+          <p>Nom : {{ hero.prenom }} {{ hero.nom }}</p>
+          <p>Alias : {{ hero.alias }}</p>
+          <p>Popularité : {{ hero.popularite }}</p>
+          <p>Santé : {{ hero.sante }}</p>
+          <p>Salaire : {{ hero.salaire }} €</p>
+          <p>Coût de création : {{ hero.coutCreation }}</p>
+          <p>Expérience : {{ hero.experience }}</p>
+          <p>Dégâts : {{ hero.degats }}</p>
+          <p>Motivation : {{ hero.motivation }}</p>
+
         </div>
+      </ng-container>
 
-        <p>Nom : {{ hero.prenom }} {{ hero.nom }}</p>
-        <p>Alias : {{ hero.alias }}</p>
-        <p>Popularité : {{ hero.popularite }}</p>
-        <p>Santé : {{ hero.sante }}</p>
-        <p>Salaire : {{ hero.salaire }} €</p>
-        <p>Coût de création : {{ hero.coutCreation }}</p>
-        <p>Expérience : {{ hero.experience }}</p>
-        <p>Dégâts : {{ hero.degats }}</p>
-        <p>Motivation : {{ hero.motivation }}</p>
+    </div> <!-- FIN colonne gauche -->
 
-      </div>
-    </ng-container>
+   <!-- COLONNE CENTRE -->
+<div class="colonne_centre">
 
-  </div> <!-- FIN colonne gauche -->
+  <h1 class="page-title">
+    Liste des héros
+    <span style="font-size: 14px; color: grey;">
+      (Nombre de héros correspondant aux filtre(s) : {{ filteredHeros.length }})
+    </span>
+  </h1>
 
-  <!-- COLONNE CENTRE -->
-  <div class="colonne_centre">
-
-    <h1 class="page-title">
-      Liste des heros
-      <span style="font-size: 14px; color: grey;">
-        (Nombre de heros correspondant aux filtre(s) : {{ filteredHeros.length }})
-      </span>
-    </h1>
-
-    <div class="hero-legende">
-      <label class="legende-item">
-        <input
-          type="checkbox"
-          class="legende-carre"
-          [(ngModel)]="showAlpha"
-          (ngModelChange)="updateFiltered()"
-        />
+  <!-- Bloc rouge pour les cases Alpha / Beta / Omega -->
+  <div class="hero-legende-block">
+    <div class="hero-categories">
+      <label class="category-item">
+        <input type="checkbox" class="legende-carre"
+               [(ngModel)]="showAlpha"
+               (ngModelChange)="updateFiltered()" />
         <span>Alpha</span>
       </label>
-
-      <label class="legende-item">
-        <input
-          type="checkbox"
-          class="legende-carre"
-          [(ngModel)]="showBeta"
-          (ngModelChange)="updateFiltered()"
-        />
+      <label class="category-item">
+        <input type="checkbox" class="legende-carre"
+               [(ngModel)]="showBeta"
+               (ngModelChange)="updateFiltered()" />
         <span>Beta</span>
       </label>
-     <!--  (ngModelChange)="updateFiltered() ==> appel de la fonction updateFiltered() pour recalculer la liste filteredHeros qu'on doit afficher  -->
-      <label class="legende-item">
-        <input
-          type="checkbox"
-          class="legende-carre"
-          [(ngModel)]="showOmega"
-          (ngModelChange)="updateFiltered()" 
-        />
+      <label class="category-item">
+        <input type="checkbox" class="legende-carre"
+               [(ngModel)]="showOmega"
+               (ngModelChange)="updateFiltered()" />
         <span>Omega</span>
       </label>
     </div>
+  </div>
 
-    <div class="liste-heros">
+  <!-- Liste des héros -->
+  <div class="liste-heros">
 
-      <div class="no-results" *ngIf="filteredHeros.length === 0">
-        Aucune heros ne correspond aux critères sélectionnés.
+    <div class="no-results" *ngIf="filteredHeros.length === 0">
+      Aucun héros ne correspond aux critères sélectionnés.
+    </div>
+
+    <div
+      class="hero-card"
+      *ngFor="let hero of filteredHeros"
+      (click)="selectHero(hero)"
+    >
+      <div class="hero-photo">
+        Héros {{ hero.id }}
       </div>
 
-      <div
-        class="hero-card"
-        *ngFor="let hero of filteredHeros"
-        (click)="selectHero(hero)"
-      >
-        <div class="hero-photo">
-          Heros {{ hero.id }}
-        </div>
-
-        <div class="hero-infos">
-          Nom : {{ hero.alias }}
-          — Popularité : {{ hero.popularite }}
-          - Salaire : {{ hero.salaire }} €
-        </div>
+      <div class="hero-infos">
+        Nom : {{ hero.alias }}
+        — Popularité : {{ hero.popularite }}
+        - Salaire : {{ hero.salaire }} €
       </div>
-
     </div>
 
   </div>
 
 </div>
+
+
+  </div> <!-- FIN main-container -->
+
+  <!-- FOOTER BLEU FONCÉ -->
+  <footer class="site-footer" style="
+    width: 100%; 
+    background-color: #0A3161; 
+    color: #fff; 
+    text-align: center; 
+    padding: 20px 0; 
+    border-top: 3px solid #000; 
+    box-shadow: 0 -3px 0 #000; 
+    font-weight: bold; 
+    font-family: 'Orbitron', sans-serif;
+  ">
+    © 2025 Vought International. L'Agence de Super-Héros numéro 1.
+  </footer>
+
+</body>

@@ -16,6 +16,7 @@ public class CreateUpdateHerosRequest {
     private double degats;
     private int motivation;
     private List<Pouvoirs> pouvoirs;
+    private int agenceId;
     
     public String getNom() {
         return nom;
@@ -77,6 +78,14 @@ public class CreateUpdateHerosRequest {
     public void setPouvoirs(List<Pouvoirs> pouvoirs) {
         this.pouvoirs = pouvoirs;
     }
+    public int getAgenceId() {
+        return agenceId;
+    }
+    public void setAgenceId(int agenceId) {
+        this.agenceId = agenceId;
+    }
+
+    
 
 
     

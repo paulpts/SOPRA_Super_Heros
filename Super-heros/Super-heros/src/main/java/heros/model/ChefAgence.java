@@ -1,6 +1,5 @@
 package heros.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
@@ -15,7 +14,6 @@ public class ChefAgence extends Compte {
 
 	@OneToOne
 	@JoinColumn(name = "agence_id")
-	@JsonIgnore
 	private Agence agence;
 
 	@Column(length = 25)
