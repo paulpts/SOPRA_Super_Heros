@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import heros.dto.request.CreateMissionRequest;
 
 import heros.model.Mission;
+import heros.repo.AgenceRepository;
+import heros.repo.HerosRepository;
 import heros.repo.MissionRepository;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -16,6 +18,12 @@ public class MissionService {
     
     @Autowired
     private MissionRepository missionRepository;
+
+    @Autowired
+    private HerosRepository herosRepository;
+
+        @Autowired
+    private AgenceRepository agenceRepository;
     
     @Autowired
     AgenceService agenceSrv;
@@ -58,6 +66,8 @@ public class MissionService {
         updateMission.setNiveauDanger(request.getNiveauDanger());
         updateMission.setStatut(request.getStatut());
         updateMission.setVille(request.getVille());
+        updateMission.setHero(herosRepository.findById(request.getHerosId()).orElse(null));
+        updateMission.setAgence(agenceRepository.findById(request.getAgenceId()).orElse(null));
         return missionRepository.save(updateMission);
         
     }

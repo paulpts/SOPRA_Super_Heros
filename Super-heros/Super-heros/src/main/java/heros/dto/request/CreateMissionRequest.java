@@ -25,9 +25,19 @@ public class CreateMissionRequest {
 	
 	private int agenceId;
 
+	private int herosId;
+
+
+	public int getHerosId() {
+		return herosId;
+	}
 
 	public int getDifficulte() {
 		return difficulte;
+	}
+
+	public void setHerosId(int herosId) {
+		this.herosId = herosId;
 	}
 
 	public void setDifficulte(int difficulte) {

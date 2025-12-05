@@ -34,19 +34,17 @@ export class MissionService {
   }
 
 
-  public save(missionDto: MissionDto): void {
+  public save(missionDto: MissionDto): Observable<MissionDto> {
     const payload = missionDto.toJson();
 
     if (missionDto.id === null) {
       
-      this.http.post<MissionDto>(this.apiUrl, payload)
-        .subscribe(() => this.refresh());
-      return;
+      return this.http.post<MissionDto>(this.apiUrl, payload);
+      
     }
 
     
-    this.http.put<MissionDto>(`${this.apiUrl}/${missionDto.id}`, payload)
-      .subscribe(() => this.refresh());
+     return this.http.put<MissionDto>(`${this.apiUrl}/${missionDto.id}`, payload);
   }
 
   

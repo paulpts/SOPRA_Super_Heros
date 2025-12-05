@@ -85,8 +85,8 @@ export class MissionDto {
       ville: this.ville,
       statut: this.statut,
       creditMission: this.creditMission,
-      agence: this.agenceId !== null ? { id: this.agenceId } : null,
-      hero:   this.herosId !== null ? { id: this.herosId } : null,
+      agenceId: this.agenceId,
+      herosId:   this.herosId,
     };
   }
 }
